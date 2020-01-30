@@ -33,8 +33,8 @@ En gros, les étapes sont:
 * Cloner le projet
 * Installer les libraires Python
 * Configurer le build des models avec cmake
-* Télécharger les modèles; juste les modlèle de segmentation sémentique sont téléchagés. Cela prend une bonne demie-heure, selon la connexion Internet (wifi vs Ethernet, bande passance)
-* Installer PyTorch; nécessaire pour faire le transfer learning
+* Télécharger les modèles; uniquement les modlèles des segmentations sémentiques sont téléchargés. Cela prend une bonne demie-heure, selon la connexion Internet (wifi vs Ethernet, bande passance)
+* Installer PyTorch; nécessaire pour faire le transfer learning; uniquement la version PyTorch v1.1.0 pour Python 3.6 est installée. 
 * Compiler le projet
 
 # Première inférence avec un modèl de segmentation sémanique
