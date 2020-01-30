@@ -30,6 +30,20 @@ La référence de l'installation est située à cette page:
 https://github.com/dusty-nv/jetson-inference/blob/master/docs/building-repo-2.md
 
 En gros, les étapes sont:
-* Cloning the Repo
+* Cloner le projet
+* Installer les libraires Python
+* Configurer le build des models avec cmake
+* Télécharger les modèles; Juste les modlèle de segmentation sémentique sont téléchagés
+* Installer PyTorch; nécessaire pour faire le transfer learning
+* Compiler le projet
+
+# Première inférence avec un modèl de segmentation sémanique
+Ce test permet de savoir si le système est bien en place, et si le Jetson nano est desservie par assez d'énergie. Sinon, il s'éteind tout simplement pendant l'inférence. 
+
+La commande utilisée est:
+$ cd ./build/aa/bin
+$ ./segnet-console.py --network=fcn-resnet18-cityscapes images/city_0.jpg output.jpg
+
+
 
 
