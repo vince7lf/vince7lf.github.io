@@ -1,5 +1,3 @@
-{:toc}
-
 # Préparation: système d'alimentation, micro-sd, image
 
 * La première étape est d'avoir un système d'alimentation assez puissant: un adapteur USB fournissant un peu plus que 5V, et d'au moins 2.4amp. 
