@@ -1,7 +1,6 @@
-Hello and welcome to this blog. Edit the `index.md` file to change this content. All pages on the blog, including this one, use [Markdown](https://guides.github.com/features/mastering-markdown/). You can include images:
+* La première étape est d'avoir un système d'alimentation assez puissant: un adapteur USB fournissant un peu plus que 5V, et d'au moins 2.4amp. 
+* La seconde étape est de préparer Jetpack sur une microsd. Jetpack est une boite à outil préparé par Nvidia, qui contient L4T, le système d'exploitation Ubuntu 18 de NVidia, et des outils nécessaires pour l'inférence et la deeplearning.
 
-![Image of fast.ai logo](images/logo.png)
+La référence est :
+https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit
 
-## This is a title
-
-And you can include links, like this [link to fast.ai](https://www.fast.ai). Posts will appear after this file. 
