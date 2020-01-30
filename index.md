@@ -1,4 +1,3 @@
-1. TOC
 {:toc}
 
 # Préparation: système d'alimentation, micro-sd, image
