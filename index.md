@@ -10,6 +10,11 @@ https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit
 * Télécharger et exécuter le Sd Card Formatter: quick format; pas de label
 * Télécharger et exécuter Etcher pour flasher la micro-sdo avec l'image, ce qui prend entre 5 et 10 minutes selon le PC utilisé
 
+Notes: 
+- La carte micro-sd 64Gb EVO Plus *rouge* m'appartient personnellement. 
+- La carte micro-sd 64Gb EVO Plus *verte* appartient au projet
+
+
 # Démarrage du système pour la 1er fois
 Au  1er démarrage, le système nécessite de recevoir certaines informations pour l'installation, tel que le language du système et du clavier, le fuseau horaire, l'espace de la micro-sd qu'il peut utiliser. 
 
