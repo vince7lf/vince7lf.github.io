@@ -45,6 +45,24 @@ La commande utilisée est:
 $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
 $ ./segnet-console.py --network=fcn-resnet18-cityscapes images/city_0.jpg output.jpg
+
+[TRT]   ------------------------------------------------
+[TRT]   Timing Report networks/FCN-ResNet18-Cityscapes-512x256/fcn_resnet18.onnx
+[TRT]   ------------------------------------------------
+[TRT]   Pre-Process   CPU   2.78468ms  CUDA   3.04458ms
+[TRT]   Network       CPU  59.17971ms  CUDA  58.76735ms
+[TRT]   Post-Process  CPU   1.05956ms  CUDA   1.05630ms
+[TRT]   Total         CPU  63.02396ms  CUDA  62.86823ms
+[TRT]   ------------------------------------------------
+
+[TRT]   ------------------------------------------------
+[TRT]   Timing Report networks/FCN-ResNet18-Cityscapes-512x256/fcn_resnet18.onnx
+[TRT]   ------------------------------------------------
+[TRT]   Pre-Process   CPU   2.78468ms  CUDA   3.04458ms
+[TRT]   Network       CPU  59.17971ms  CUDA  58.76735ms
+[TRT]   Post-Process  CPU   1.05956ms  CUDA   1.05630ms
+[TRT]   Total         CPU  63.02396ms  CUDA  62.86823ms
+[TRT]   ------------------------------------------------
 ```
 
 
