@@ -45,7 +45,9 @@ La commande utilisée est:
 $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
 $ ./segnet-console.py --network=fcn-resnet18-cityscapes images/city_0.jpg output.jpg
-
+```
+La première exécution le rapport donne des valeurs assez élevées. 
+```
 [TRT]   ------------------------------------------------
 [TRT]   Timing Report networks/FCN-ResNet18-Cityscapes-512x256/fcn_resnet18.onnx
 [TRT]   ------------------------------------------------
@@ -54,14 +56,16 @@ $ ./segnet-console.py --network=fcn-resnet18-cityscapes images/city_0.jpg output
 [TRT]   Post-Process  CPU   1.05956ms  CUDA   1.05630ms
 [TRT]   Total         CPU  63.02396ms  CUDA  62.86823ms
 [TRT]   ------------------------------------------------
-
+```
+Les fois suivantes, les valeurs du rapports restent stables. Par contre la commande `sudo jetson_clocks` a été exécuté après la première fois. 
+```
 [TRT]   ------------------------------------------------
 [TRT]   Timing Report networks/FCN-ResNet18-Cityscapes-512x256/fcn_resnet18.onnx
 [TRT]   ------------------------------------------------
-[TRT]   Pre-Process   CPU   2.78468ms  CUDA   3.04458ms
-[TRT]   Network       CPU  59.17971ms  CUDA  58.76735ms
-[TRT]   Post-Process  CPU   1.05956ms  CUDA   1.05630ms
-[TRT]   Total         CPU  63.02396ms  CUDA  62.86823ms
+[TRT]   Pre-Process   CPU   0.08807ms  CUDA   0.61323ms
+[TRT]   Network       CPU  28.77813ms  CUDA  28.67969ms
+[TRT]   Post-Process  CPU   0.63754ms  CUDA   0.20552ms
+[TRT]   Total         CPU  29.50374ms  CUDA  29.49844ms
 [TRT]   ------------------------------------------------
 ```
 
