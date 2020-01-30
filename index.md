@@ -23,7 +23,7 @@ Au  1er démarrage, le système nécessite de recevoir certaines informations po
 * mot de passe: identique au nom d'usager
 * fuseau horaire : New-York
 
-Connecter le réseau wifi. 
+Connecter le réseau wifi via l'adapteur usb s'il n'y a pas d'extension interne m.2 installée. 
 
 # Mise en place de Jetpack avec projet "Hello AI World"
 La référence de l'installation est située à cette page:
@@ -38,7 +38,7 @@ En gros, les étapes sont:
 * Compiler le projet
 
 # Première inférence avec un modèl de segmentation sémanique
-Ce test permet de savoir si le système est bien en place, et si le Jetson nano est desservie par assez d'énergie. Sinon, il s'éteind tout simplement pendant l'inférence. 
+Ce test permet de savoir si le système est bien en place, et si le Jetson nano est desservie par assez d'énergie. Sinon, il s'éteind tout simplement pendant l'exécution de l'inférence. 
 
 La commande utilisée est:
 ```
