@@ -41,9 +41,9 @@ En gros, les étapes sont:
 Ce test permet de savoir si le système est bien en place, et si le Jetson nano est desservie par assez d'énergie. Sinon, il s'éteind tout simplement pendant l'inférence. 
 
 La commande utilisée est:
-``
+```
 $ cd ./build/aa/bin
 $ ./segnet-console.py --network=fcn-resnet18-cityscapes images/city_0.jpg output.jpg
-``
+```
 
 
