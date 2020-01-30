@@ -32,17 +32,18 @@ https://github.com/dusty-nv/jetson-inference/blob/master/docs/building-repo-2.md
 En gros, les étapes sont:
 * Cloner le projet
 * Installer les libraires Python
-* Configurer le build des models avec cmake
+* Configurer le build des modèles avec cmake; le répertoire ~/projects/dusty-nv/jetson-inference/build a été créer pour contenir les modèles. 
 * Télécharger les modèles; uniquement les modlèles des segmentations sémentiques sont téléchargés. Cela prend une bonne demie-heure, selon la connexion Internet (wifi vs Ethernet, bande passance)
 * Installer PyTorch; nécessaire pour faire le transfer learning; uniquement la version PyTorch v1.1.0 pour Python 3.6 est installée. 
-* Compiler le projet
+* Compiler le projet; cette étape prend 3-5 minutes
 
 # Première inférence avec un modèl de segmentation sémanique
 Ce test permet de savoir si le système est bien en place, et si le Jetson nano est desservie par assez d'énergie. Sinon, il s'éteind tout simplement pendant l'exécution de l'inférence. 
 
 La commande utilisée est:
 ```
-$ cd ./build/aa/bin
+$ cd ~/projects/dusty-nv/jetson-inference
+$ cd ./build/aarch64/bin
 $ ./segnet-console.py --network=fcn-resnet18-cityscapes images/city_0.jpg output.jpg
 ```
 
