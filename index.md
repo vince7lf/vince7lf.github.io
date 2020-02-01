@@ -1,6 +1,5 @@
 # Préparation du Jetson nano
 
-
 ## système d'alimentation, micro-sd, image
 
 * La première étape est d'avoir un système d'alimentation assez puissant: un adapteur USB fournissant un peu plus que 5V, et d'au moins 2.4amp. 
@@ -18,7 +17,7 @@ Notes:
 - La carte micro-sd 64Gb EVO Plus *verte* appartient au projet
 
 
-# Démarrage du système pour la 1er fois
+## Démarrage du système pour la 1er fois
 Au  1er démarrage, le système nécessite de recevoir certaines informations pour l'installation, tel que le language du système et du clavier, le fuseau horaire, l'espace de la micro-sd qu'il peut utiliser. Suivre le Wizard.
 
 * language : anglais
@@ -28,7 +27,7 @@ Au  1er démarrage, le système nécessite de recevoir certaines informations po
 
 Connecter le réseau wifi via l'adapteur usb s'il n'y a pas d'extension interne m.2 installée. 
 
-# Mise en place de Jetpack avec projet "Hello AI World"
+## Mise en place de Jetpack avec projet "Hello AI World"
 La référence de l'installation est située à cette page:
 https://github.com/dusty-nv/jetson-inference/blob/master/docs/building-repo-2.md
 
@@ -149,12 +148,11 @@ $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
 $ ./segnet-camera.py --network=fcn-resnet18-mhp
 ```
---
-
-NOTE Importante:
+---
+**_NOTE Importante:_**
 Il y a un fix a apporter avant de procéder. Le paramètre *flip-method* n'a pas la bonne valeur. Il doit être à **`0`** pour être conforme à la bonne orientation de la caméra dans le boitier.
 
---
+---
 
 * Ouvrir le fichier ./utils/camera/gstCamera.cpp du projet jetson-inference
 ```
