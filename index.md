@@ -69,7 +69,7 @@ Les fois suivantes, les valeurs du rapports restent stables. Par contre la comma
 [TRT]   ------------------------------------------------
 ```
 
-# Test the camera (Raspberry Pi v2)
+# Test de la caméra Raspberry Pi v2
 Réference : https://www.jetsonhacks.com/2019/04/02/jetson-nano-raspberry-pi-camera/
 
 La première chose a s'assurer est d'installer la caméra dans le boitier à la bonne position, c'est à dire la bonne orientation. Le cable doit longer le haut du boitier. 
@@ -81,6 +81,39 @@ gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=3820, height=2
 Une nouvelle fenêtre apparait avec la vidéo de la caméra. 
 A noter que le nombre de frame est 21/1. Au dessus de cette valeur (> 22/1), la vido ne démarre pas, il y a des erreurs. 
 
+## Récupère les résolutions que la caméra supporte
+Référence: https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-camera-2.md
 
+Installer v4l-utils
+```
+$ sudo apt-get install v4l-utils
+```
+et exécuter l'utilitaire 
+```
+$ v4l2-ctl --list-formats-ext
+ioctl: VIDIOC_ENUM_FMT
+	Index       : 0
+	Type        : Video Capture
+	Pixel Format: 'RG10'
+	Name        : 10-bit Bayer RGRG/GBGB
+		Size: Discrete 3264x2464
+			Interval: Discrete 0.048s (21.000 fps)
+		Size: Discrete 3264x1848
+			Interval: Discrete 0.036s (28.000 fps)
+		Size: Discrete 1920x1080
+			Interval: Discrete 0.033s (30.000 fps)
+		Size: Discrete 1280x720
+			Interval: Discrete 0.017s (60.000 fps)
+		Size: Discrete 1280x720
+			Interval: Discrete 0.017s (60.000 fps)
+```
+
+On peut s'appercevoir que la caméra supporte jusqu'à 60 images-par-seconde en résolution 1280x720, et 21 images-par-seconde en résolution 3264x2464. 
+
+Essayons le format 60FPS 1280x720: 
+
+```
+gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=1280, height=720, framerate=60/1, format=RG10' ! nvvidconv flip-method=0 ! 'video/x-raw,width=960, height=616' ! nvvidconv ! nvegltransform ! nveglglessink -e
+```
 
 
