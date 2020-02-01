@@ -146,7 +146,7 @@ $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
 $ ./segnet-camera.py --network=fcn-resnet18-mhp
 ```
-> **_NOTE:_** Importante** Il y a un fix a apporter avant de procéder. Le paramètre flip-method n'a pas la bonne valeur. Il doit être à 0 pour être conforme à la bonne orientation de la caméra dans le boitier. 
+> **_NOTE: Importante_** Il y a un fix a apporter avant de procéder. Le paramètre flip-method n'a pas la bonne valeur. Il doit être à 0 pour être conforme à la bonne orientation de la caméra dans le boitier. 
 
 * Ouvrir le fichier ./utils/camera/gstCamera.cpp du projet jetson-inference
 ```
