@@ -1,4 +1,7 @@
-# Préparation: système d'alimentation, micro-sd, image
+# Préparation du Jetson nano
+
+
+## système d'alimentation, micro-sd, image
 
 * La première étape est d'avoir un système d'alimentation assez puissant: un adapteur USB fournissant un peu plus que 5V, et d'au moins 2.4amp. 
 * La seconde étape est de préparer Jetpack sur une microsd. Jetpack est un SDK, une boite à outil, préparée par Nvidia, qui contient L4T, le système d'exploitation Ubuntu 18 de NVidia, et des outils nécessaires pour le deeplearning et l'inférence.
@@ -43,7 +46,7 @@ $ sudo make install
 $ sudo ldconfig
 ```
 
-# Première inférence avec un modèl de segmentation sémanique
+## Première inférence avec un modèl de segmentation sémanique
 Ce test permet de savoir si le système est bien en place, et si le Jetson nano est desservie par assez d'énergie. Sinon, il s'éteind tout simplement pendant l'exécution de l'inférence. 
 
 La commande utilisée est:
@@ -75,7 +78,7 @@ Les fois suivantes, les valeurs du rapports restent stables. Par contre la comma
 [TRT]   ------------------------------------------------
 ```
 
-# Test de la caméra Raspberry Pi v2
+## Test de la caméra Raspberry Pi v2
 Réference : https://www.jetsonhacks.com/2019/04/02/jetson-nano-raspberry-pi-camera/
 
 La première chose a s'assurer est d'installer la caméra dans le boitier à la bonne position, c'est à dire la bonne orientation. Le cable doit longer le haut du boitier. 
@@ -90,7 +93,7 @@ A noter que le nombre de frame est 21/1. Au dessus de cette valeur (> 22/1), la 
 Pour les détails de la ligne de dommande et l'utilisation de GStreamer, il faut se référer au guide suivant. GStreamer est l'outil qui est préconisé par NVidia (vs ffmpeg) afin de profiter des GPUs.  
 https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Accelerated_GStreamer_User_Guide.pdf
 
-## Résolutions x FPS supportés par la caméra
+### Résolutions x FPS supportés par la caméra
 Référence: https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-camera-2.md
 
 Installer v4l-utils
@@ -127,7 +130,7 @@ $ gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=1280, height
 Cela fontionne. 
 
 
-## Nano hardware encoder decoder
+### Nano hardware encoder decoder
 Basé sur le commentaire trouvé sur le forum devtalk (https://devtalk.nvidia.com/default/topic/1050950/jetson-nano/h-264-h-265-encoding-using-jetson-nano-gpu/), il est recommandé d'utiliser GStreamer, à la place du populaire ffmpeg, pour bénéficier de l'accélération des GPUs du nano. ffmpeg utilise les CPUs et non les GPUs. 
 
 "ffmpeg doesn't use the Nano's hardware encoder or decoder, you can run it but it will be CPU-only."
@@ -135,7 +138,7 @@ Basé sur le commentaire trouvé sur le forum devtalk (https://devtalk.nvidia.co
 La référence à utiliser pour traiter les images et vidéos avec le Jetson nano est: 
 https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Accelerated_GStreamer_User_Guide.pdf
 
-# Test inference segmentation sementic en temps réel avec la caméra
+## Test inference segmentation sementic en temps réel avec la caméra
 
 NVidia fournit déjà des tests pour réaliser l'inférence de modèle de segmentation sémentique en temps réel avec la caméra. 
 Référence: https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-camera-2.md
@@ -146,8 +149,9 @@ $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
 $ ./segnet-camera.py --network=fcn-resnet18-mhp
 ```
-> **_NOTE Importante:_** Il y a un fix a apporter avant de procéder. Le paramètre *flip-method* n'a pas la bonne valeur. Il doit être à **`0`** pour être conforme à la bonne orientation de la caméra dans le boitier. 
-
+---
+**_NOTE Importante:_** Il y a un fix a apporter avant de procéder. Le paramètre *flip-method* n'a pas la bonne valeur. Il doit être à **`0`** pour être conforme à la bonne orientation de la caméra dans le boitier. 
+---
 * Ouvrir le fichier ./utils/camera/gstCamera.cpp du projet jetson-inference
 ```
 $ cd ~/projects/dusty-nv/jetson-inference
