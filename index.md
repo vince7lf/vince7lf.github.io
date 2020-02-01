@@ -26,7 +26,7 @@ Au  1er démarrage, le système nécessite de recevoir certaines informations po
 
 Connecter le réseau wifi via l'adapteur usb s'il n'y a pas d'extension interne m.2 installée. 
 
-## Mise en place de Jetpack avec projet "Hello AI World"
+## Mise en place de Jetpack avec le projet "Hello AI World"
 La référence de l'installation est située à cette page:
 https://github.com/dusty-nv/jetson-inference/blob/master/docs/building-repo-2.md
 
