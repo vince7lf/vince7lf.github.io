@@ -69,4 +69,16 @@ Les fois suivantes, les valeurs du rapports restent stables. Par contre la comma
 [TRT]   ------------------------------------------------
 ```
 
+# Test the camera (Raspberry Pi v2)
+La première chose a s'assurer est d'installer la caméra dans le boitier à la bonne position, c'est à dire la bonne orientation. Le cable doit longer le haut du boitier. 
+
+La commande pour tested la caméra est la suivante:
+```
+gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=3820, height=2464, framerate=21/1, format=NV12' ! nvvidconv flip-method=0 ! 'video/x-raw,width=960, height=616' ! nvvidconv ! nvegltransform ! nveglglessink -e
+```
+Une nouvelle fenêtre apparait avec la vidéo de la caméra. 
+A noter que le nombre de frame est 21/1. Au dessus de cette valeur (> 22/1), la vido ne démarre pas, il y a des erreurs. 
+
+
+
 
