@@ -70,6 +70,8 @@ Les fois suivantes, les valeurs du rapports restent stables. Par contre la comma
 ```
 
 # Test the camera (Raspberry Pi v2)
+Réference : https://www.jetsonhacks.com/2019/04/02/jetson-nano-raspberry-pi-camera/
+
 La première chose a s'assurer est d'installer la caméra dans le boitier à la bonne position, c'est à dire la bonne orientation. Le cable doit longer le haut du boitier. 
 
 La commande pour tested la caméra est la suivante:
