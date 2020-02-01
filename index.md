@@ -36,6 +36,12 @@ En gros, les étapes sont:
 * Télécharger les modèles; uniquement les modlèles des segmentations sémentiques sont téléchargés. Cela prend une bonne demie-heure, selon la connexion Internet (wifi vs Ethernet, bande passance)
 * Installer PyTorch; nécessaire pour faire le transfer learning; uniquement la version PyTorch v1.1.0 pour Python 3.6 est installée. 
 * Compiler le projet; cette étape prend 3-5 minutes
+```
+$ cd jetson-inference/build          # omit if working directory is already build/ from above
+$ make
+$ sudo make install
+$ sudo ldconfig
+```
 
 # Première inférence avec un modèl de segmentation sémanique
 Ce test permet de savoir si le système est bien en place, et si le Jetson nano est desservie par assez d'énergie. Sinon, il s'éteind tout simplement pendant l'exécution de l'inférence. 
@@ -76,7 +82,7 @@ La première chose a s'assurer est d'installer la caméra dans le boitier à la 
 
 La commande pour tested la caméra est la suivante:
 ```
-gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=3820, height=2464, framerate=21/1, format=NV12' ! nvvidconv flip-method=0 ! 'video/x-raw,width=960, height=616' ! nvvidconv ! nvegltransform ! nveglglessink -e
+$ gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=3820, height=2464, framerate=21/1, format=NV12' ! nvvidconv flip-method=0 ! 'video/x-raw,width=960, height=616' ! nvvidconv ! nvegltransform ! nveglglessink -e
 ```
 Une nouvelle fenêtre apparait avec la vidéo de la caméra. 
 A noter que le nombre de frame est 21/1. Au dessus de cette valeur (> 22/1), la vido ne démarre pas, il y a des erreurs. 
@@ -116,7 +122,7 @@ On peut s'appercevoir que la caméra supporte jusqu'à 60 images-par-seconde en 
 Essayons le format 60FPS 1280x720: 
 
 ```
-gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=1280, height=720, framerate=60/1, format=NV12' ! nvvidconv flip-method=0 ! 'video/x-raw,width=960, height=616' ! nvvidconv ! nvegltransform ! nveglglessink -e
+$ gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=1280, height=720, framerate=60/1, format=NV12' ! nvvidconv flip-method=0 ! 'video/x-raw,width=960, height=616' ! nvvidconv ! nvegltransform ! nveglglessink -e
 ```
 Cela fontionne. 
 
@@ -128,3 +134,25 @@ Basé sur le commentaire trouvé sur le forum devtalk (https://devtalk.nvidia.co
 
 La référence à utiliser pour traiter les images et vidéos avec le Jetson nano est: 
 https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Accelerated_GStreamer_User_Guide.pdf
+
+# Test inference segmentation sementic en temps réel avec la caméra
+
+```
+$ cd ~/projects/dusty-nv/jetson-inference
+$ cd ./build/aarch64/bin
+$ ./segnet-camera.py --network=fcn-resnet18-mhp
+```
+
+Il y a un fix a apporter avant de procéder. Le paramètre flip-method n'a pas la bonne valeur. Il doit être à 0 pour être conforme à la bonne orientation de la caméra dans le boitier. 
+
+* Ouvrir le fichier ./utils/camera/gstCamera.cpp du projet jetson-inference
+```
+$ cd ~/projects/dusty-nv/jetson-inference
+$ vim ./utils/camera/gstCamera.cpp
+```
+* faire une recherche pour "flip-method = 2"
+* modifier la valeur pour 0 ("flip-method = 0")
+* sauvegarder le fichier
+* recompiler le projet (voir section plus haut)
+* ré-exécuter le test d'inférence de segmentation sémantique en temps réel avec la caméra
+
