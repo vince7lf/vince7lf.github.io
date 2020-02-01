@@ -121,7 +121,7 @@ gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=1280, height=7
 Cela fontionne. 
 
 
-## Nano hardware encoder ou decoder
+## Nano hardware encoder decoder
 Basé sur le commentaire trouvé sur le forum devtalk (https://devtalk.nvidia.com/default/topic/1050950/jetson-nano/h-264-h-265-encoding-using-jetson-nano-gpu/), il est recommandé d'utiliser GStreamer, à la place du populaire ffmpeg, pour bénéficier de l'accélération des GPUs du nano. ffmpeg utilise les CPUs et non les GPUs. 
 
 "ffmpeg doesn't use the Nano's hardware encoder or decoder, you can run it but it will be CPU-only."
