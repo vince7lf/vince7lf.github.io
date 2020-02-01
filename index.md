@@ -1,5 +1,8 @@
 # Préparation du Jetson nano
 
+1. TOC
+{:toc}
+
 ## Système d'alimentation, micro-sd, image
 
 * La première étape est d'avoir un système d'alimentation assez puissant: un adapteur USB fournissant un peu plus que 5V, et d'au moins 4amp. 
