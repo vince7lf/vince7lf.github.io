@@ -38,7 +38,7 @@ En gros, les étapes sont:
 * Installer PyTorch; nécessaire pour faire le transfer learning; uniquement la version PyTorch v1.1.0 pour Python 3.6 est installée. 
 * Compiler le projet; cette étape prend 3-5 minutes
 ```
-$ cd jetson-inference/build          # omit if working directory is already build/ from above
+$ cd jetson-inference/build
 $ make
 $ sudo make install
 $ sudo ldconfig
@@ -157,7 +157,7 @@ $ vim ./utils/camera/gstCamera.cpp
 * sauvegarder le fichier
 * recompiler le projet (voir section plus haut)
 ```
-$ cd jetson-inference/build          # omit if working directory is already build/ from above
+$ cd jetson-inference/build
 $ make
 $ sudo make install
 $ sudo ldconfig
