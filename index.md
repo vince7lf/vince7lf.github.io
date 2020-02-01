@@ -118,7 +118,7 @@ Essayons le format 60FPS 1280x720:
 ```
 gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=1280, height=720, framerate=60/1, format=NV12' ! nvvidconv flip-method=0 ! 'video/x-raw,width=960, height=616' ! nvvidconv ! nvegltransform ! nveglglessink -e
 ```
-cela fontionne. 
+Cela fontionne. 
 
 
 ## Nano hardware encoder ou decoder
