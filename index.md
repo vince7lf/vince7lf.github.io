@@ -84,7 +84,7 @@ A noter que le nombre de frame est 21/1. Au dessus de cette valeur (> 22/1), la 
 Pour les détails de la ligne de dommande et l'utilisation de GStreamer, il faut se référer au guide suivant. GStreamer est l'outil qui est préconisé par NVidia (vs ffmpeg) afin de profiter des GPUs.  
 https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Accelerated_GStreamer_User_Guide.pdf
 
-## Récupère les résolutions que la caméra supporte
+## Résolutions x FPS supportés par la caméra
 Référence: https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-camera-2.md
 
 Installer v4l-utils
