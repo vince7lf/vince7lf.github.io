@@ -12,10 +12,9 @@ https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit
 * Télécharger et exécuter le Sd Card Formatter: quick format; pas de label
 * Télécharger et exécuter Etcher pour flasher la micro-sdo avec l'image, ce qui prend entre 5 et 10 minutes selon le PC utilisé
 
-Notes: 
-- La carte micro-sd 64Gb EVO Plus *rouge* m'appartient personnellement. 
-- La carte micro-sd 64Gb EVO Plus *verte* appartient au projet
-
+> Notes: 
+> - La carte micro-sd 64Gb EVO Plus *rouge* m'appartient personnellement. 
+> - La carte micro-sd 64Gb EVO Plus *verte* appartient au projet
 
 ## Démarrage du système pour la 1er fois
 Au  1er démarrage, le système nécessite de recevoir certaines informations pour l'installation, tel que le language du système et du clavier, le fuseau horaire, l'espace de la micro-sd qu'il peut utiliser. Suivre le Wizard.
@@ -95,11 +94,11 @@ https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Acceler
 ### Résolutions x FPS supportés par la caméra
 Référence: https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-camera-2.md
 
-Installer v4l-utils
+Installer v4l-utils:
 ```
 $ sudo apt-get install v4l-utils
 ```
-et exécuter l'utilitaire 
+Et exécuter l'utilitaire *v4l2-ctl*:
 ```
 $ v4l2-ctl --list-formats-ext
 ioctl: VIDIOC_ENUM_FMT
@@ -118,16 +117,13 @@ ioctl: VIDIOC_ENUM_FMT
 		Size: Discrete 1280x720
 			Interval: Discrete 0.017s (60.000 fps)
 ```
-
 On peut s'appercevoir que la caméra supporte jusqu'à 60 images-par-seconde en résolution 1280x720, et 21 images-par-seconde en résolution 3264x2464. 
 
 Essayons le format 60FPS 1280x720: 
-
 ```
 $ gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=1280, height=720, framerate=60/1, format=NV12' ! nvvidconv flip-method=0 ! 'video/x-raw,width=960, height=616' ! nvvidconv ! nvegltransform ! nveglglessink -e
 ```
 Cela fontionne. 
-
 
 ### Nano hardware encoder decoder
 Basé sur le commentaire trouvé sur le forum devtalk (https://devtalk.nvidia.com/default/topic/1050950/jetson-nano/h-264-h-265-encoding-using-jetson-nano-gpu/), il est recommandé d'utiliser GStreamer, à la place du populaire ffmpeg, pour bénéficier de l'accélération des GPUs du nano. ffmpeg utilise les CPUs et non les GPUs. 
@@ -148,11 +144,8 @@ $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
 $ ./segnet-camera.py --network=fcn-resnet18-mhp
 ```
----
-**_NOTE Importante:_**
-Il y a un fix a apporter avant de procéder. Le paramètre *flip-method* n'a pas la bonne valeur. Il doit être à **`0`** pour être conforme à la bonne orientation de la caméra dans le boitier.
-
----
+> **_NOTE Importante:_**
+> Il y a un fix a apporter avant de procéder. Le paramètre *flip-method* n'a pas la bonne valeur. Il doit être à **`0`** pour être conforme à la bonne orientation de la caméra dans le boitier.
 
 * Ouvrir le fichier ./utils/camera/gstCamera.cpp du projet jetson-inference
 ```
@@ -175,4 +168,3 @@ $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
 $ ./segnet-camera.py --network=fcn-resnet18-mhp
 ```
-
