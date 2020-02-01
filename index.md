@@ -81,6 +81,9 @@ gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=3820, height=2
 Une nouvelle fenêtre apparait avec la vidéo de la caméra. 
 A noter que le nombre de frame est 21/1. Au dessus de cette valeur (> 22/1), la vido ne démarre pas, il y a des erreurs. 
 
+Pour les détails de la ligne de dommande et l'utilisation de GStreamer, il faut se référer au guide suivant. GStreamer est l'outil qui est préconisé par NVidia (vs ffmpeg) afin de profiter des GPUs.  
+https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Accelerated_GStreamer_User_Guide.pdf
+
 ## Récupère les résolutions que la caméra supporte
 Référence: https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-camera-2.md
 
@@ -113,7 +116,15 @@ On peut s'appercevoir que la caméra supporte jusqu'à 60 images-par-seconde en 
 Essayons le format 60FPS 1280x720: 
 
 ```
-gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=1280, height=720, framerate=60/1, format=RG10' ! nvvidconv flip-method=0 ! 'video/x-raw,width=960, height=616' ! nvvidconv ! nvegltransform ! nveglglessink -e
+gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=1280, height=720, framerate=60/1, format=NV12' ! nvvidconv flip-method=0 ! 'video/x-raw,width=960, height=616' ! nvvidconv ! nvegltransform ! nveglglessink -e
 ```
+cela fontionne. 
 
 
+## Nano hardware encoder ou decoder
+Basé sur le commentaire trouvé sur le forum devtalk (https://devtalk.nvidia.com/default/topic/1050950/jetson-nano/h-264-h-265-encoding-using-jetson-nano-gpu/), il est recommandé d'utiliser GStreamer, à la place du populaire ffmpeg, pour bénéficier de l'accélération des GPUs du nano. ffmpeg utilise les CPUs et non les GPUs. 
+
+"ffmpeg doesn't use the Nano's hardware encoder or decoder, you can run it but it will be CPU-only."
+
+La référence à utiliser pour traiter les images et vidéos avec le Jetson nano est: 
+https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Accelerated_GStreamer_User_Guide.pdf
