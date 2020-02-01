@@ -137,14 +137,18 @@ https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Acceler
 
 # Test inference segmentation sementic en temps réel avec la caméra
 
+NVidia fournit déjà des tests pour réaliser l'inférence de modèle de segmentation sémentique en temps réel avec la caméra. 
+Référence: https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-camera-2.md
+
+Par exemple:
 ```
 $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
 $ ./segnet-camera.py --network=fcn-resnet18-mhp
 ```
-
-Il y a un fix a apporter avant de procéder. Le paramètre flip-method n'a pas la bonne valeur. Il doit être à 0 pour être conforme à la bonne orientation de la caméra dans le boitier. 
-
+---
+**NOTE Importante** Il y a un fix a apporter avant de procéder. Le paramètre flip-method n'a pas la bonne valeur. Il doit être à 0 pour être conforme à la bonne orientation de la caméra dans le boitier. 
+---
 * Ouvrir le fichier ./utils/camera/gstCamera.cpp du projet jetson-inference
 ```
 $ cd ~/projects/dusty-nv/jetson-inference
@@ -154,5 +158,16 @@ $ vim ./utils/camera/gstCamera.cpp
 * modifier la valeur pour 0 ("flip-method = 0")
 * sauvegarder le fichier
 * recompiler le projet (voir section plus haut)
+```
+$ cd jetson-inference/build          # omit if working directory is already build/ from above
+$ make
+$ sudo make install
+$ sudo ldconfig
+```
 * ré-exécuter le test d'inférence de segmentation sémantique en temps réel avec la caméra
+```
+$ cd ~/projects/dusty-nv/jetson-inference
+$ cd ./build/aarch64/bin
+$ ./segnet-camera.py --network=fcn-resnet18-mhp
+```
 
