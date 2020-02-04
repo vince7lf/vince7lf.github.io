@@ -139,6 +139,7 @@ La référence à utiliser pour traiter les images et vidéos avec le Jetson nan
 ## Test inference segmentation sementic en temps réel avec la caméra
 
 NVidia fournit déjà des tests pour réaliser l'inférence de modèle de segmentation sémentique en temps réel avec la caméra. 
+
 Référence: <https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-camera-2.md>
 
 Par exemple:
