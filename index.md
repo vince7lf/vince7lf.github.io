@@ -9,7 +9,7 @@
 * La seconde étape est de préparer Jetpack sur une microsd. Jetpack est un SDK, une boite à outil, préparée par Nvidia, qui contient L4T, le système d'exploitation Ubuntu 18 de NVidia, et des outils nécessaires pour le deeplearning et l'inférence.
 
 La référence pour la mise en place de la micro-sd se trouve sur le site suivant, et peut se résumer ainsi:
-https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit
+<https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit>
 
 * Télécharger l'image nv-jetson-nano-sd-card-image-r32.3.1.zip (~5.4 Gb)
 * Télécharger et exécuter le Sd Card Formatter: quick format; pas de label
@@ -20,9 +20,9 @@ https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit
 > - La carte micro-sd 64Gb EVO Plus *verte* appartient au projet
 
 ## Démarrage du système pour la 1er fois
-Au  1er démarrage, le système nécessite de recevoir certaines informations pour l'installation, tel que le language du système et du clavier, le fuseau horaire, l'espace de la micro-sd qu'il peut utiliser. Suivre le Wizard.
+Au  1er démarrage, le système nécessite de recevoir certaines informations pour l'installation, tel que le langage du système et du clavier, le fuseau horaire, l'espace de la micro-sd qu'il peut utiliser. Suivre le Wizard.
 
-* language : anglais
+* langage : anglais
 * usager: lefv2603; c'est mon nom d'usager à l'université de Sherbrooke. 
 * mot de passe: identique au nom d'usager
 * fuseau horaire : New-York
@@ -31,7 +31,7 @@ Connecter le réseau wifi via l'adapteur usb s'il n'y a pas d'extension interne 
 
 ## Mise en place de Jetpack avec le projet "Hello AI World"
 La référence de l'installation est située à cette page:
-https://github.com/dusty-nv/jetson-inference/blob/master/docs/building-repo-2.md
+<https://github.com/dusty-nv/jetson-inference/blob/master/docs/building-repo-2.md>
 
 En gros, les étapes sont:
 * Cloner le projet
@@ -48,7 +48,7 @@ $ sudo ldconfig
 ```
 
 ## Première inférence avec un modèl de segmentation sémanique
-Ce test permet de savoir si le système est bien en place, et si le Jetson nano est desservie par assez d'énergie. Sinon, il s'éteind tout simplement pendant l'exécution de l'inférence. 
+Ce test permet de savoir si le système est bien en place, et si le Jetson nano est desservi par assez d'énergie. Sinon, il s'éteind tout simplement pendant l'exécution de l'inférence. 
 
 La commande utilisée est:
 ```
@@ -67,7 +67,7 @@ La première exécution le rapport donne des valeurs assez élevées.
 [TRT]   Total         CPU  63.02396ms  CUDA  62.86823ms
 [TRT]   ------------------------------------------------
 ```
-Les fois suivantes, les valeurs du rapports restent stables. Par contre la commande `sudo jetson_clocks` a été exécuté après la première fois. 
+Les fois suivantes, les valeurs du rapport restent stables. Par contre la commande `sudo jetson_clocks` a été exécuté après la première fois. 
 ```
 [TRT]   ------------------------------------------------
 [TRT]   Timing Report networks/FCN-ResNet18-Cityscapes-512x256/fcn_resnet18.onnx
@@ -80,22 +80,22 @@ Les fois suivantes, les valeurs du rapports restent stables. Par contre la comma
 ```
 
 ## Test de la caméra Raspberry Pi v2
-Réference : https://www.jetsonhacks.com/2019/04/02/jetson-nano-raspberry-pi-camera/
+Réference : <https://www.jetsonhacks.com/2019/04/02/jetson-nano-raspberry-pi-camera/>
 
 La première chose a s'assurer est d'installer la caméra dans le boitier à la bonne position, c'est à dire la bonne orientation. Le cable doit longer le haut du boitier. 
 
-La commande pour tested la caméra est la suivante:
+La commande pour tester la caméra est la suivante:
 ```
 $ gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=3820, height=2464, framerate=21/1, format=NV12' ! nvvidconv flip-method=0 ! 'video/x-raw,width=960, height=616' ! nvvidconv ! nvegltransform ! nveglglessink -e
 ```
 Une nouvelle fenêtre apparait avec la vidéo de la caméra. 
-A noter que le nombre de frame est 21/1. Au dessus de cette valeur (> 22/1), la vido ne démarre pas, il y a des erreurs. 
+A noter que le nombre de frame est 21/1 dans l'exemple. Pour augmenter le nombre de frame, il faut diminuer la résolution. Voir plus bas. 
 
 Pour les détails de la ligne de dommande et l'utilisation de GStreamer, il faut se référer au guide suivant. GStreamer est l'outil qui est préconisé par NVidia (vs ffmpeg) afin de profiter des GPUs.  
-https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Accelerated_GStreamer_User_Guide.pdf
+<https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Accelerated_GStreamer_User_Guide.pdf>
 
 ### Résolutions x FPS supportés par la caméra
-Référence: https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-camera-2.md
+Référence: <https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-camera-2.md>
 
 Installer v4l-utils:
 ```
@@ -129,17 +129,17 @@ $ gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=1280, height
 Cela fontionne. 
 
 ### Nano hardware encoder decoder
-Basé sur le commentaire trouvé sur le forum devtalk (https://devtalk.nvidia.com/default/topic/1050950/jetson-nano/h-264-h-265-encoding-using-jetson-nano-gpu/), il est recommandé d'utiliser GStreamer, à la place du populaire ffmpeg, pour bénéficier de l'accélération des GPUs du nano. ffmpeg utilise les CPUs et non les GPUs. 
+Basé sur le commentaire trouvé sur le forum devtalk (<https://devtalk.nvidia.com/default/topic/1050950/jetson-nano/h-264-h-265-encoding-using-jetson-nano-gpu/>), il est recommandé d'utiliser GStreamer, à la place du populaire ffmpeg, pour bénéficier de l'accélération des GPUs du nano. ffmpeg utilise les CPUs et non les GPUs. 
 
-"ffmpeg doesn't use the Nano's hardware encoder or decoder, you can run it but it will be CPU-only."
+*"ffmpeg doesn't use the Nano's hardware encoder or decoder, you can run it but it will be CPU-only."*
 
 La référence à utiliser pour traiter les images et vidéos avec le Jetson nano est: 
-https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Accelerated_GStreamer_User_Guide.pdf
+<https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Accelerated_GStreamer_User_Guide.pdf>
 
 ## Test inference segmentation sementic en temps réel avec la caméra
 
 NVidia fournit déjà des tests pour réaliser l'inférence de modèle de segmentation sémentique en temps réel avec la caméra. 
-Référence: https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-camera-2.md
+Référence: <https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-camera-2.md>
 
 Par exemple:
 ```
