@@ -3,10 +3,11 @@
 1. TOC
 {:toc}
 
-## Système d'alimentation, micro-sd, image
+## Montage, système d'alimentation, micro-sd, image
+* La première étape est le montage du Jetson nano. Pour des informations pertinentes sur la composition du Jetson nano, se référer au [JETSON NANO DEVELOPER KIT User Guide]( https://developer.download.nvidia.com/assets/embedded/secure/jetson/Nano/docs/NVIDIA_Jetson_Nano_Developer_Kit_User_Guide.pdf?4i_bSgtK7-9jHyrfcxqONSTGdsqaUzN66jUD0MSJOEDHHZFrBeQo0tVlgVGftxj3E9lYDGVrnG7Q1dSgrYy_2qZmOeccW7Br4Hxw8bygQ6VjpFL0sPO2ogMhJuTcQARio68xNvqYSWHChfIJLSZH04TAcJicfE7QbRTHhiwpomBVNla-QTt-ItqM5sFpoobABNEJ7lZS)
 
-* La première étape est d'avoir un système d'alimentation assez puissant: un adapteur USB fournissant un peu plus que 5V, et d'au moins 4amp. 
-* La seconde étape est de préparer Jetpack sur une microsd. Jetpack est un SDK, une boite à outil, préparée par Nvidia, qui contient L4T, le système d'exploitation Ubuntu 18 de NVidia, et des outils nécessaires pour le deeplearning et l'inférence.
+* La seconde étape est d'avoir un système d'alimentation assez puissant: un adapteur USB fournissant un peu plus que 5V, et d'au moins 4amp. 
+* La troisième étape est de préparer Jetpack sur une microsd. Jetpack est un SDK, une boite à outil, préparée par Nvidia, qui contient L4T, le système d'exploitation Ubuntu 18 de NVidia, et des outils nécessaires pour le deeplearning et l'inférence.
 
 La référence pour la mise en place de la micro-sd se trouve sur le site suivant, et peut se résumer ainsi:
 <https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit>
