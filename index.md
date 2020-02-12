@@ -71,7 +71,7 @@ La commande utilisée est:
 ```
 $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
-$ ./segnet-console.py --network=fcn-resnet18-cityscapes images/city_0.jpg output.jpg
+$ ./segnet-console.py --network=fcn-resnet18-deepscene --visualize=mask --alpha=10000 images/city_0.jpg output.jpg
 ```
 La première exécution le rapport donne des valeurs assez élevées. 
 ```
