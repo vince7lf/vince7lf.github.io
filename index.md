@@ -42,8 +42,8 @@ $ sudo hdparm -t --direct /dev/sda
 Timing O_DIRECT disk reads: 1004 MB in 3.00 seconds = 334.15 MB/sec
 ```
 
-## Installation d<un SSD Nvme M.2
-R/f/rence : https://www.jetsonhacks.com/2019/09/17/jetson-nano-run-from-usb-drive/
+## Installation d'un SSD Nvme M.2
+Référence : https://www.jetsonhacks.com/2019/09/17/jetson-nano-run-from-usb-drive/
 
 
 ## Mise en place de Jetpack avec le projet "Hello AI World"
