@@ -18,7 +18,7 @@ La référence pour la mise en place de la micro-sd se trouve sur le site suivan
 
 > Notes: 
 > - La carte micro-sd 64Gb EVO Plus *rouge* m'appartient personnellement. 
-> - La carte micro-sd 64Gb EVO Plus *verte* appartient au projet
+> - La carte micro-sd 64Gb EVO Select *verte* appartient au projet
 
 ## Démarrage du système pour la 1er fois
 Au  1er démarrage, le système nécessite de recevoir certaines informations pour l'installation, tel que le langage du système et du clavier, le fuseau horaire, l'espace de la micro-sd qu'il peut utiliser. Suivre le Wizard.
