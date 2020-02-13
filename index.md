@@ -190,6 +190,7 @@ $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
 $ ./segnet-camera.py --network=fcn-resnet18-mhp
 ```
+
 ## Test d'inférence segmentation sémantique d'une vidéo
 Références: https://github.com/umlaeute/v4l2loopback
 https://unix.stackexchange.com/questions/5452/manipulating-dev-video
