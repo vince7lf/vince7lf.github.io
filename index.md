@@ -30,7 +30,7 @@ Au  1er démarrage, le système nécessite de recevoir certaines informations po
 
 Connecter le réseau wifi via l'adapteur usb s'il n'y a pas d'extension interne m.2 installée. 
 
-## test des performances de la carte micro-sd (ou autre disque, comme un SSD Sata ou Nvme, via PCIe ou USB)
+## Test des performances de la carte micro-sd (ou autre disque, comme un SSD Sata ou Nvme, via PCIe ou USB)
 Pour tester les performances de la micro-sd ou d<un disk interne ou externe, connecté via USB3.0, PCI2 ou carte extension M.2, l'utilitaire hdparm peut etre facilement utilise. 
 
 Référence : <https://devtalk.nvidia.com/default/topic/1049706/jetson-nano/can-this-board-use-m-2-ssd-nvme/>
