@@ -33,7 +33,7 @@ Connecter le réseau wifi via l'adapteur usb s'il n'y a pas d'extension interne 
 ## test des performances de la carte micro-sd (ou autre disque, comme un SSD Sata ou Nvme, via PCIe ou USB)
 Pour tester les performances de la micro-sd ou d<un disk interne ou externe, connecté via USB3.0, PCI2 ou carte extension M.2, l'utilitaire hdparm peut etre facilement utilise. 
 
-Référence : https://devtalk.nvidia.com/default/topic/1049706/jetson-nano/can-this-board-use-m-2-ssd-nvme/
+Référence : <https://devtalk.nvidia.com/default/topic/1049706/jetson-nano/can-this-board-use-m-2-ssd-nvme/>
 
 ```
 $ sudo apt install hdparm
@@ -44,7 +44,7 @@ Timing O_DIRECT disk reads: 1004 MB in 3.00 seconds = 334.15 MB/sec
 
 ## Installation d'un SSD interne Nvme M.2 avec carte d'extension M.2 vers USB3.0
 À noter qu'à ce jour le disque n'arrive pas resté connecté très longtemps, pour une raison inconnue, il devient indisponible.
-Référence : https://www.jetsonhacks.com/2019/09/17/jetson-nano-run-from-usb-drive/
+Référence : <https://www.jetsonhacks.com/2019/09/17/jetson-nano-run-from-usb-drive/>
 
 
 ## Mise en place de Jetpack avec le projet "Hello AI World"
