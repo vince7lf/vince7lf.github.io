@@ -154,7 +154,7 @@ Basé sur le commentaire trouvé sur le forum devtalk (<https://devtalk.nvidia.c
 La référence à utiliser pour traiter les images et vidéos avec le Jetson nano est: 
 <https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Accelerated_GStreamer_User_Guide.pdf>
 
-## Test inference segmentation sementic en temps réel avec la caméra
+## Test d'inférence segmentation sémantique en temps réel avec la caméra
 
 NVidia fournit déjà des tests pour réaliser l'inférence de modèle de segmentation sémentique en temps réel avec la caméra. 
 
@@ -190,7 +190,7 @@ $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
 $ ./segnet-camera.py --network=fcn-resnet18-mhp
 ```
-## Test inference segmentation sementic d'une vidéo
+## Test d'inférence segmentation sémantique d'une vidéo
 Références: https://github.com/umlaeute/v4l2loopback
 https://unix.stackexchange.com/questions/5452/manipulating-dev-video
 https://sourceforge.net/projects/v4l2vd/
