@@ -42,7 +42,8 @@ $ sudo hdparm -t --direct /dev/sda
 Timing O_DIRECT disk reads: 1004 MB in 3.00 seconds = 334.15 MB/sec
 ```
 
-## Installation d'un SSD Nvme M.2
+## Installation d'un SSD interne Nvme M.2 avec carte d'extension M.2 vers USB3.0
+À noter qu'à ce jour le disque n'arrive pas resté connecté très longtemps, pour une raison inconnue, il devient indisponible.
 Référence : https://www.jetsonhacks.com/2019/09/17/jetson-nano-run-from-usb-drive/
 
 
@@ -189,3 +190,7 @@ $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
 $ ./segnet-camera.py --network=fcn-resnet18-mhp
 ```
+## Test inference segmentation sementic d'une vidéo
+Références: https://github.com/umlaeute/v4l2loopback
+https://unix.stackexchange.com/questions/5452/manipulating-dev-video
+https://sourceforge.net/projects/v4l2vd/
