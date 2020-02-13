@@ -65,7 +65,7 @@ $ sudo make install
 $ sudo ldconfig
 ```
 
-## Première inférence avec un modèl de segmentation sémanique
+## Premièr test d'inférence avec un modèle de segmentation sémantique
 Ce test permet de savoir si le système est bien en place, et si le Jetson nano est desservi par assez d'énergie. Sinon, il s'éteind tout simplement pendant l'exécution de l'inférence. 
 
 La commande utilisée est:
