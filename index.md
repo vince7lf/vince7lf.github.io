@@ -194,8 +194,12 @@ $ ./segnet-camera.py --network=fcn-resnet18-mhp
 
 ## Test d'inférence segmentation sémantique d'une vidéo
 Références: <https://github.com/umlaeute/v4l2loopback>
+
 <https://unix.stackexchange.com/questions/5452/manipulating-dev-video>
+
 <https://sourceforge.net/projects/v4l2vd/>
+
+<https://gist.github.com/strezh/9114204>
 
 ## Review of the Jetson nano (benchmark)
 Reference: <https://syonyk.blogspot.com/2019/04/benchmarking-nvidia-jetson-nano.html>
