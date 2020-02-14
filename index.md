@@ -201,5 +201,20 @@ Références: <https://github.com/umlaeute/v4l2loopback>
 
 <https://gist.github.com/strezh/9114204>
 
+### Pour jouer une vidéo avec gstreamer
+
+Cette commande va jouer une vidéo mpeg4 en plein écran. ESC pour arrêter. 
+```
+gst-launch-1.0 filesrc location=~/Downloads/1080p.mp4 ! \
+    decodebin name=dec ! \
+    queue ! \
+    videoconvert ! \
+    autovideosink dec. ! \
+    queue ! \
+    audioconvert ! \
+    audioresample ! \
+    autoaudiosink
+```
+
 ## Review of the Jetson nano (benchmark)
 Reference: <https://syonyk.blogspot.com/2019/04/benchmarking-nvidia-jetson-nano.html>
