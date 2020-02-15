@@ -203,7 +203,7 @@ Références: <https://github.com/umlaeute/v4l2loopback>
 
 ### Pour jouer une vidéo avec gstreamer
 
-Cette commande va jouer une vidéo mpeg4 en plein écran. ESC pour arrêter. 
+Cette commande va jouer une vidéo mpeg4 en plein écran. Ctrl+C pour arrêter. 
 ```
 gst-launch-1.0 filesrc location=~/Downloads/1080p.mp4 ! \
     decodebin name=dec ! \
