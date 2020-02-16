@@ -175,8 +175,8 @@ $ ./segnet-camera.py --network=fcn-resnet18-mhp
 $ cd ~/projects/dusty-nv/jetson-inference
 $ vim ./utils/camera/gstCamera.cpp
 ```
-* faire une recherche pour "flip-method = 2"
-* modifier la valeur pour 0 ("flip-method = 0")
+* faire une recherche pour "flip-method = 2" ou flipMethod = "2"
+* modifier la valeur pour 0 ("flip-method = 0" ou "flipMethod = 0")
 * sauvegarder le fichier
 * recompiler le projet (voir section plus haut)
 ```
