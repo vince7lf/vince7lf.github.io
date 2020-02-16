@@ -201,6 +201,22 @@ Références: <https://github.com/umlaeute/v4l2loopback>
 
 <https://gist.github.com/strezh/9114204>
 
+Référence: <https://github.com/umlaeute/v4l2loopback>
+```
+$ ls -al /dev/video*
+crw-rw----+ 1 root video 81, 0 Feb 15 16:58 /dev/video0
+$ cd ~/projects
+$ mkdir umlaeute
+$ cd umlaeute
+$ git clone https://github.com/umlaeute/v4l2loopback.git
+$ cd v4l2loopback
+$ make 
+$ make && sudo make install
+$ sudo depmod -a
+$ ls -al /dev/video*
+crw-rw----+ 1 root video 81, 0 Feb 15 16:58 /dev/video0
+crw-rw----+ 1 root video 81, 3 Feb 16 14:36 /dev/video1
+```
 ### Pour jouer une vidéo avec gstreamer
 
 Cette commande va jouer une vidéo mpeg4 en plein écran. Ctrl+C pour arrêter. 
