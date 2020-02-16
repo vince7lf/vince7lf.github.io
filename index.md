@@ -226,8 +226,19 @@ $ ls -al /dev/video*
 crw-rw----+ 1 root video 81, 0 Feb 15 16:58 /dev/video0
 crw-rw----+ 1 root video 81, 3 Feb 16 14:36 /dev/video1
 ```
+### Tests
 
-### Pour jouer une vidéo avec gstreamer
+Démarrer en premier la source vidéo (producer) vers /dev/video1:
+```
+$ gst-launch-1.0 videotestsrc ! v4l2sink device=/dev/video1
+```
+Ensuite démarrer le consommateur (consummer) de la vidéo:
+```
+$ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
+```
+Une petite fenêtre va apparaitre avec des frames de différentes couleurs et de la neige.
+
+## Pour jouer une vidéo avec gstreamer
 
 Cette commande va jouer une vidéo mpeg4 en plein écran. Ctrl+C pour arrêter. 
 ```
