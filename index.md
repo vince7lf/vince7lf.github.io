@@ -193,16 +193,18 @@ $ ./segnet-camera.py --network=fcn-resnet18-mhp
 ```
 
 ## Test d'inférence segmentation sémantique d'une vidéo
-Références: <https://github.com/umlaeute/v4l2loopback>
 
-<https://unix.stackexchange.com/questions/5452/manipulating-dev-video>
+### DVSNet
+Référence: <https://github.com/XUSean0118/DVSNet.git>
 
-<https://sourceforge.net/projects/v4l2vd/>
+### loopback
+Références: 
+- <https://github.com/umlaeute/v4l2loopback>
+- <https://unix.stackexchange.com/questions/5452/manipulating-dev-video>
+- <https://sourceforge.net/projects/v4l2vd/>
+- <https://gist.github.com/strezh/9114204>
 
-<https://gist.github.com/strezh/9114204>
-
-Référence: <https://github.com/umlaeute/v4l2loopback>
-### Prepare et télécharge
+#### Prepare et télécharge
 ```
 $ ls -al /dev/video*
 crw-rw----+ 1 root video 81, 0 Feb 15 16:58 /dev/video0
@@ -213,20 +215,20 @@ $ git clone https://github.com/umlaeute/v4l2loopback.git
 $ cd v4l2loopback
 ```
 
-### Installation
+#### Installation
 ```
 $ make 
 $ make && sudo make install
 $ sudo depmod -a
 ```
-### Démarrage
+#### Démarrage
 ```
 $ sudo modprobe v4l2loopback
 $ ls -al /dev/video*
 crw-rw----+ 1 root video 81, 0 Feb 15 16:58 /dev/video0
 crw-rw----+ 1 root video 81, 3 Feb 16 14:36 /dev/video1
 ```
-### Tests
+#### Tests
 
 Démarrer en premier la source vidéo (producer) vers /dev/video1:
 ```
@@ -238,7 +240,7 @@ $ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
 ```
 Une petite fenêtre va apparaitre avec des frames de différentes couleurs et de la neige.
 
-## Pour jouer une vidéo avec gstreamer
+### Pour jouer une vidéo avec gstreamer
 
 Cette commande va jouer une vidéo mpeg4 en plein écran. Ctrl+C pour arrêter. 
 ```
