@@ -66,6 +66,14 @@ $ sudo make install
 $ sudo ldconfig
 ```
 
+## Mise à jour
+### pip
+Installation de pip pour Python2 
+```
+sudo apt install python3-pip
+```
+pip3 pour Python3 devrait être installé avec l'étpae précédente. 
+
 ## Premier test d'inférence avec un modèle de segmentation sémantique
 Ce test permet de savoir si le système est bien en place, et si le Jetson nano est desservi par assez d'énergie. Sinon, il s'éteind tout simplement pendant l'exécution de l'inférence. 
 
