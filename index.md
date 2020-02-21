@@ -267,9 +267,11 @@ gst-launch-1.0 filesrc location=~/Downloads/1080p.mp4 ! \
 - Loopback requires to be started
 - the full path of the video is required
 - tee is required
-- specifying width, heigth, format and framerate generates an error
+- specifying width, heigth, format and framerate generates an error.. if not the one expected. With the verbose option (-v) we can see what is expected
 ```
 gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee name=qtdemux ! decodebin ! videoconvert ! video/x-raw ! v4l2sink device=/dev/video1
+
+gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee ! qtdemux ! decodebin ! videoconvert ! "video/x-raw,format=(string)I420,width=(int)1920,heigth=(int)1080" ! v4l2sink device=/dev/video1
 ```
 
 ## Review of the Jetson nano (benchmark)
