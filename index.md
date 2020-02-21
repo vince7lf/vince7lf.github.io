@@ -263,5 +263,14 @@ gst-launch-1.0 filesrc location=~/Downloads/1080p.mp4 ! \
     autoaudiosink
 ```
 
+### Pour streamer une vidéo avec gstreamer-1.0 sur le loppback /dev/video1
+- Loopback requires to be started
+- the full path of the video is required
+- tee is required
+- specifying width, heigth, format and framerate generates an error
+```
+gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee name=qtdemux ! decodebin ! videoconvert ! video/x-raw ! v4l2sink device=/dev/video1
+```
+
 ## Review of the Jetson nano (benchmark)
 Reference: <https://syonyk.blogspot.com/2019/04/benchmarking-nvidia-jetson-nano.html>
