@@ -74,19 +74,20 @@ sudo apt install python3-pip
 ```
 pip3 pour Python3 devrait être installé avec l'étpae précédente. 
 
-### dconf-editor to switch between windows vs application using Alt+Tab
+### dconf-editor pour basculer entre les fenêtres, et non les applications (défaut), avec Alt+Tab
+L'alternative est de basculer entre applications avec Alt-# (clavier FR) (ou Alt+\` clavier US)  (touche en dessous de Esc)
 ```
 sudo apt-get install dconf-tools
 ```
 Ensuite ouvrer l'editor dconf-editor:
 Référence: https://superuser.com/questions/394376/how-to-prevent-gnome-shells-alttab-from-grouping-windows-from-similar-apps
-- Open dconf-editor
-- Go to org/gnome/desktop/wm/keybindings
-- Move the value '<Alt>Tab' from switch-applications to switch-windows
-- Optionally move '<Shift><Alt>Tab' from switch-applications-backward to switch-windows-backward
-- If you want switch-windows to work across desktops, not just in the current desktop, you can also uncheck org/gnome/shell/window-switcher/current-workspace-only (Courtesy of @CharlBotha)
-- Close dconf-editor
-- If using X11, press <Alt>F2, then type r to restart Gnome.
+- "Open dconf-editor"
+- "Go to org/gnome/desktop/wm/keybindings"
+- "Move the value '<Alt>Tab' from switch-applications to switch-windows"
+- "Optionally move '<Shift><Alt>Tab' from switch-applications-backward to switch-windows-backward"
+- "If you want switch-windows to work across desktops, not just in the current desktop, you can also uncheck org/gnome/shell/window-switcher/current-workspace-only (Courtesy of @CharlBotha)"
+- "Close dconf-editor"
+- "If using X11, press <Alt>F2, then type r to restart Gnome."
 
 ## Premier test d'inférence avec un modèle de segmentation sémantique
 Ce test permet de savoir si le système est bien en place, et si le Jetson nano est desservi par assez d'énergie. Sinon, il s'éteind tout simplement pendant l'exécution de l'inférence. 
@@ -268,9 +269,6 @@ $ ./segnet-camera.py --network=fcn-resnet18-mhp
 
 ## Test d'inférence segmentation sémantique d'une vidéo
 
-### DVSNet
-Référence: <https://github.com/XUSean0118/DVSNet.git>
-
 ### loopback
 Références: 
 - <https://github.com/umlaeute/v4l2loopback>
@@ -367,6 +365,10 @@ $ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
 ```
 Une petite fenêtre va apparaitre avec des frames de différentes couleurs et de la neige.
 
+### DVSNet
+J'ai essayé de faire l'installation mais j'ai échoué avec l'inmtallation de PyTorch pour Python 2.7. Il y a besoin de mettre plus d'efforts.  
+Référence: <https://github.com/XUSean0118/DVSNet.git>
+
 ### Pour jouer une vidéo avec gstreamer
 
 Cette commande va jouer une vidéo mpeg4 en plein écran. Ctrl+C pour arrêter. 
@@ -388,20 +390,48 @@ gst-launch-1.0 filesrc location=~/Downloads/1080p.mp4 ! \
 ```
 sudo modprobe v4l2loopback buffers=2
 ```
-- the full path of the video is required
-- tee multiplexer is required
---  to force a memory copy in the gstreamer pipeline
+- le cheminn complet de la vidéo est requis
+- tee multiplexer est requis
+-- pour forcer une copie de la mémoire dans le pipeline de gstreamer
 -- Références: 
 --- <https://github.com/umlaeute/v4l2loopback/issues/116>
 --- <https://github.com/umlaeute/v4l2loopback/issues/83>
-- specifying width, heigth and framerate generates an error if the command is not specified (videoscale and videorate)
-- use the verbose option (-v) to see the details
+- si width, heigth and framerate sont précisés une erreur est retournée sauf si videoscale et videorate le sont aussi
+- ajouter le mode verbeux -v pour voir les détails
 
+Producer:
+Ctrl+C dans le termincal pour arrêter et fermer la fenêtre de la vidéo. 
 ```
 gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee name=qtdemux ! decodebin ! videoconvert ! video/x-raw ! v4l2sink device=/dev/video1
 
 gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee ! qtdemux ! decodebin ! videoconvert ! "video/x-raw,format=(string)I420,width=(int)1920,heigth=(int)1080" ! v4l2sink device=/dev/video1
+
+gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee ! qtdemux ! decodebin ! videoconvert ! "video/x-raw" ! v4l2sink device=/dev/video1
 ```
+
+Consummer de test: 
+Ctrl+C dans le terminal pour arrêter, ou fermer la fenêtre de la vidéo. 
+```
+$ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
+```
+
+> **_NOTE Importante:_**
+> Le consummer ne peut jouer la video si "format=(string)RGB,width=(int)640,heigth=(int)480" indiqué par le producer. L'erreur "streaming stopped, reason not-negotiated (-4)" est retouné par le consummer. Par contre, ce même producer sera accepté par l'inférence segnet de NVidia. Pas investigué la raison. Le consummer de l'inférence est "gst-launch-1.0 v4l2src device=/dev/video1 ! appsink name=mysink" (après simplification de ma part dans le code cpp).
+
+> gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee ! qtdemux ! decodebin ! videoconvert ! videoscale ! "video/x-raw,format=(string)RGB,width=(int)640,heigth=(int)480" ! v4l2sink device=/dev/video1
+
+> $ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
+Setting pipeline to PAUSED ...
+Pipeline is live and does not need PREROLL ...
+ERROR: from element /GstPipeline:pipeline0/GstV4l2Src:v4l2src0: Internal data stream error.
+Additional debug info:
+gstbasesrc.c(3055): gst_base_src_loop (): /GstPipeline:pipeline0/GstV4l2Src:v4l2src0:
+streaming stopped, reason not-negotiated (-4)
+ERROR: pipeline doesn't want to preroll.
+Setting pipeline to PAUSED ...
+Setting pipeline to READY ...
+Setting pipeline to NULL ...
+Freeing pipeline ...
 
 ## Review of the Jetson nano (benchmark)
 Reference: <https://syonyk.blogspot.com/2019/04/benchmarking-nvidia-jetson-nano.html>
