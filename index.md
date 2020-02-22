@@ -230,6 +230,14 @@ Basé sur le commentaire trouvé sur le forum devtalk (<https://devtalk.nvidia.c
 La référence à utiliser pour traiter les images et vidéos avec le Jetson nano est: 
 <https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Accelerated_GStreamer_User_Guide.pdf>
 
+### Pour jouer une vidéo avec gstreamer
+
+Cette commande va jouer une vidéo mpeg4 en plein écran (sans le son). Ctrl+C pour arrêter. 
+Il est important d'indiquer le chemin complet de la vidéo. 
+```
+gst-launch-1.0 filesrc location=~/Downloads/1080p.mp4 ! decodebin ! queue ! videoconvert ! autovideosink
+```
+
 ## Test d'inférence segmentation sémantique en temps réel avec la caméra
 
 NVidia fournit déjà des tests pour réaliser l'inférence de modèle de segmentation sémentique en temps réel avec la caméra. 
@@ -267,7 +275,7 @@ $ cd ./build/aarch64/bin
 $ ./segnet-camera.py --network=fcn-resnet18-mhp
 ```
 
-## Test d'inférence segmentation sémantique d'une vidéo
+### Installation d'un device video virtuel (loopback)
 
 ### loopback
 Références: 
@@ -365,37 +373,18 @@ $ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
 ```
 Une petite fenêtre va apparaitre avec des frames de différentes couleurs et de la neige.
 
-### DVSNet
-J'ai essayé de faire l'installation mais j'ai échoué avec l'inmtallation de PyTorch pour Python 2.7. Il y a besoin de mettre plus d'efforts.  
-Référence: <https://github.com/XUSean0118/DVSNet.git>
-
-### Pour jouer une vidéo avec gstreamer
-
-Cette commande va jouer une vidéo mpeg4 en plein écran. Ctrl+C pour arrêter. 
-```
-gst-launch-1.0 filesrc location=~/Downloads/1080p.mp4 ! \
-    decodebin name=dec ! \
-    queue ! \
-    videoconvert ! \
-    autovideosink dec. ! \
-    queue ! \
-    audioconvert ! \
-    audioresample ! \
-    autoaudiosink
-```
-
-### Pour streamer une vidéo avec gstreamer-1.0 sur le loppback /dev/video1
+### Pour streamer une vidéo avec gstreamer-1.0 sur le loopback /dev/video1
 - Loopback doit être démarré. 
- - TODO: déterminer si buffers aide et est nécessaire. Référence: <https://github.com/umlaeute/v4l2loopback/issues/83>
+  - TODO: déterminer si buffers aide et est nécessaire. Référence: <https://github.com/umlaeute/v4l2loopback/issues/83>
 ```
 sudo modprobe v4l2loopback buffers=2
 ```
 - le cheminn complet de la vidéo est requis
 - tee multiplexer est requis
- - pour forcer une copie de la mémoire dans le pipeline de gstreamer
-  - Références: 
-   - <https://github.com/umlaeute/v4l2loopback/issues/116>
-   - <https://github.com/umlaeute/v4l2loopback/issues/83>
+  - pour forcer une copie de la mémoire dans le pipeline de gstreamer
+    - Références: 
+      - <https://github.com/umlaeute/v4l2loopback/issues/116>
+      - <https://github.com/umlaeute/v4l2loopback/issues/83>
 - si width, heigth and framerate sont précisés une erreur est retournée sauf si videoscale et videorate le sont aussi
 - ajouter le mode verbeux -v pour voir les détails
 
@@ -432,6 +421,12 @@ $ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
 > Setting pipeline to READY ...  
 > Setting pipeline to NULL ...  
 > Freeing pipeline ...  ```
+
+## Test d'inférence segmentation sémantique d'une vidéo
+
+### DVSNet
+J'ai essayé de faire l'installation mais j'ai échoué avec l'inmtallation de PyTorch pour Python 2.7. Il y a besoin de mettre plus d'efforts.  
+Référence: <https://github.com/XUSean0118/DVSNet.git>
 
 ## Review of the Jetson nano (benchmark)
 Reference: <https://syonyk.blogspot.com/2019/04/benchmarking-nvidia-jetson-nano.html>
