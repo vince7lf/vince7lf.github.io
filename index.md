@@ -275,7 +275,7 @@ $ cd ./build/aarch64/bin
 $ ./segnet-camera.py --network=fcn-resnet18-mhp
 ```
 
-### Installation d'un device video virtuel (loopback)
+### Installation d'un 'matériel' vidéo virtuel (loopback)
 
 ### loopback
 Références: 
@@ -284,7 +284,7 @@ Références:
 - <https://sourceforge.net/projects/v4l2vd/>
 - <https://gist.github.com/strezh/9114204>
 
-#### Prepare et télécharge
+#### Prépare et télécharge
 ```
 $ ls -al /dev/video*
 crw-rw----+ 1 root video 81, 0 Feb 15 16:58 /dev/video0
@@ -371,7 +371,7 @@ Ensuite démarrer le consommateur de test (consummer) de la vidéo:
 ```
 $ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
 ```
-Une petite fenêtre va apparaitre avec des frames de différentes couleurs et de la neige.
+Une petite fenêtre va apparaître avec des frames de différentes couleurs et de la neige.
 
 ### Pour streamer une vidéo avec gstreamer-1.0 sur le loopback /dev/video1
 - Loopback doit être démarré. 
@@ -389,6 +389,7 @@ sudo modprobe v4l2loopback buffers=2
 - ajouter le mode verbeux -v pour voir les détails
 
 Producer du streaming video:
+
 Ctrl+C dans le terminal pour arrêter et fermer la fenêtre de la vidéo. 
 ```
 gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee name=qtdemux ! decodebin ! videoconvert ! video/x-raw ! v4l2sink device=/dev/video1
@@ -399,6 +400,7 @@ gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee ! qt
 ```
 
 Consummer de test: 
+
 Ctrl+C dans le terminal pour arrêter, ou fermer la fenêtre de la vidéo. 
 ```
 $ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
@@ -425,8 +427,39 @@ $ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
 ## Test d'inférence segmentation sémantique d'une vidéo
 
 ### DVSNet
-J'ai essayé de faire l'installation mais j'ai échoué avec l'inmtallation de PyTorch pour Python 2.7. Il y a besoin de mettre plus d'efforts.  
+J'ai essayé de faire l'installation mais j'ai échoué avec l'intallation de PyTorch pour Python 2.7. Il y a besoin de mettre plus d'efforts. Mais cela semble bien intéressant.
+
 Référence: <https://github.com/XUSean0118/DVSNet.git>
+
+### NVidia avec loopback
+
+> **_NOTE Importante:_**
+> NVidia procure du code pour l'inférence avec une caméra. Afin de faire fonctionner l'inférence avec une vidéo au lieu de la caméra, il est important de faire quelques ajustement dans le code cpp. Voici les détails: 
+> - fichier dusty-nv/jetson-inference/utils/camera/gstCamera.cpp: 
+>   - mettre en commentaire les lignes 429, 432, 434:
+> ```
+> 428                 ss << "v4l2src device=" << mCameraStr << " ! ";
+> 429                 //ss << "video/x-raw, width=(int)" << mWidth << ", height=(int)" << mHeight << ", "; 
+> 430 
+> 431         #if NV_TENSORRT_MAJOR >= 5
+> 432                 //ss << "format=YUY2 ! videoconvert ! video/x-raw, format=RGB ! videoconvert !";
+> 433         #else
+> 434                 //ss << "format=RGB ! videoconvert ! video/x-raw, format=RGB ! videoconvert !";
+> 435         #endif
+> 436                 ss << "appsink name=mysink";
+> 437 
+> 438                 mSource = GST_SOURCE_V4L2;
+> ```
+L'objectif est d'avoir "v4l2src device=/dev/video1 ! appsink name=mysink"
+```
+$ cd ~/projects/dusty-nv/jetson-inference
+$ cd ./build/aarch64/bin
+$ ./segnet-camera --camera=/dev/video1 --network=fcn-resnet18-deepscene --visualize=mask --alpha=255 
+```
+
+
+> **_NOTE Importante:_**
+> Le consummer de test ne peut jouer la video si "format=(string)RGB,width=(int)640,heigth=(int)480" est indiqué par le 
 
 ## Review of the Jetson nano (benchmark)
 Reference: <https://syonyk.blogspot.com/2019/04/benchmarking-nvidia-jetson-nano.html>
