@@ -434,7 +434,7 @@ Référence: <https://github.com/XUSean0118/DVSNet.git>
 ### NVidia avec loopback
 
 > **_NOTE Importante:_**
-> NVidia procure du code pour l'inférence avec une caméra. Afin de faire fonctionner l'inférence avec une vidéo au lieu de la caméra, il est important de faire quelques ajustement dans le code cpp. Voici les détails: 
+> NVidia procure du code pour l'inférence avec une caméra. Afin de faire fonctionner l'inférence avec une vidéo au lieu de la caméra, il est important de faire quelques ajustements dans le code cpp. Voici les détails: 
 > - fichier dusty-nv/jetson-inference/utils/camera/gstCamera.cpp: 
 >   - mettre en commentaire les lignes 429, 432, 434:
 > ```
@@ -450,13 +450,36 @@ Référence: <https://github.com/XUSean0118/DVSNet.git>
 > 437 
 > 438                 mSource = GST_SOURCE_V4L2;
 > ```
-L'objectif est d'avoir "v4l2src device=/dev/video1 ! appsink name=mysink"
+> L'objectif est d'avoir "v4l2src device=/dev/video1 ! appsink name=mysink"
+> 
+> - fichier dusty-nv/jetson-inference/utils/display/glDisplay.cpp:
+>   - ajouter les lignes 157 et 158:
+> ```
+> 153         // retrieve screen info
+> 154         const int screenIdx   = DefaultScreen(mDisplayX);
+> 155         int screenWidth = DisplayWidth(mDisplayX, screenIdx);
+> 156         int screenHeight = DisplayHeight(mDisplayX, screenIdx);
+> 157         screenWidth = 1280;
+> 158         screenHeight = 720;
+> ```
+> L'objectif est de démarrer avec la fenêtre (qui va afficher la vidéo) qui ne prend pas tout l'écran. C'est spécifique à mon environnement. 
+
+Pour faire l'inférence de la vidéo: 
+- Dans un premier terminal démarrer le streaming de la vidéo en premier (le producer):
+  - il est important de spécifier le chemin complet de la vidéo
+  - il est optionnel de spécifier le format, le width et le height
+
+`gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee ! qtdemux ! decodebin ! videoconvert ! videoscale ! "video/x-raw,format=(string)RGB,width=(int)640,heigth=(int)480" ! v4l2sink device=/dev/video1`
+
+- Juste après avoir démarrer le producer, dans un deuxième terminal, démarrer l'inférence. Une nouvelle fenêtre va apparaître avec la vidéo en train de se faire inférer. 
 ```
 $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
+$ Pour tester avec deepscene
 $ ./segnet-camera --camera=/dev/video1 --network=fcn-resnet18-deepscene --visualize=mask --alpha=255 
+$ Pour tester avec deepscene
+$ ./segnet-camera --camera=/dev/video1 --network=fcn-resnet18-cityscapes --visualize=mask --alpha=255 
 ```
-
 
 > **_NOTE Importante:_**
 > Le consummer de test ne peut jouer la video si "format=(string)RGB,width=(int)640,heigth=(int)480" est indiqué par le 
