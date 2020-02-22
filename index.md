@@ -355,11 +355,11 @@ User Controls
 
 #### Tests
 
-Démarrer en premier la source vidéo (producer) vers /dev/video1:
+Démarrer en premier la source vidéo de test (producer) vers /dev/video1:
 ```
 $ gst-launch-1.0 videotestsrc ! v4l2sink device=/dev/video1
 ```
-Ensuite démarrer le consommateur (consummer) de la vidéo:
+Ensuite démarrer le consommateur de test (consummer) de la vidéo:
 ```
 $ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
 ```
@@ -399,8 +399,8 @@ sudo modprobe v4l2loopback buffers=2
 - si width, heigth and framerate sont précisés une erreur est retournée sauf si videoscale et videorate le sont aussi
 - ajouter le mode verbeux -v pour voir les détails
 
-Producer:
-Ctrl+C dans le termincal pour arrêter et fermer la fenêtre de la vidéo. 
+Producer du streaming video:
+Ctrl+C dans le terminal pour arrêter et fermer la fenêtre de la vidéo. 
 ```
 gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee name=qtdemux ! decodebin ! videoconvert ! video/x-raw ! v4l2sink device=/dev/video1
 
@@ -416,9 +416,9 @@ $ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
 ```
 
 > **_NOTE Importante:_**
-> Le consummer ne peut jouer la video si "format=(string)RGB,width=(int)640,heigth=(int)480" est indiqué par le producer. L'erreur "streaming stopped, reason not-negotiated (-4)" est retouné par le consummer. Par contre, ce même producer sera accepté par l'inférence segnet de NVidia. Pas investigué la raison. Le consummer de l'inférence est "gst-launch-1.0 v4l2src device=/dev/video1 ! appsink name=mysink" (après simplification de ma part dans le code cpp).
+> Le consummer de test ne peut jouer la video si "format=(string)RGB,width=(int)640,heigth=(int)480" est indiqué par le producer. L'erreur "streaming stopped, reason not-negotiated (-4)" est retouné par le consummer. Par contre, ce même producer sera accepté par l'inférence segnet de NVidia. Pas investigué la raison. Le consummer de l'inférence est `gst-launch-1.0 v4l2src device=/dev/video1 ! appsink name=mysink` (après simplification de ma part dans le code cpp. Voir note dans cette page).
 >  
-> ```gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee ! qtdemux ! decodebin ! videoconvert ! videoscale ! "video/x-raw,format=(string)RGB,width=(int)640,heigth=(int)480" ! v4l2sink device=/dev/video1```
+> `gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee ! qtdemux ! decodebin ! videoconvert ! videoscale ! "video/x-raw,format=(string)RGB,width=(int)640,heigth=(int)480" ! v4l2sink device=/dev/video1`
 > ```
 > $ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink  
 > Setting pipeline to PAUSED ...  
