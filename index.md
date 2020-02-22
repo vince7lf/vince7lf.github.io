@@ -169,7 +169,59 @@ $ gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=1280, height
 ```
 Cela fontionne. 
 
-### Nano hardware encoder decoder
+### Validation des capacités de la caméra
+
+```
+$ v4l2-ctl -d 0 --all 
+Driver Info (not using libv4l2):
+	Driver name   : tegra-video
+	Card type     : vi-output, imx219 6-0010
+	Bus info      : platform:54080000.vi:0
+	Driver version: 4.9.140
+	Capabilities  : 0x84200001
+		Video Capture
+		Streaming
+		Extended Pix Format
+		Device Capabilities
+	Device Caps   : 0x04200001
+		Video Capture
+		Streaming
+		Extended Pix Format
+Priority: 2
+Video input : 0 (Camera 0: no power)
+Format Video Capture:
+	Width/Height      : 3264/2464
+	Pixel Format      : 'RG10'
+	Field             : None
+	Bytes per Line    : 6528
+	Size Image        : 16084992
+	Colorspace        : sRGB
+	Transfer Function : Default (maps to sRGB)
+	YCbCr/HSV Encoding: Default (maps to ITU-R 601)
+	Quantization      : Default (maps to Full Range)
+	Flags             : 
+
+Camera Controls
+
+                     group_hold 0x009a2003 (bool)   : default=0 value=0 flags=execute-on-write
+                    sensor_mode 0x009a2008 (int64)  : min=0 max=0 step=0 default=0 value=0 flags=slider
+                           gain 0x009a2009 (int64)  : min=0 max=0 step=0 default=0 value=16 flags=slider
+                       exposure 0x009a200a (int64)  : min=0 max=0 step=0 default=0 value=13 flags=slider
+                     frame_rate 0x009a200b (int64)  : min=0 max=0 step=0 default=0 value=2000000 flags=slider
+                    bypass_mode 0x009a2064 (intmenu): min=0 max=1 default=0 value=0
+                override_enable 0x009a2065 (intmenu): min=0 max=1 default=0 value=0
+                   height_align 0x009a2066 (int)    : min=1 max=16 step=1 default=1 value=1
+                     size_align 0x009a2067 (intmenu): min=0 max=2 default=0 value=0
+               write_isp_format 0x009a2068 (bool)   : default=0 value=0
+       sensor_signal_properties 0x009a2069 (u32)    : min=0 max=0 step=0 default=0 flags=read-only, has-payload
+        sensor_image_properties 0x009a206a (u32)    : min=0 max=0 step=0 default=0 flags=read-only, has-payload
+      sensor_control_properties 0x009a206b (u32)    : min=0 max=0 step=0 default=0 flags=read-only, has-payload
+              sensor_dv_timings 0x009a206c (u32)    : min=0 max=0 step=0 default=0 flags=read-only, has-payload
+               low_latency_mode 0x009a206d (bool)   : default=0 value=0
+                   sensor_modes 0x009a2082 (int)    : min=0 max=30 step=1 default=30 value=5 flags=read-only
+
+```
+## Nano hardware encoder decoder
 Basé sur le commentaire trouvé sur le forum devtalk (<https://devtalk.nvidia.com/default/topic/1050950/jetson-nano/h-264-h-265-encoding-using-jetson-nano-gpu/>), il est recommandé d'utiliser GStreamer, à la place du populaire ffmpeg, pour bénéficier de l'accélération des GPUs du nano. ffmpeg utilise les CPUs et non les GPUs. 
 
 *"ffmpeg doesn't use the Nano's hardware encoder or decoder, you can run it but it will be CPU-only."*
@@ -250,6 +302,59 @@ $ ls -al /dev/video*
 crw-rw----+ 1 root video 81, 0 Feb 15 16:58 /dev/video0
 crw-rw----+ 1 root video 81, 3 Feb 16 14:36 /dev/video1
 ```
+#### Validation des capacités du loopback /dev/video1
+```
+$ v4l2-ctl -d 1 --all 
+Driver Info (not using libv4l2):
+	Driver name   : v4l2 loopback
+	Card type     : Dummy video device (0x0000)
+	Bus info      : platform:v4l2loopback-000
+	Driver version: 4.9.140
+	Capabilities  : 0x85208003
+		Video Capture
+		Video Output
+		Video Memory-to-Memory
+		Read/Write
+		Streaming
+		Extended Pix Format
+		Device Capabilities
+	Device Caps   : 0x85208003
+		Video Capture
+		Video Output
+		Video Memory-to-Memory
+		Read/Write
+		Streaming
+		Extended Pix Format
+		Device Capabilities
+Priority: 0
+Video input : 0 (loopback: ok)
+Video output: 0 (loopback in)
+Format Video Output:
+	Width/Height      : 0/0
+	Pixel Format      : 'BGR4'
+	Field             : None
+	Bytes per Line    : 0
+	Size Image        : 0
+	Colorspace        : sRGB
+	Transfer Function : Default (maps to sRGB)
+	YCbCr/HSV Encoding: Default (maps to ITU-R 601)
+	Quantization      : Default (maps to Full Range)
+	Flags             : 
+Streaming Parameters Video Capture:
+	Frames per second: 30.000 (30/1)
+	Read buffers     : 8
+Streaming Parameters Video Output:
+	Frames per second: 30.000 (30/1)
+	Write buffers    : 8
+
+User Controls
+
+                    keep_format 0x0098f900 (bool)   : default=0 value=0
+              sustain_framerate 0x0098f901 (bool)   : default=0 value=0
+                        timeout 0x0098f902 (int)    : min=0 max=100000 step=1 default=0 value=0
+               timeout_image_io 0x0098f903 (bool)   : default=0 value=0
+```
+
 #### Tests
 
 Démarrer en premier la source vidéo (producer) vers /dev/video1:
@@ -278,10 +383,20 @@ gst-launch-1.0 filesrc location=~/Downloads/1080p.mp4 ! \
 ```
 
 ### Pour streamer une vidéo avec gstreamer-1.0 sur le loppback /dev/video1
-- Loopback requires to be started
+- Loopback doit être démarré. 
+-- TODO: déterminer si buffers aide et est nécessaire. Référence: <https://github.com/umlaeute/v4l2loopback/issues/83>
+```
+sudo modprobe v4l2loopback buffers=2
+```
 - the full path of the video is required
-- tee is required
-- specifying width, heigth, format and framerate generates an error.. if not the one expected. With the verbose option (-v) we can see what is expected
+- tee multiplexer is required
+--  to force a memory copy in the gstreamer pipeline
+-- Références: 
+--- <https://github.com/umlaeute/v4l2loopback/issues/116>
+--- <https://github.com/umlaeute/v4l2loopback/issues/83>
+- specifying width, heigth and framerate generates an error if the command is not specified (videoscale and videorate)
+- use the verbose option (-v) to see the details
+
 ```
 gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee name=qtdemux ! decodebin ! videoconvert ! video/x-raw ! v4l2sink device=/dev/video1
 
