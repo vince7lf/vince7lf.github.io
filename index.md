@@ -386,16 +386,16 @@ gst-launch-1.0 filesrc location=~/Downloads/1080p.mp4 ! \
 
 ### Pour streamer une vidéo avec gstreamer-1.0 sur le loppback /dev/video1
 - Loopback doit être démarré. 
--- TODO: déterminer si buffers aide et est nécessaire. Référence: <https://github.com/umlaeute/v4l2loopback/issues/83>
+	- TODO: déterminer si buffers aide et est nécessaire. Référence: <https://github.com/umlaeute/v4l2loopback/issues/83>
 ```
 sudo modprobe v4l2loopback buffers=2
 ```
 - le cheminn complet de la vidéo est requis
 - tee multiplexer est requis
--- pour forcer une copie de la mémoire dans le pipeline de gstreamer
--- Références: 
---- <https://github.com/umlaeute/v4l2loopback/issues/116>
---- <https://github.com/umlaeute/v4l2loopback/issues/83>
+	- pour forcer une copie de la mémoire dans le pipeline de gstreamer
+	- Références: 
+		- <https://github.com/umlaeute/v4l2loopback/issues/116>
+		- <https://github.com/umlaeute/v4l2loopback/issues/83>
 - si width, heigth and framerate sont précisés une erreur est retournée sauf si videoscale et videorate le sont aussi
 - ajouter le mode verbeux -v pour voir les détails
 
