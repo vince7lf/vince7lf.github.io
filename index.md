@@ -74,6 +74,20 @@ sudo apt install python3-pip
 ```
 pip3 pour Python3 devrait être installé avec l'étpae précédente. 
 
+### dconf-editor to switch between windows vs application using Alt+Tab
+```
+sudo apt-get install dconf-tools
+```
+Ensuite ouvrer l'editor dconf-editor:
+Référence: https://superuser.com/questions/394376/how-to-prevent-gnome-shells-alttab-from-grouping-windows-from-similar-apps
+- Open dconf-editor
+- Go to org/gnome/desktop/wm/keybindings
+- Move the value '<Alt>Tab' from switch-applications to switch-windows
+- Optionally move '<Shift><Alt>Tab' from switch-applications-backward to switch-windows-backward
+- If you want switch-windows to work across desktops, not just in the current desktop, you can also uncheck org/gnome/shell/window-switcher/current-workspace-only (Courtesy of @CharlBotha)
+- Close dconf-editor
+- If using X11, press <Alt>F2, then type r to restart Gnome.
+
 ## Premier test d'inférence avec un modèle de segmentation sémantique
 Ce test permet de savoir si le système est bien en place, et si le Jetson nano est desservi par assez d'énergie. Sinon, il s'éteind tout simplement pendant l'exécution de l'inférence. 
 
