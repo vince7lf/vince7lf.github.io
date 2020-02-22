@@ -420,14 +420,14 @@ $ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
 >  
 > `gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee ! qtdemux ! decodebin ! videoconvert ! videoscale ! "video/x-raw,format=(string)RGB,width=(int)640,heigth=(int)480" ! v4l2sink device=/dev/video1`
 > ```
-> \$ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink  
+> $$ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink  
 > Setting pipeline to PAUSED ...  
 > Pipeline is live and does not need PREROLL ...  
 > ERROR: from element /GstPipeline:pipeline0/GstV4l2Src:v4l2src0: Internal data stream error.  
 > Additional debug info:  
 > gstbasesrc.c(3055): gst_base_src_loop (): /GstPipeline:pipeline0/GstV4l2Src:v4l2src0:  
-> ```**`streaming stopped, reason not-negotiated (-4)`**  
-> ```ERROR: pipeline doesn't want to preroll.  
+> **streaming stopped, reason not-negotiated (-4)**  
+> ERROR: pipeline doesn't want to preroll.  
 > Setting pipeline to PAUSED ...  
 > Setting pipeline to READY ...  
 > Setting pipeline to NULL ...  
