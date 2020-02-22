@@ -419,19 +419,19 @@ $ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
 > Le consummer de test ne peut jouer la video si "format=(string)RGB,width=(int)640,heigth=(int)480" est indiqué par le producer. L'erreur "streaming stopped, reason not-negotiated (-4)" est retouné par le consummer. Par contre, ce même producer sera accepté par l'inférence segnet de NVidia. Pas investigué la raison. Le consummer de l'inférence est `gst-launch-1.0 v4l2src device=/dev/video1 ! appsink name=mysink` (après simplification de ma part dans le code cpp. Voir note dans cette page).
 >  
 > `gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee ! qtdemux ! decodebin ! videoconvert ! videoscale ! "video/x-raw,format=(string)RGB,width=(int)640,heigth=(int)480" ! v4l2sink device=/dev/video1`
-> 
+> `
 > $ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink  
 > Setting pipeline to PAUSED ...  
 > Pipeline is live and does not need PREROLL ...  
 > ERROR: from element /GstPipeline:pipeline0/GstV4l2Src:v4l2src0: Internal data stream error.  
 > Additional debug info:  
 > gstbasesrc.c(3055): gst_base_src_loop (): /GstPipeline:pipeline0/GstV4l2Src:v4l2src0:  
-> **streaming stopped, reason not-negotiated (-4)**  
-> ERROR: pipeline doesn't want to preroll.  
+> `**`streaming stopped, reason not-negotiated (-4)`**  
+> `ERROR: pipeline doesn't want to preroll.  
 > Setting pipeline to PAUSED ...  
 > Setting pipeline to READY ...  
 > Setting pipeline to NULL ...  
-> Freeing pipeline ...  
+> Freeing pipeline ...  `
 
 ## Review of the Jetson nano (benchmark)
 Reference: <https://syonyk.blogspot.com/2019/04/benchmarking-nvidia-jetson-nano.html>
