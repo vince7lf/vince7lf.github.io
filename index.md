@@ -432,7 +432,7 @@ J'ai essayé de faire l'installation mais j'ai échoué avec l'intallation de Py
 Référence: <https://github.com/XUSean0118/DVSNet.git>
 
 ### NVidia avec loopback
-
+---
 > **_NOTE Importante:_**
 > NVidia procure du code pour l'inférence avec une caméra. Afin de faire fonctionner l'inférence avec une vidéo au lieu de la caméra, il est important de faire quelques ajustements dans le code cpp. Voici les détails: 
 > - fichier dusty-nv/jetson-inference/utils/camera/gstCamera.cpp: 
@@ -463,7 +463,7 @@ Référence: <https://github.com/XUSean0118/DVSNet.git>
 > 158         screenHeight = 720;
 > ```
 > L'objectif est de démarrer avec la fenêtre (qui va afficher la vidéo) qui ne prend pas tout l'écran. C'est spécifique à mon environnement. 
-
+---
 Pour faire l'inférence de la vidéo: 
 - Dans un premier terminal démarrer le streaming de la vidéo en premier (le producer):
   - il est important de spécifier le chemin complet de la vidéo
