@@ -252,28 +252,33 @@ $ ./segnet-camera.py --network=fcn-resnet18-mhp
 ```
 > **_NOTE Importante:_**
 > Il y a un fix a apporter avant de procéder. Le paramètre *flip-method* n'a pas la bonne valeur. Il doit être à **`0`** pour être conforme à la bonne orientation de la caméra dans le boitier.
-
-* Ouvrir le fichier ./utils/camera/gstCamera.cpp du projet jetson-inference
-```
-$ cd ~/projects/dusty-nv/jetson-inference
-$ vim ./utils/camera/gstCamera.cpp
-```
-* faire une recherche pour "flip-method = 2" ou flipMethod = "2"
-* modifier la valeur pour 0 ("flip-method = 0" ou "flipMethod = 0")
-* sauvegarder le fichier
-* recompiler le projet (voir section plus haut)
-```
-$ cd jetson-inference/build
-$ make
-$ sudo make install
-$ sudo ldconfig
-```
-* ré-exécuter le test d'inférence de segmentation sémantique en temps réel avec la caméra
-```
-$ cd ~/projects/dusty-nv/jetson-inference
-$ cd ./build/aarch64/bin
-$ ./segnet-camera.py --network=fcn-resnet18-mhp
-```
+> 
+> * Ouvrir le fichier ./utils/camera/gstCamera.cpp du projet jetson-inference
+> ```
+> $ cd ~/projects/dusty-nv/jetson-inference
+> $ vim ./utils/camera/gstCamera.cpp
+> ```
+> * faire une recherche pour "flip-method = 2" ou flipMethod = "2" (ligne 416)
+> * modifier la valeur pour 0 ("flip-method = 0" ou "flipMethod = 0")
+> 413         #if NV_TENSORRT_MAJOR > 1 && NV_TENSORRT_MAJOR < 5      // if JetPack 3.1-3.3 (different flip-method)
+> 414                 const int flipMethod = 0;                                       // Xavier (w/TRT5) camera is mounted inverted
+> 415         #else
+> 416                 const int flipMethod = 0;
+> 417         #endif
+> * sauvegarder le fichier
+> * recompiler le projet:
+> ```
+> $ cd jetson-inference/build
+> $ make
+> $ sudo make install
+> $ sudo ldconfig
+> ```
+> * ré-exécuter le test d'inférence de segmentation sémantique en temps réel avec la caméra
+> ```
+> $ cd ~/projects/dusty-nv/jetson-inference
+> $ cd ./build/aarch64/bin
+> $ ./segnet-camera.py --network=fcn-resnet18-mhp
+> ```
 
 ### Installation d'un 'matériel' vidéo virtuel (loopback)
 
@@ -435,7 +440,7 @@ Référence: <https://github.com/XUSean0118/DVSNet.git>
 ---
 > **_NOTE Importante:_**
 > NVidia procure du code pour l'inférence avec une caméra. Afin de faire fonctionner l'inférence avec une vidéo au lieu de la caméra, il est important de faire quelques ajustements dans le code cpp. Voici les détails: 
-> - fichier dusty-nv/jetson-inference/utils/camera/gstCamera.cpp: 
+> - fichier ./dusty-nv/jetson-inference/utils/camera/gstCamera.cpp: 
 >   - mettre en commentaire les lignes 429, 432, 434:
 > ```
 > 428                 ss << "v4l2src device=" << mCameraStr << " ! ";
@@ -463,6 +468,14 @@ Référence: <https://github.com/XUSean0118/DVSNet.git>
 > 158         screenHeight = 720;
 > ```
 > L'objectif est de démarrer avec la fenêtre (qui va afficher la vidéo) qui ne prend pas tout l'écran. C'est spécifique à mon environnement. 
+>
+> Il faut recompiler. 
+> ```
+> $ cd ./dusty-nv/jetson-inference/build
+> $ make
+> $ sudo make install
+> $ sudo ldconfig
+> ```
 ---
 
 Pour faire l'inférence de la vidéo: 
