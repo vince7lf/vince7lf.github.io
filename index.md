@@ -464,6 +464,7 @@ Référence: <https://github.com/XUSean0118/DVSNet.git>
 > ```
 > L'objectif est de démarrer avec la fenêtre (qui va afficher la vidéo) qui ne prend pas tout l'écran. C'est spécifique à mon environnement. 
 ---
+
 Pour faire l'inférence de la vidéo: 
 - Dans un premier terminal démarrer le streaming de la vidéo en premier (le producer):
   - il est important de spécifier le chemin complet de la vidéo
@@ -471,7 +472,7 @@ Pour faire l'inférence de la vidéo:
 
 `gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee ! qtdemux ! decodebin ! videoconvert ! videoscale ! "video/x-raw,format=(string)RGB,width=(int)640,heigth=(int)480" ! v4l2sink device=/dev/video1`
 
-- Juste après avoir démarrer le producer, dans un deuxième terminal, démarrer l'inférence. Une nouvelle fenêtre va apparaître avec la vidéo en train de se faire inférer. 
+- Juste après avoir démarrer le producer, **dans un deuxième terminal**, démarrer l'inférence. Une nouvelle fenêtre va apparaître avec la vidéo en train de se faire inférer. 
 ```
 $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
@@ -482,7 +483,7 @@ $ ./segnet-camera --camera=/dev/video1 --network=fcn-resnet18-cityscapes --visua
 ```
 
 > **_NOTE Importante:_**
-> Si la vidéo termine, l'inférence et la fenêtre de la vidéo restent bloqué (gelé). Pour les arrêter, utiliser la commande `kill -9`. 
+> Si la vidéo termine, l'inférence et la fenêtre de la vidéo restent bloqués (gelés). Pour les arrêter, utiliser la commande `kill -9`. 
 > ```
 > $ psf -ef | grep 'scene' (ou ps -ef | grep 'city')
 > lefv2603 31864 13527  0 17:50 pts/1    00:00:00 /bin/bash ./inference_resnet18-deepscene_loopback.sh
