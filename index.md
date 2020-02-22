@@ -426,7 +426,7 @@ $ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
 > ERROR: from element /GstPipeline:pipeline0/GstV4l2Src:v4l2src0: Internal data stream error.  
 > Additional debug info:  
 > gstbasesrc.c(3055): gst_base_src_loop (): /GstPipeline:pipeline0/GstV4l2Src:v4l2src0:  
-> ***streaming stopped, reason not-negotiated (-4)***  
+>  **streaming stopped, reason not-negotiated (-4)**  
 > ERROR: pipeline doesn't want to preroll.  
 > Setting pipeline to PAUSED ...  
 > Setting pipeline to READY ...  
