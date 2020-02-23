@@ -507,3 +507,6 @@ $ ./segnet-camera --camera=/dev/video1 --network=fcn-resnet18-cityscapes --visua
 
 ## Review of the Jetson nano (benchmark)
 Reference: <https://syonyk.blogspot.com/2019/04/benchmarking-nvidia-jetson-nano.html>
+
+## Tips and tricks to train network
+<https://towardsdatascience.com/a-bunch-of-tips-and-tricks-for-training-deep-neural-networks-3ca24c31ddc8>
