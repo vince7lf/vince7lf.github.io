@@ -2,7 +2,7 @@
 
 ## Spécifications techniques
 Référence: <https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-nano/>
-
+```
 Technical Specifications
 GPU
     NVIDIA Maxwell™ architecture with 128 NVIDIA CUDA® cores
@@ -40,3 +40,4 @@ Size
     69.6 mm x 45 mm
 Mechanical
     260-pin edge connector
+```
