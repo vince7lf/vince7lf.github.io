@@ -397,7 +397,7 @@ Une petite fenêtre va apparaître avec des frames de différentes couleurs et d
 ```
 sudo modprobe v4l2loopback buffers=2
 ```
-- le cheminn complet de la vidéo est requis
+- le chemin complet de la vidéo est requis
 - tee multiplexer est requis
   - pour forcer une copie de la mémoire dans le pipeline de gstreamer
     - Références: 
