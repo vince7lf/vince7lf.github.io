@@ -511,7 +511,7 @@ $ ./segnet-camera --camera=/dev/video1 --network=fcn-resnet18-cityscapes --visua
 > **_NOTE Importante:_**
 > Si la vidéo termine, l'inférence et la fenêtre de la vidéo restent bloqués (gelés). Pour les arrêter, utiliser la commande `kill -9`. 
 > ```
-> $ psf -ef | grep 'scene' (ou ps -ef | grep 'city')
+> $ ps -ef | grep 'scene' (ou ps -ef | grep 'city')
 > lefv2603 31864 13527  0 17:50 pts/1    00:00:00 /bin/bash ./inference_resnet18-deepscene_loopback.sh
 > lefv2603 31865 31864  9 17:50 pts/1    00:00:05 /usr/bin/python /home/lefv2603/projects/dusty-nv/jetson-inference/build/aarch64/bin/segnet-camera.py --network=fcn-resnet18-deepscene --camera=/dev/video1 --alpha=255
 > lefv2603 31898  9597  0 17:51 pts/0    00:00:00 grep --color=auto scene
