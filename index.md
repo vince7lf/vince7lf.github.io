@@ -238,6 +238,19 @@ Il est important d'indiquer le chemin complet de la vidéo.
 gst-launch-1.0 filesrc location=~/Downloads/1080p.mp4 ! decodebin ! queue ! videoconvert ! autovideosink
 ```
 
+Pour jouer une vidéo avec une rotation: 
+```
+lefv2603@lefv2603-jetsonnano:~$ gst-launch-1.0 filesrc location=/media/3433-3732/DCIM/Camera/20200308_150708.mp4 ! decodebin ! queue ! nvvidconv flip-method=3 ! autovideosink
+```
+
+### Pour extraire des images de la vidéo
+
+Cette commande permet d'extraire des images JPEG (PNG est aussi possible) d'une vidéo .mp4 prise avec un cellulaire (SamSung S8). La vidéo de l'exemple a une résolution de 1920x1080, 60FPS. Les images ont une résolution similaire (1920x1080) et sont sauvegardées à l'emplacement où la commande est exécuté, dans cet exemple c'est le 'home' directory /home/lefv2603 (~).
+
+```
+lefv2603@lefv2603-jetsonnano:~$ gst-launch-1.0 -v filesrc location=/media/3433-3732/DCIM/Camera/20200308_150708.mp4 ! qtdemux ! decodebin ! queue ! nvvidconv flip-method=3 ! videorate ! 'video/x-raw,framerate=1/5' ! nvjpegenc ! multifilesink location=file%d.jpg
+```
+
 ## Test d'inférence segmentation sémantique en temps réel avec la caméra
 
 NVidia fournit déjà des tests pour réaliser l'inférence de modèle de segmentation sémentique en temps réel avec la caméra. 
