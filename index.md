@@ -504,7 +504,7 @@ $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
 $ Pour tester avec deepscene
 $ ./segnet-camera --camera=/dev/video1 --network=fcn-resnet18-deepscene --visualize=mask --alpha=255 
-$ Pour tester avec deepscene
+$ Pour tester avec cityscapes
 $ ./segnet-camera --camera=/dev/video1 --network=fcn-resnet18-cityscapes --visualize=mask --alpha=255 
 ```
 
