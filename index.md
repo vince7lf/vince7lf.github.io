@@ -518,6 +518,27 @@ $ ./segnet-camera --camera=/dev/video1 --network=fcn-resnet18-cityscapes --visua
 > $ kill -9 31864 31865
 > ```
 
+### en progres... jouer une vidéo prise avec mobile Samsung S8 60FPS
+```
+gst-launch-1.0 -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)1080, height=(int)1920, framerate=(fraction)60/1' ! nvvidconv ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)1080, height=(int)1920, framerate=(fraction)60/1' ! nvv4l2h264enc ! h264parse ! v4l2sink device=/dev/video1
+
+gst-launch-1.0 -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! queue ! qtdemux ! h264parse ! nvv4l2decoder ! nvvidconv ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)1080, height=(int)1920, framerate=(fraction)60/1' ! nvv4l2h264enc ! h264parse ! v4l2sink device=/dev/video1
+
+gst-launch-1.0 -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! queue ! qtdemux ! h264parse ! nvv4l2decoder ! nvvidconv flip-method=3 ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)1080, height=(int)1920, framerate=(fraction)60/1' ! nvv4l2h264enc ! h264parse ! tee ! queue ! identity drop-allocation=1 ! v4l2sink device=/dev/video1
+
+# Change the rate to 20 FPS and scale
+gst-launch-1.0 -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! queue ! qtdemux ! h264parse ! nvv4l2decoder ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)I420, width=(int)1080, height=(int)1920, framerate=(fraction)20/1' ! nvv4l2h264enc ! h264parse ! tee ! queue ! identity drop-allocation=1 ! v4l2sink device=/dev/video1
+
+# feed video1 with a rate 60FPS rescaled and flipped with constant bit rates control
+gst-launch-1.0 -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! queue ! qtdemux ! h264parse ! nvv4l2decoder ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)I420, width=(int)640, height=(int)480, framerate=(fraction)30/1' ! nvv4l2h264enc control-rate=1 bitrate=5000 ! h264parse ! tee ! queue ! identity drop-allocation=1 ! v4l2sink device=/dev/video1
+
+# play the video, with a flip, rescale and rate FPS
+gst-launch-1.0 -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! queue ! qtdemux ! h264parse ! nvv4l2decoder ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)I420, width=(int)480, height=(int)640, framerate=(fraction)20/1' ! decodebin ! autovideosink -e
+
+# Moving 60FPS video 1080x1920 (portrait)
+gst-launch-1.0 -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150945.mp4 ! tee ! queue ! qtdemux ! h264parse ! nvv4l2decoder ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)I420, width=(int)480, height=(int)640, framerate=(fraction)60/1' ! decodebin ! autovideosink -e
+```
+
 ## Review of the Jetson nano (benchmark)
 Reference: <https://syonyk.blogspot.com/2019/04/benchmarking-nvidia-jetson-nano.html>
 
