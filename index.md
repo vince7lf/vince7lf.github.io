@@ -321,7 +321,7 @@ $ sudo depmod -a
 ```
 #### Démarrage
 ```
-$ sudo modprobe v4l2loopback
+$ sudo modprobe v4l2loopback buffers=2
 $ ls -al /dev/video*
 crw-rw----+ 1 root video 81, 0 Feb 15 16:58 /dev/video0
 crw-rw----+ 1 root video 81, 3 Feb 16 14:36 /dev/video1
