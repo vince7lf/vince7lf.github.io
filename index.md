@@ -325,7 +325,13 @@ $ sudo modprobe v4l2loopback buffers=2
 $ ls -al /dev/video*
 crw-rw----+ 1 root video 81, 0 Feb 15 16:58 /dev/video0
 crw-rw----+ 1 root video 81, 3 Feb 16 14:36 /dev/video1
+##### 
 ```
+#### Optionnaly set the FPS
+```
+./projects/v4l2loopback/utils/v4l2loopback-ctl set-fps 60 /dev/video1
+```
+
 #### Validation des capacités du loopback /dev/video1
 ```
 $ v4l2-ctl -d 1 --all 
