@@ -543,6 +543,9 @@ gst-launch-1.0 -v filesrc location=/home/lefv2603/projects/gae724/videos/2020030
 
 # Moving 60FPS video 1080x1920 (portrait)
 gst-launch-1.0 -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150945.mp4 ! tee ! queue ! qtdemux ! h264parse ! nvv4l2decoder ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)I420, width=(int)480, height=(int)640, framerate=(fraction)60/1' ! decodebin ! autovideosink -e
+
+# Error but tentative to convert to RGB, to folow the model which is working
+gst-launch-1.0 -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! queue ! qtdemux ! h264parse ! nvv4l2decoder ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)I420, width=(int)640, height=(int)480, framerate=(fraction)60/1' ! nvv4l2h264enc ! h264parse ! decodebin ! videoconvert ! "video/x-raw,format=(string)RGB,width=(int)480,height=(int)640,framerate=(fraction)30/1" ! videoconvert ! tee ! queue ! identity drop-allocation=1 ! v4l2sink device=/dev/video1
 ```
 
 ## Review of the Jetson nano (benchmark)
