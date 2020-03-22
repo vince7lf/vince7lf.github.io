@@ -554,7 +554,11 @@ gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/vi
 GST_DEBUG=2 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! queue ! qtdemux ! h264parse ! nvv4l2decoder ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)I420, width=(int)480, height=(int)640, framerate=(fraction)20/1' ! queue ! tee ! nvv4l2h264enc bitrate=8000000 ! h264parse ! v4l2sink device=/dev/video1 -e
 ...
 0:00:17.073011683 15272   0x55c0555540 WARN          v4l2bufferpool gstv4l2bufferpool.c:1482:gst_v4l2_buffer_pool_dqbuf:<nvv4l2decoder0:pool:sink> v4l2 provided buffer that is too big for the memory it was writing into.  v4l2 claims 1008 bytes used but memory is only 0B.  This is probably a driver bug.
+```
 
+### saisir les logs de gstreamer
+```
+GST_DEBUG=3 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! queue ! qtdemux ! queue ! h264parse ! nvv4l2decoder ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM),format=(string)NV12,width=(int)480,height=(int)640,framerate=(fraction)20/1' ! nvv4l2h264enc ! h264parse ! v4l2sink device=/dev/video1 -e 2>&1 | tee stream.txt
 ```
 
 ## Review of the Jetson nano (benchmark)
