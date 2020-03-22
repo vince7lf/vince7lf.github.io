@@ -558,7 +558,7 @@ GST_DEBUG=2 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projec
 
 ### Saisir les logs de gstreamer
 ```
-GST_DEBUG=3 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! queue ! qtdemux ! queue ! h264parse ! nvv4l2decoder ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM),format=(string)NV12,width=(int)480,height=(int)640,framerate=(fraction)20/1' ! nvv4l2h264enc ! h264parse ! v4l2sink device=/dev/video1 -e 2>&1 | tee stream.txt
+lefv2603@lefv2603-jetsonnano:~$ GST_DEBUG=3 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! queue ! qtdemux ! queue ! h264parse ! nvv4l2decoder ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM),format=(string)NV12,width=(int)480,height=(int)640,framerate=(fraction)20/1' ! nvv4l2h264enc ! h264parse ! v4l2sink device=/dev/video1 -e 2>&1 | tee stream.txt
 ```
 
 ## Review of the Jetson nano (benchmark)
