@@ -64,15 +64,42 @@ La référence de l'installation est située à cette page:
 <https://github.com/dusty-nv/jetson-inference/blob/master/docs/building-repo-2.md>
 
 En gros, les étapes sont:
+* Mettre à jour le système
+```
+$ sudo apt-get update
+````
+* Mettre à jour les librairies nécessaires
+```
+$ sudo apt-get install git cmake libpython3-dev python3-numpy
+````
 * Cloner le projet
-* Installer les libraires Python
+```
+$ git clone https://github.com/dusty-nv/jetson-inference
+$ cd jetson-inference
+$ git submodule update --init
+```
 * Configurer le build des modèles avec cmake; le répertoire ~/projects/dusty-nv/jetson-inference/build a été créer pour contenir les modèles. 
+```
+$ cd jetson-inference
+$ mkdir build
+$ cd build
+$ cmake ../
+```
 * Télécharger les modèles; uniquement les modlèles des segmentations sémentiques sont téléchargés. Cela prend une bonne demie-heure, selon la connexion Internet (wifi vs Ethernet, bande passance)
+```
+$ cd jetson-inference/tools
+$ ./download-models.sh
+```
 * Installer PyTorch; nécessaire pour faire le transfer learning; uniquement la version PyTorch v1.1.0 pour Python 3.6 est installée. 
+```
+$ cd jetson-inference/build
+$ ./install-pytorch.sh
+```
 * Compiler le projet; cette étape prend 3-5 minutes
 ```
 $ cd jetson-inference/build
 $ make
+$ make -j$(nproc)
 $ sudo make install
 $ sudo ldconfig
 ```
