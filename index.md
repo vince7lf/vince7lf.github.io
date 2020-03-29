@@ -13,6 +13,7 @@ La référence pour la mise en place de la micro-sd se trouve sur le site suivan
 <https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit>
 
 * Télécharger l'image nv-jetson-nano-sd-card-image-r32.3.1.zip (~5.4 Gb)
+source: <https://developer.nvidia.com/jetson-nano-sd-card-image>
 * Télécharger et exécuter le Sd Card Formatter: quick format; pas de label
 * Télécharger et exécuter Etcher pour flasher la micro-sdo avec l'image, ce qui prend entre 5 et 10 minutes selon le PC utilisé
 
