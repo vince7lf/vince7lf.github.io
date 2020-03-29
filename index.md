@@ -69,7 +69,9 @@ En gros, les étapes sont:
 $ sudo apt-get update
 ````
 * Mettre à jour les librairies nécessaires
-```$ sudo apt-get install git cmake libpython3-dev python3-numpy```
+```
+$ sudo apt-get install git cmake libpython3-dev python3-numpy
+```
 * Cloner le projet
 ```
 $ git clone https://github.com/dusty-nv/jetson-inference
