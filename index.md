@@ -97,7 +97,8 @@ $ ./install-pytorch.sh
 ```
 > **_NOTE Importante:_**
 > A noter que l'installation de PyTorch V1.1.0 pour Python 3.6 échoue, même après une installation fraîche. 
-> ```
+> 
+```
 torch-1.1.0-cp36-cp 100%[===================>] 202.36M  3.81MB/s    in 53s     
 Processing ./torch-1.1.0-cp36-cp36m-linux_aarch64.whl
 Collecting numpy (from torch==1.1.0)
@@ -230,6 +231,7 @@ $ make -j$(nproc)
 $ sudo make install
 $ sudo ldconfig
 ```
+>
 
 ## Mise à jour
 ### pip
