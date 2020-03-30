@@ -95,6 +95,133 @@ $ ./download-models.sh
 $ cd jetson-inference/build
 $ ./install-pytorch.sh
 ```
+> **_NOTE Importante:_**
+> A noter que l'installation de PyTorch V1.1.0 pour Python 3.6 échoue, même après une installation fraîche. 
+> ```
+torch-1.1.0-cp36-cp 100%[===================>] 202.36M  3.81MB/s    in 53s     
+Processing ./torch-1.1.0-cp36-cp36m-linux_aarch64.whl
+Collecting numpy (from torch==1.1.0)
+  Downloading https://files.pythonhosted.org/packages/84/1e/ff467ac56bfeaea51d4a2e72d315c1fe440b20192fea7e460f0f248acac8/numpy-1.18.2.zip (5.4MB)
+Building wheels for collected packages: numpy
+  Running setup.py bdist_wheel for numpy: started
+  Running setup.py bdist_wheel for numpy: finished with status 'error'
+  Complete output from command /usr/bin/python3 -u -c "import setuptools, tokenize;__file__='/tmp/pip-build-j1wx480_/numpy/setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '\n');f.close();exec(compile(code, __file__, 'exec'))" bdist_wheel -d /tmp/tmp2natmwmypip-wheel- --python-tag cp36:
+  Running from numpy source directory.
+  Cythonizing sources
+  Processing numpy/random/_bounded_integers.pxd.in
+  Processing numpy/random/_bounded_integers.pyx.in
+  Traceback (most recent call last):
+    File "/tmp/pip-build-j1wx480_/numpy/tools/cythonize.py", line 61, in process_pyx
+      from Cython.Compiler.Version import version as cython_version
+  ModuleNotFoundError: No module named 'Cython'
+  
+  During handling of the above exception, another exception occurred:
+  
+  Traceback (most recent call last):
+    File "/tmp/pip-build-j1wx480_/numpy/tools/cythonize.py", line 238, in <module>
+      main()
+    File "/tmp/pip-build-j1wx480_/numpy/tools/cythonize.py", line 234, in main
+      find_process_files(root_dir)
+    File "/tmp/pip-build-j1wx480_/numpy/tools/cythonize.py", line 225, in find_process_files
+      process(root_dir, fromfile, tofile, function, hash_db)
+    File "/tmp/pip-build-j1wx480_/numpy/tools/cythonize.py", line 191, in process
+      processor_function(fromfile, tofile)
+    File "/tmp/pip-build-j1wx480_/numpy/tools/cythonize.py", line 94, in process_tempita_pyx
+      process_pyx(pyxfile, tofile)
+    File "/tmp/pip-build-j1wx480_/numpy/tools/cythonize.py", line 66, in process_pyx
+      raise OSError('Cython needs to be installed in Python as a module')
+  OSError: Cython needs to be installed in Python as a module
+  Traceback (most recent call last):
+    File "<string>", line 1, in <module>
+    File "/tmp/pip-build-j1wx480_/numpy/setup.py", line 488, in <module>
+      setup_package()
+    File "/tmp/pip-build-j1wx480_/numpy/setup.py", line 469, in setup_package
+      generate_cython()
+    File "/tmp/pip-build-j1wx480_/numpy/setup.py", line 275, in generate_cython
+      raise RuntimeError("Running cythonize failed!")
+  RuntimeError: Running cythonize failed!
+  
+  ----------------------------------------
+  Failed building wheel for numpy
+  Running setup.py clean for numpy
+  Complete output from command /usr/bin/python3 -u -c "import setuptools, tokenize;__file__='/tmp/pip-build-j1wx480_/numpy/setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '\n');f.close();exec(compile(code, __file__, 'exec'))" clean --all:
+  Running from numpy source directory.
+  
+  `setup.py clean` is not supported, use one of the following instead:
+  
+    - `git clean -xdf` (cleans all files)
+    - `git clean -Xdf` (cleans all versioned files, doesn't touch
+                        files that aren't checked into the git repo)
+  
+  Add `--force` to your command to use it anyway if you must (unsupported).
+  
+  
+  ----------------------------------------
+  Failed cleaning build dir for numpy
+Failed to build numpy
+Installing collected packages: numpy, torch
+  Running setup.py install for numpy: started
+    Running setup.py install for numpy: finished with status 'error'
+    Complete output from command /usr/bin/python3 -u -c "import setuptools, tokenize;__file__='/tmp/pip-build-j1wx480_/numpy/setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '\n');f.close();exec(compile(code, __file__, 'exec'))" install --record /tmp/pip-irgyg31t-record/install-record.txt --single-version-externally-managed --compile --user --prefix=:
+    Running from numpy source directory.
+    
+    Note: if you need reliable uninstall behavior, then install
+    with pip instead of using `setup.py install`:
+    
+      - `pip install .`       (from a git repo or downloaded source
+                               release)
+      - `pip install numpy`   (last NumPy release on PyPi)
+    
+    
+    Cythonizing sources
+    numpy/random/_bounded_integers.pxd.in has not changed
+    Processing numpy/random/_bounded_integers.pyx
+    Traceback (most recent call last):
+      File "/tmp/pip-build-j1wx480_/numpy/tools/cythonize.py", line 61, in process_pyx
+        from Cython.Compiler.Version import version as cython_version
+    ModuleNotFoundError: No module named 'Cython'
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/tmp/pip-build-j1wx480_/numpy/tools/cythonize.py", line 238, in <module>
+        main()
+      File "/tmp/pip-build-j1wx480_/numpy/tools/cythonize.py", line 234, in main
+        find_process_files(root_dir)
+      File "/tmp/pip-build-j1wx480_/numpy/tools/cythonize.py", line 225, in find_process_files
+        process(root_dir, fromfile, tofile, function, hash_db)
+      File "/tmp/pip-build-j1wx480_/numpy/tools/cythonize.py", line 191, in process
+        processor_function(fromfile, tofile)
+      File "/tmp/pip-build-j1wx480_/numpy/tools/cythonize.py", line 66, in process_pyx
+        raise OSError('Cython needs to be installed in Python as a module')
+    OSError: Cython needs to be installed in Python as a module
+    Traceback (most recent call last):
+      File "<string>", line 1, in <module>
+      File "/tmp/pip-build-j1wx480_/numpy/setup.py", line 488, in <module>
+        setup_package()
+      File "/tmp/pip-build-j1wx480_/numpy/setup.py", line 469, in setup_package
+        generate_cython()
+      File "/tmp/pip-build-j1wx480_/numpy/setup.py", line 275, in generate_cython
+        raise RuntimeError("Running cythonize failed!")
+    RuntimeError: Running cythonize failed!
+    
+    ----------------------------------------
+Command "/usr/bin/python3 -u -c "import setuptools, tokenize;__file__='/tmp/pip-build-j1wx480_/numpy/setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '\n');f.close();exec(compile(code, __file__, 'exec'))" install --record /tmp/pip-irgyg31t-record/install-record.txt --single-version-externally-managed --compile --user --prefix=" failed with error code 1 in /tmp/pip-build-j1wx480_/numpy/
+[jetson-inference]  failed to install torch-1.1.0-cp36-cp36m-linux_aarch64.whl
+[jetson-inference]     -- command:     pip3 install torch-1.1.0-cp36-cp36m-linux_aarch64.whl
+[jetson-inference]     -- error code:  1
+[jetson-inference]  failed to install PyTorch v1.1.0 (Python 3.6)
+ 
+[jetson-inference]  installation complete, exiting with status code 0
+[jetson-inference]  to run this tool again, use the following commands:
+ 
+    $ cd <jetson-inference>/build
+    $ ./install-pytorch.sh
+ 
+[Pre-build]  Finished CMakePreBuild script
+-- Finished installing dependencies
+```
+
 * Compiler le projet; cette étape prend 3-5 minutes
 ```
 $ cd jetson-inference/build
