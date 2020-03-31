@@ -461,10 +461,12 @@ $ ./segnet-camera.py --network=fcn-resnet18-mhp
 > ```
 
 ### Installation d'un 'matériel' vidéo virtuel (loopback)
-Les sources de 'Linux For Tegra' (L4T) sont situées dans: 
+La documentation du module #loopback# précise que les #kernel header#s doivent être installées, et de la même version que le kernel. Cela tombe bien puisque les sources sont fournies avec l'installation. Les #kernel headers# du 'Linux For Tegra' (L4T) sont situées dans: 
 ```
 /usr/src/linux-headers-4.9.140-tegra-ubuntu18.04_aarch64/kernel-4.9
 ```
+
+Il n'y a donc pas besoin d'installer les sources.
 
 ### loopback
 Références: 
@@ -492,13 +494,15 @@ $ make && sudo make install
 $ sudo depmod -a
 ```
 #### Démarrage
+Il est TRÈS important de préciser un nombre de max_buffers=8. 
 ```
-$ sudo modprobe v4l2loopback buffers=2
+$ sudo modprobe v4l2loopback max_buffers=8
 $ ls -al /dev/video*
 crw-rw----+ 1 root video 81, 0 Feb 15 16:58 /dev/video0
 crw-rw----+ 1 root video 81, 3 Feb 16 14:36 /dev/video1
 ##### 
 ```
+
 #### Optionnaly set the FPS
 ```
 ./projects/v4l2loopback/utils/v4l2loopback-ctl set-fps 60 /dev/video1
@@ -541,6 +545,99 @@ Format Video Output:
 	Transfer Function : Default (maps to sRGB)
 	YCbCr/HSV Encoding: Default (maps to ITU-R 601)
 	Quantization      : Default (maps to Full Range)
+	Flags             : 
+Streaming Parameters Video Capture:
+	Frames per second: 30.000 (30/1)
+	Read buffers     : 8
+Streaming Parameters Video Output:
+	Frames per second: 30.000 (30/1)
+	Write buffers    : 8
+
+User Controls
+
+                    keep_format 0x0098f900 (bool)   : default=0 value=0
+              sustain_framerate 0x0098f901 (bool)   : default=0 value=0
+                        timeout 0x0098f902 (int)    : min=0 max=100000 step=1 default=0 value=0
+               timeout_image_io 0x0098f903 (bool)   : default=0 value=0
+```
+#### Dépannage
+
+##### Erreur gstv4l2bufferpool.c:479:gst_v4l2_buffer_pool_alloc_buffer:<v4l2sink0:pool:sink> failed to allocate buffer
+== Log trace from the producer (with the error):
+
+```
+GST_DEBUG=3 gst-launch-1.0 --gst-debug -v videotestsrc ! v4l2sink device=/dev/video1
+...
+0:00:00.299469280 15073   0x557fe71de0 WARN          v4l2bufferpool gstv4l2bufferpool.c:790:gst_v4l2_buffer_pool_start:<v4l2sink0:pool:sink> Uncertain or not enough buffers, enabling copy threshold
+Pipeline is PREROLLED ...
+Setting pipeline to PLAYING ...
+New clock: GstSystemClock
+0:00:00.335972561 15073   0x557fe71de0 ERROR         v4l2bufferpool gstv4l2bufferpool.c:479:gst_v4l2_buffer_pool_alloc_buffer:<v4l2sink0:pool:sink> failed to allocate buffer
+0:00:00.336012876 15073   0x557fe71de0 WARN              bufferpool gstbufferpool.c:310:do_alloc_buffer:<v4l2sink0:pool:sink> alloc function failed
+...
+```
+
+* I first removed the module
+```
+sudo rmmod v4l2loopback.ko
+```
+
+* Then reinstalled the module with max_buffers=8
+```
+sudo insmod v4l2loopback.ko max_buffers=8
+```
+
+The max_buffers=8, to me, makes all the difference. Initially I installed it with buffers=2. And got the error "failed to allocate buffer". What made me wondering is that I already made it work on a previous installation, on the same system (I re-installed from scratch my system). And my documentation was not precise enough to make that property VERY important.
+
+* Producer I used: 
+```
+gst-launch-1.0 videotestsrc ! v4l2sink device=/dev/video1
+```
+
+* Consumer I used
+```
+gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
+```
+
+Works. 
+
+== driver info once it works (read/write buffers =8)
+```
+~/projects/umlaeute/v4l2loopback$ v4l2-ctl -d 1 --all
+Driver Info (not using libv4l2):
+	Driver name   : v4l2 loopback
+	Card type     : Dummy video device (0x0000)
+	Bus info      : platform:v4l2loopback-000
+	Driver version: 4.9.140
+	Capabilities  : 0x85208003
+		Video Capture
+		Video Output
+		Video Memory-to-Memory
+		Read/Write
+		Streaming
+		Extended Pix Format
+		Device Capabilities
+	Device Caps   : 0x85208003
+		Video Capture
+		Video Output
+		Video Memory-to-Memory
+		Read/Write
+		Streaming
+		Extended Pix Format
+		Device Capabilities
+Priority: 0
+Video input : 0 (loopback: ok)
+Video output: 0 (loopback in)
+Format Video Output:
+	Width/Height      : 320/240
+	Pixel Format      : 'YUYV'
+	Field             : None
+	Bytes per Line    : 640
+	Size Image        : 153600
+	Colorspace        : sRGB
+	Transfer Function : sRGB
+	YCbCr/HSV Encoding: ITU-R 601
+	Quantization      : Limited Range
 	Flags             : 
 Streaming Parameters Video Capture:
 	Frames per second: 30.000 (30/1)
