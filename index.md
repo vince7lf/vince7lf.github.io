@@ -465,6 +465,7 @@ $ ./segnet-camera.py --network=fcn-resnet18-mhp
 ### loopback
 Références: 
 - <https://github.com/umlaeute/v4l2loopback>
+- <https://github.com/umlaeute/v4l2loopback/wiki/Gstreamer>
 - <https://unix.stackexchange.com/questions/5452/manipulating-dev-video>
 - <https://sourceforge.net/projects/v4l2vd/>
 - <https://gist.github.com/strezh/9114204>
