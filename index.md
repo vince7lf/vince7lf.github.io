@@ -462,6 +462,10 @@ $ ./segnet-camera.py --network=fcn-resnet18-mhp
 
 ### Installation d'un 'matériel' vidéo virtuel (loopback)
 
+Les sources de Linux For Tegra (L4T) sont situées dans: 
+
+`/usr/src/linux-headers-4.9.140-tegra-ubuntu18.04_aarch64/kernel-4.9
+
 ### loopback
 Références: 
 - <https://github.com/umlaeute/v4l2loopback>
