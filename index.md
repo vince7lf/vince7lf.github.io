@@ -675,6 +675,9 @@ Une petite fenêtre va apparaître avec des frames de différentes couleurs et d
   - Référence: <https://github.com/umlaeute/v4l2loopback/issues/83>
 ```
 sudo modprobe v4l2loopback max_buffers=8
+ou bien
+sudo insmod ~/projects/umlaeute/v4l2loopback/v4l2loopback.ko
+sudo rmmod ~/projects/umlaeute/v4l2loopback/v4l2loopback.ko max_buffers=8
 ```
 - le chemin complet de la vidéo est requis
 - tee multiplexer est requis
