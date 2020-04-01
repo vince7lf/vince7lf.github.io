@@ -687,6 +687,7 @@ sudo insmod ~/projects/umlaeute/v4l2loopback/v4l2loopback.ko max_buffers=8
       - <https://github.com/umlaeute/v4l2loopback/issues/83>
 - si width, heigth and framerate sont précisés une erreur est retournée sauf si videoscale et videorate le sont aussi
 - ajouter le mode verbeux -v pour voir les détails
+- pour plus de log et d'information: GST_DEBUG=3 gst-launch-1.0 --gst-debug -v ...
 
 Producer du streaming video:
 
