@@ -461,12 +461,12 @@ $ ./segnet-camera.py --network=fcn-resnet18-mhp
 > ```
 
 ### Installation d'un 'matériel' vidéo virtuel (loopback)
-La documentation du module #loopback# précise que les #kernel header#s doivent être installées, et de la même version que le kernel. Cela tombe bien puisque les sources sont fournies avec l'installation. Les #kernel headers# du 'Linux For Tegra' (L4T) sont situées dans: 
+La documentation du module _loopback_ précise que les _kernel headers_ doivent être installées, et de la même version que le kernel. Cela tombe bien puisque les sources sont fournies avec l'installation. Les _kernel headers_ du 'Linux For Tegra' (L4T) sont situées dans: 
 ```
 /usr/src/linux-headers-4.9.140-tegra-ubuntu18.04_aarch64/kernel-4.9
 ```
 
-Il n'y a donc pas besoin d'installer les sources.
+Il n'y a donc pas besoin d'installer les sources, elles sont déjà là. 
 
 ### loopback
 Références: 
