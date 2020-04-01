@@ -563,6 +563,8 @@ User Controls
 #### Dépannage
 
 ##### Erreur gstv4l2bufferpool.c:479:gst_v4l2_buffer_pool_alloc_buffer:<v4l2sink0:pool:sink> failed to allocate buffer
+Référence: <https://github.com/umlaeute/v4l2loopback/issues/166>
+
 == Log trace from the producer (with the error):
 
 ```
