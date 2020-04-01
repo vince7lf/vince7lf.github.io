@@ -670,9 +670,11 @@ Une petite fenêtre va apparaître avec des frames de différentes couleurs et d
 
 ### Pour streamer une vidéo avec gstreamer-1.0 sur le loopback /dev/video1
 - Loopback doit être démarré. 
-  - TODO: déterminer si buffers aide et est nécessaire. Référence: <https://github.com/umlaeute/v4l2loopback/issues/83>
+  - buffers n'est pas une option valide, il faut utiliser max_buffers à la place.
+  - max_buffers avec au moins 8; avec 2 max_buffers cela ne marche pas
+  - Référence: <https://github.com/umlaeute/v4l2loopback/issues/83>
 ```
-sudo modprobe v4l2loopback buffers=2
+sudo modprobe v4l2loopback max_buffers=8
 ```
 - le chemin complet de la vidéo est requis
 - tee multiplexer est requis
