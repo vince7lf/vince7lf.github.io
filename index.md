@@ -223,6 +223,9 @@ Command "/usr/bin/python3 -u -c "import setuptools, tokenize;__file__='/tmp/pip-
 -- Finished installing dependencies
 ```
 
+Une autre option pour installer pytorch sur le Jetson Nano est d'utiliser le site <https://forums.developer.nvidia.com/t/pytorch-for-jetson-nano-version-1-4-0-now-available/72048>
+
+
 * Compiler le projet; cette étape prend 3-5 minutes
 ```
 $ cd jetson-inference/build
