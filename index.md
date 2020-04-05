@@ -819,8 +819,27 @@ Pour faire l'inférence de la vidéo:
 - Dans un premier terminal démarrer le streaming de la vidéo en premier (le producer):
   - il est important de spécifier le chemin complet de la vidéo
   - il est optionnel de spécifier le format, le width et le height
+  - le width et height doivent concorder avec l'inference; si l'inférence s'attend à du 1280x720, alors il faut spécifier ces dimensions lors de la lecture de la video 
+  
+```
+lefv2603@lefv2603-jetsonnano:~/projects/dusty-nv/jetson-inference/build$ ./aarch64/bin/segnet-camera --camera=/dev/video1 --network=fcn-resnet18-deepscene --visualize=mask --alpha=255
+[gstreamer] initialized gstreamer, version 1.14.5.0
+[gstreamer] gstCamera attempting to initialize with GST_SOURCE_NVARGUS, camera /dev/video1
+[gstreamer] gstCamera pipeline string:
+v4l2src device=/dev/video1 !  appsink name=mysink
+[gstreamer] gstCamera successfully initialized with GST_SOURCE_V4L2, camera /dev/video1
 
-`gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee ! qtdemux ! decodebin ! videoconvert ! videoscale ! "video/x-raw,format=(string)RGB,width=(int)640,heigth=(int)480" ! v4l2sink device=/dev/video1`
+segnet-camera:  successfully initialized camera device
+    width:  1280
+   height:  720
+    depth:  24 (bpp)
+
+```
+```
+  gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee ! qtdemux ! decodebin ! videoconvert ! videoscale ! "video/x-raw,format=(string)RGB,width=(int)1280,heigth=(int)720" ! v4l2sink device=/dev/video1
+```
+
+`gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee ! qtdemux ! decodebin ! videoconvert ! videoscale ! "video/x-raw,format=(string)RGB,width=(int)1280,heigth=(int)720" ! v4l2sink device=/dev/video1`
 
 - Juste après avoir démarrer le producer, **dans un deuxième terminal**, démarrer l'inférence. Une nouvelle fenêtre va apparaître avec la vidéo en train de se faire inférer. 
 ```
