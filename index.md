@@ -474,7 +474,6 @@ Il n'y a donc pas besoin d'installer les sources, elles sont déjà là.
 ### loopback
 Références: 
 - <https://github.com/umlaeute/v4l2loopback>
-- <https://github.com/umlaeute/v4l2loopback/blob/master/utils/v4l2loopback-ctl>
 - <https://github.com/umlaeute/v4l2loopback/wiki/Gstreamer>
 - <https://unix.stackexchange.com/questions/5452/manipulating-dev-video>
 - <https://sourceforge.net/projects/v4l2vd/>
