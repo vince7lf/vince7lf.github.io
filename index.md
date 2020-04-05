@@ -740,19 +740,57 @@ Référence: <https://github.com/XUSean0118/DVSNet.git>
 > **_NOTE Importante:_**
 > NVidia procure du code pour l'inférence avec une caméra. Afin de faire fonctionner l'inférence avec une vidéo au lieu de la caméra, il est important de faire quelques ajustements dans le code cpp. Voici les détails: 
 > - fichier ./dusty-nv/jetson-inference/utils/camera/gstCamera.cpp: 
->   - mettre en commentaire les lignes 429, 432, 434:
+>   - mettre en commentaire les lignes (before => 429, 432, 434,) 775 à 781:
 > ```
-> 428                 ss << "v4l2src device=" << mCameraStr << " ! ";
-> 429                 //ss << "video/x-raw, width=(int)" << mWidth << ", height=(int)" << mHeight << ", "; 
-> 430 
-> 431         #if NV_TENSORRT_MAJOR >= 5
-> 432                 //ss << "format=YUY2 ! videoconvert ! video/x-raw, format=RGB ! videoconvert !";
-> 433         #else
-> 434                 //ss << "format=RGB ! videoconvert ! video/x-raw, format=RGB ! videoconvert !";
-> 435         #endif
-> 436                 ss << "appsink name=mysink";
-> 437 
-> 438                 mSource = GST_SOURCE_V4L2;
+// buildLaunchStr
+bool gstCamera::buildLaunchStr( gstCameraSrc src )
+{
+	// gst-launch-1.0 nvcamerasrc fpsRange="30.0 30.0" ! 'video/x-raw(memory:NVMM), width=(int)1920, height=(int)1080, format=(string)I420, framerate=(fraction)30/1' ! \
+	// nvvidconv flip-method=2 ! 'video/x-raw(memory:NVMM), format=(string)I420' ! fakesink silent=false -v
+	// #define CAPS_STR "video/x-raw(memory:NVMM), width=(int)2592, height=(int)1944, format=(string)I420, framerate=(fraction)30/1"
+	// #define CAPS_STR "video/x-raw(memory:NVMM), width=(int)1920, height=(int)1080, format=(string)I420, framerate=(fraction)30/1"
+	std::ostringstream ss;
+
+	if( csiCamera() && src != GST_SOURCE_V4L2 )
+	{
+		mSource = src;	 // store camera source method
+
+	#if NV_TENSORRT_MAJOR > 1 && NV_TENSORRT_MAJOR < 5	// if JetPack 3.1-3.3 (different flip-method)
+		const int flipMethod = 0;					// Xavier (w/TRT5) camera is mounted inverted
+	#else
+		//const int flipMethod = 2;
+		const int flipMethod = 0;
+	#endif	
+
+		if( src == GST_SOURCE_NVCAMERA )
+			ss << "nvcamerasrc fpsRange=\"30.0 30.0\" ! video/x-raw(memory:NVMM), width=(int)" << mWidth << ", height=(int)" << mHeight << ", format=(string)NV12 ! nvvidconv flip-method=" << flipMethod << " ! "; //'video/x-raw(memory:NVMM), width=(int)1920, height=(int)1080, format=(string)I420, framerate=(fraction)30/1' ! ";
+		else if( src == GST_SOURCE_NVARGUS )
+			ss << "nvarguscamerasrc sensor-id=" << mSensorCSI << " ! video/x-raw(memory:NVMM), width=(int)" << mWidth << ", height=(int)" << mHeight << ", framerate=30/1, format=(string)NV12 ! nvvidconv flip-method=" << flipMethod << " ! ";
+		
+		ss << "video/x-raw ! appsink name=mysink";
+	}
+	else
+	{
+		ss << "v4l2src device=" << mCameraStr << " ! ";
+//		ss << "video/x-raw, width=(int)" << mWidth << ", height=(int)" << mHeight << ", "; 
+		
+	//#if NV_TENSORRT_MAJOR >= 5
+//		ss << "format=YUY2 ! videoconvert ! video/x-raw, format=RGB ! videoconvert !";
+//	#else
+		//ss << " format=RGB ! videoconvert ! video/x-raw, format=RGB ! videoconvert ! ";
+//	#endif
+
+		ss << " appsink name=mysink";
+
+		mSource = GST_SOURCE_V4L2;
+	}
+	
+	mLaunchStr = ss.str();
+
+	printf(LOG_GSTREAMER "gstCamera pipeline string:\n");
+	printf("%s\n", mLaunchStr.c_str());
+	return true;
+}
 > ```
 > L'objectif est d'avoir "v4l2src device=/dev/video1 ! appsink name=mysink"
 > 
