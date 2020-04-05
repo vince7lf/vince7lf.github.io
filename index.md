@@ -506,11 +506,18 @@ crw-rw----+ 1 root video 81, 3 Feb 16 14:36 /dev/video1
 ##### 
 ```
 
-#### Optionnaly set the FPS
+#### Autres configuration
+
+Le FPS peut être fixer:
 ```
 ./projects/v4l2loopback/utils/v4l2loopback-ctl set-fps 60 /dev/video1
 ```
-
+De me que les critère de captures (caps). Ceci sont des exemples qui ne sont peut-être pas fonctionnel dans le contexte. Il fuat les adapter. 
+```
+./projects/v4l2loopback/utils/v4l2loopback-ctl set-caps "video/x-raw,format=UYVY,width=640,height=480" /dev/video1
+./projects/v4l2loopback/utils/v4l2loopback-ctl set-caps "video/x-raw,format=NV10,width=1280,height=720" /dev/video1
+./projects/v4l2loopback/utils/v4l2loopback-ctl set-caps "video/x-raw,format=RGB,width=720,height=1280" /dev/video1
+```
 #### Validation des capacités du loopback /dev/video1
 ```
 $ v4l2-ctl -d 1 --all 
