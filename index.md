@@ -849,6 +849,201 @@ segnet-camera:  successfully initialized camera device
 `gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee ! qtdemux ! decodebin ! videoconvert ! videoscale ! "video/x-raw,format=(string)RGB,width=(int)1280,heigth=(int)720" ! v4l2sink device=/dev/video1`
 
 - Juste après avoir démarrer le producer, **dans un deuxième terminal**, démarrer l'inférence. Une nouvelle fenêtre va apparaître avec la vidéo en train de se faire inférer. 
+
+Note Importante: La version en python ne fonctionne pas et retourne une erreur ! 
+```
+lefv2603@lefv2603-jetsonnano:~$ ~/projects/dusty-nv/jetson-inference/build/aarch64/bin/segnet-camera.py --camera=/dev/video1 --network=fcn-resnet18-deepscene --visualize=mask --alpha=255
+jetson.inference.__init__.py
+jetson.inference -- initializing Python 2.7 bindings...
+jetson.inference -- registering module types...
+jetson.inference -- done registering module types
+jetson.inference -- done Python 2.7 binding initialization
+jetson.utils.__init__.py
+jetson.utils -- initializing Python 2.7 bindings...
+jetson.utils -- registering module functions...
+jetson.utils -- done registering module functions
+jetson.utils -- registering module types...
+jetson.utils -- done registering module types
+jetson.utils -- done Python 2.7 binding initialization
+jetson.inference -- PyTensorNet_New()
+jetson.inference -- PySegNet_Init()
+jetson.inference -- segNet loading network using argv command line params
+jetson.inference -- segNet.__init__() argv[0] = '/home/lefv2603/projects/dusty-nv/jetson-inference/build/aarch64/bin/segnet-camera.py'
+jetson.inference -- segNet.__init__() argv[1] = '--camera=/dev/video1'
+jetson.inference -- segNet.__init__() argv[2] = '--network=fcn-resnet18-deepscene'
+jetson.inference -- segNet.__init__() argv[3] = '--visualize=mask'
+jetson.inference -- segNet.__init__() argv[4] = '--alpha=255'
+
+segNet -- loading segmentation network model from:
+       -- prototxt:   (null)
+       -- model:      networks/FCN-ResNet18-DeepScene-576x320/fcn_resnet18.onnx
+       -- labels:     networks/FCN-ResNet18-DeepScene-576x320/classes.txt
+       -- colors:     networks/FCN-ResNet18-DeepScene-576x320/colors.txt
+       -- input_blob  'input_0'
+       -- output_blob 'output_0'
+       -- batch_size  1
+
+[TRT]   TensorRT version 6.0.1
+[TRT]   loading NVIDIA plugins...
+[TRT]   Plugin Creator registration succeeded - GridAnchor_TRT
+[TRT]   Plugin Creator registration succeeded - GridAnchorRect_TRT
+[TRT]   Plugin Creator registration succeeded - NMS_TRT
+[TRT]   Plugin Creator registration succeeded - Reorg_TRT
+[TRT]   Plugin Creator registration succeeded - Region_TRT
+[TRT]   Plugin Creator registration succeeded - Clip_TRT
+[TRT]   Plugin Creator registration succeeded - LReLU_TRT
+[TRT]   Plugin Creator registration succeeded - PriorBox_TRT
+[TRT]   Plugin Creator registration succeeded - Normalize_TRT
+[TRT]   Plugin Creator registration succeeded - RPROI_TRT
+[TRT]   Plugin Creator registration succeeded - BatchedNMS_TRT
+[TRT]   Could not register plugin creator:  FlattenConcat_TRT in namespace: 
+[TRT]   completed loading NVIDIA plugins.
+[TRT]   detected model format - ONNX  (extension '.onnx')
+[TRT]   desired precision specified for GPU: FASTEST
+[TRT]   requested fasted precision for device GPU without providing valid calibrator, disabling INT8
+[TRT]   native precisions detected for GPU:  FP32, FP16
+[TRT]   selecting fastest native precision for GPU:  FP16
+[TRT]   attempting to open engine cache file /usr/local/bin/networks/FCN-ResNet18-DeepScene-576x320/fcn_resnet18.onnx.1.1.GPU.FP16.engine
+[TRT]   loading network profile from engine cache... /usr/local/bin/networks/FCN-ResNet18-DeepScene-576x320/fcn_resnet18.onnx.1.1.GPU.FP16.engine
+[TRT]   device GPU, /usr/local/bin/networks/FCN-ResNet18-DeepScene-576x320/fcn_resnet18.onnx loaded
+[TRT]   Deserialize required 4022754 microseconds.
+[TRT]   device GPU, CUDA engine context initialized with 2 bindings
+[TRT]   binding -- index   0
+               -- name    'input_0'
+               -- type    FP32
+               -- in/out  INPUT
+               -- # dims  3
+               -- dim #0  3 (SPATIAL)
+               -- dim #1  320 (SPATIAL)
+               -- dim #2  576 (SPATIAL)
+[TRT]   binding -- index   1
+               -- name    'output_0'
+               -- type    FP32
+               -- in/out  OUTPUT
+               -- # dims  3
+               -- dim #0  5 (SPATIAL)
+               -- dim #1  10 (SPATIAL)
+               -- dim #2  18 (SPATIAL)
+[TRT]   binding to input 0 input_0  binding index:  0
+[TRT]   binding to input 0 input_0  dims (b=1 c=3 h=320 w=576) size=2211840
+[TRT]   binding to output 0 output_0  binding index:  1
+[TRT]   binding to output 0 output_0  dims (b=1 c=5 h=10 w=18) size=3600
+device GPU, /usr/local/bin/networks/FCN-ResNet18-DeepScene-576x320/fcn_resnet18.onnx initialized.
+[TRT]   segNet outputs -- s_w 18  s_h 10  s_c 5
+segNet -- class 00  label 'trail'
+segNet -- class 01  label 'grass'
+segNet -- class 02  label 'vegetation'
+segNet -- class 03  label 'obstacle'
+segNet -- class 04  label 'sky'
+segNet -- loaded 5 class labels
+segNet -- class 00  color 200 155 75 180
+segNet -- class 01  color 85 210 100 255
+segNet -- class 02  color 15 100 20 255
+segNet -- class 03  color 255 185 0 255
+segNet -- class 04  color 0 120 255 150
+segNet -- loaded 5 class colors
+jetson.utils -- PyCamera_New()
+jetson.utils -- PyCamera_Init()
+[gstreamer] initialized gstreamer, version 1.14.5.0
+[gstreamer] gstCamera attempting to initialize with GST_SOURCE_NVARGUS, camera /dev/video1
+[gstreamer] gstCamera pipeline string:
+v4l2src device=/dev/video1 !  appsink name=mysink
+[gstreamer] gstCamera successfully initialized with GST_SOURCE_V4L2, camera /dev/video1
+jetson.utils -- PyDisplay_New()
+jetson.utils -- PyDisplay_Init()
+[OpenGL] glDisplay -- X screen 0 resolution:  1920x1080
+[OpenGL] glDisplay -- display device initialized
+[gstreamer] opening gstCamera for streaming, transitioning pipeline to GST_STATE_PLAYING
+[gstreamer] gstreamer changed state from NULL to READY ==> mysink
+[gstreamer] gstreamer changed state from NULL to READY ==> v4l2src0
+[gstreamer] gstreamer changed state from NULL to READY ==> pipeline0
+[gstreamer] gstreamer stream status CREATE ==> src
+[gstreamer] gstreamer changed state from READY to PAUSED ==> v4l2src0
+[gstreamer] gstreamer changed state from READY to PAUSED ==> pipeline0
+[gstreamer] gstreamer msg new-clock ==> pipeline0
+[gstreamer] gstreamer changed state from PAUSED to PLAYING ==> v4l2src0
+[gstreamer] gstCamera onPreroll
+[gstreamer] gstCamera recieved 1280x1080 frame (4147200 bytes, 24 bpp)
+[gstreamer] gstreamer stream status ENTER ==> src
+[gstreamer] gstreamer msg stream-start ==> pipeline0
+[gstreamer] gstreamer changed state from READY to PAUSED ==> mysink
+[gstreamer] gstreamer msg async-done ==> pipeline0
+[gstreamer] gstreamer changed state from PAUSED to PLAYING ==> mysink
+[gstreamer] gstreamer changed state from PAUSED to PLAYING ==> pipeline0
+[gstreamer] gstCamera -- allocated 16 ringbuffers, 4147200 bytes each
+[gstreamer] gstCamera recieved 1280x1080 frame (4149248 bytes, 24 bpp)
+[gstreamer] gstCamera -- allocated 16 RGBA ringbuffers
+[OpenGL]   creating 1280x1080 texture
+[cuda]  cudaGraphicsGLRegisterBuffer(&mInteropCUDA, mDMA, cudaGraphicsRegisterFlagsWriteDiscard)
+[cuda]     unspecified launch failure (error 4) (hex 0x04)
+[cuda]     /home/lefv2603/projects/dusty-nv/jetson-inference/utils/display/glTexture.cpp:253
+[OpenGL]   creating 640x540 texture
+[cuda]  cudaGetLastError()
+[cuda]     unspecified launch failure (error 4) (hex 0x04)
+[cuda]     /home/lefv2603/projects/dusty-nv/jetson-inference/utils/cuda/cudaNormalize.cu:65
+[cuda]  cudaNormalizeRGBA((float4*)img, make_float2(0.0f, 255.0f), (float4*)mNormalizedCUDA, make_float2(0.0f, 1.0f), width, height)
+[cuda]     unspecified launch failure (error 4) (hex 0x04)
+[cuda]     /home/lefv2603/projects/dusty-nv/jetson-inference/utils/display/glDisplay.cpp:369
+[cuda]  cudaGraphicsGLRegisterBuffer(&mInteropCUDA, mDMA, cudaGraphicsRegisterFlagsWriteDiscard)
+[cuda]     unspecified launch failure (error 4) (hex 0x04)
+[cuda]     /home/lefv2603/projects/dusty-nv/jetson-inference/utils/display/glTexture.cpp:253
+[cuda]  cudaEventElapsedTime(&cuda_time, mEventsGPU[evt], mEventsGPU[evt+1])
+[cuda]     unspecified launch failure (error 4) (hex 0x04)
+[cuda]     /home/lefv2603/projects/dusty-nv/jetson-inference/build/aarch64/include/jetson-inference/tensorNet.h:499
+[cuda]  cudaGetLastError()
+[cuda]     unspecified launch failure (error 4) (hex 0x04)
+[cuda]     /home/lefv2603/projects/dusty-nv/jetson-inference/utils/cuda/cudaRGB.cu:76
+[cuda]  cudaRGB8ToRGBA32((uchar3*)input, (float4*)mRGBA[mLatestRGBA], mWidth, mHeight)
+[cuda]     unspecified launch failure (error 4) (hex 0x04)
+[cuda]     /home/lefv2603/projects/dusty-nv/jetson-inference/utils/camera/gstCamera.cpp:275
+[gstreamer] gstCamera failed to convert frame to RGBA
+Traceback (most recent call last):
+  File "/home/lefv2603/projects/dusty-nv/jetson-inference/build/aarch64/bin/segnet-camera.py", line 67, in <module>
+    img, width, height = camera.CaptureRGBA()
+Exception: jetson.utils -- gstCamera failed to CaptureRGBA()
+jetson.utils -- PyDisplay_Dealloc()
+[cuda]  cudaFree(mNormalizedCUDA)
+[cuda]     unspecified launch failure (error 4) (hex 0x04)
+[cuda]     /home/lefv2603/projects/dusty-nv/jetson-inference/utils/display/glDisplay.cpp:78
+jetson.utils -- freeing CUDA mapped memory
+[cuda]  cudaFreeHost(ptr)
+[cuda]     unspecified launch failure (error 4) (hex 0x04)
+[cuda]     /home/lefv2603/projects/dusty-nv/jetson-inference/utils/python/bindings/PyCUDA.cpp:121
+jetson.utils -- failed to free CUDA mapped memory with cudaFreeHost()
+jetson.utils -- PyCamera_Dealloc()
+[gstreamer] closing gstCamera for streaming, transitioning pipeline to GST_STATE_NULL
+[cuda]  cudaFreeHost(mRingbufferCPU[n])
+[cuda]     unspecified launch failure (error 4) (hex 0x04)
+[cuda]     /home/lefv2603/projects/dusty-nv/jetson-inference/utils/camera/gstCamera.cpp:91
+[cuda]  cudaFree(mRGBA[n])
+[cuda]     unspecified launch failure (error 4) (hex 0x04)
+[cuda]     /home/lefv2603/projects/dusty-nv/jetson-inference/utils/camera/gstCamera.cpp:103
+[cuda]  cudaFreeHost(mRingbufferCPU[n])
+[cuda]     unspecified launch failure (error 4) (hex 0x04)
+[cuda]     /home/lefv2603/projects/dusty-nv/jetson-inference/utils/camera/gstCamera.cpp:91
+[cuda]  cudaFree(mRGBA[n])
+[cuda]     unspecified launch failure (error 4) (hex 0x04)
+[cuda]     /home/lefv2603/projects/dusty-nv/jetson-inference/utils/camera/gstCamera.cpp:103
+...
+[cuda]  cudaFree(mRGBA[n])
+[cuda]     unspecified launch failure (error 4) (hex 0x04)
+[cuda]     /home/lefv2603/projects/dusty-nv/jetson-inference/utils/camera/gstCamera.cpp:103
+jetson.inference -- PySegNet_Dealloc()
+Error at line 289: unspecified launch failure
+Error at line 289: unspecified launch failure
+Error at line 289: unspecified launch failure
+Error at line 289: unspecified launch failure
+Error at line 289: unspecified launch failure
+Error at line 289: unspecified launch failure
+[TRT]   ../rtExt/cuda/cudaFusedConvActRunner.cpp (92) - Cuda Error in destroyFilterTexture: 4 (unspecified launch failure)
+[TRT]   INTERNAL_ERROR: std::exception
+[TRT]   ../rtSafe/safeRuntime.cpp (32) - Cuda Error in free: 4 (unspecified launch failure)
+terminate called after throwing an instance of 'nvinfer1::CudaError'
+  what():  std::exception
+Aborted (core dumped)
+lefv2603@lefv2603-jetsonnano:~$ 
+```
+
 ```
 $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
