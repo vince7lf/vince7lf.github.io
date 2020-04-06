@@ -1338,6 +1338,9 @@ lefv2603@lefv2603-jetsonnano:~$ GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesr
 # 25FPS 480x640
 lefv2603@lefv2603-jetsonnano:~$ GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! qtdemux ! queue name=q1 ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)480, height=(int)640, framerate=(fraction)25/1' ! nvvidconv ! videorate ! videoscale ! 'video/x-raw, format=(string)I420, width=(int)480, height=(int)640, framerate=(fraction)25/1' ! tee ! decodebin ! videoconvert ! videoscale ! "video/x-raw,format=(string)RGB,width=(int)480,heigth=(int)640" ! v4l2sink device=/dev/video1
 
+# 1FPS 240x320
+lefv2603@lefv2603-jetsonnano:~$ GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! qtdemux ! queue name=q1 ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)240, height=(int)320, framerate=(fraction)1/1' ! nvvidconv ! videorate ! videoscale ! 'video/x-raw, format=(string)I420, width=(int)240, height=(int)320, framerate=(fraction)1/1' ! tee ! decodebin ! videoconvert ! videoscale ! "video/x-raw,format=(string)RGB,width=(int)240,heigth=(int)320" ! v4l2sink device=/dev/video1
+
 
 lefv2603@lefv2603-jetsonnano:~$ ~/projects/dusty-nv/jetson-inference/build/aarch64/bin/segnet-camera.py --camera=/dev/video1 --network=fcn-resnet18-deepscene --visualize=mask --alpha=255
 
