@@ -1107,3 +1107,282 @@ Reference: <https://syonyk.blogspot.com/2019/04/benchmarking-nvidia-jetson-nano.
 
 ## Tips and tricks to train network
 <https://towardsdatascience.com/a-bunch-of-tips-and-tricks-for-training-deep-neural-networks-3ca24c31ddc8>
+
+
+# Notes
+```
+# works ... but sink to nv3dsink
+GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! qtdemux ! queue ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! 'video/x-raw(memory:NVMM), format=(string)NV12' ! nv3dsink -e
+
+
+GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! 'video/x-raw(memory:NVMM), width=(int)720, height=(int)1280, format=(string)NV12, framerate=(fraction)30/1' ! nvv4l2h264enc bitrate=8000000 ! h264parse ! qtmux ! qtdemux ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! v4l2sink device=/dev/video1 -e
+
+GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! qtdemux ! queue ! h264parse ! nvv4l2decoder enable-max-
+performance=1 ! nvvidconv flip-method=3 ! 'video/x-raw(memory:NVMM), format=(string)NV12' ! nvv4l2h264enc bitrate-8000000 ! h264parse ! qtmux !
+
+
+
+################
+# WORDS WITH NO ERROR !!! 
+GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! qtdemux ! queue ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw, format=(string)NV12, width=(int)720, height=(int)1280, framerate=(fraction)60/1' ! tee ! queue ! v4l2sink device=/dev/video1
+
+# run segmentation ... error but memory low
+~/projects/dusty-nv/jetson-inference/build/aarch64/bin/segnet-camera --camera=/dev/video1 --network=fcn-resnet18-deepscene --visualize=mask --alpha=255
+
+# initialise
+sudo rmmod ~/projects/v4l2loopback/v4l2loopback.ko
+sudo insmod ~/projects/v4l2loopback/v4l2loopback.ko max_buffers=8
+~/projects/v4l2loopback/utils/v4l2loopback-ctl set-fps 60 /dev/video1
+~/projects/v4l2loopback/utils/v4l2loopback-ctl set-caps "video/x-raw,format=NV12,width=720,height=1280" /dev/video1
+~/projects/v4l2loopback/utils/v4l2loopback-ctl set-caps "video/x-raw,format=NV12,width=720,height=1280" /dev/video1
+v4l2-ctl -d 1 --all 
+
+################
+lefv2603@lefv2603-jetsonnano:~$ v4l2-ctl -d 1 --all 
+Driver Info (not using libv4l2):
+	Driver name   : v4l2 loopback
+	Card type     : Dummy video device (0x0000)
+	Bus info      : platform:v4l2loopback-000
+	Driver version: 4.9.140
+	Capabilities  : 0x85208003
+		Video Capture
+		Video Output
+		Video Memory-to-Memory
+		Read/Write
+		Streaming
+		Extended Pix Format
+		Device Capabilities
+	Device Caps   : 0x85208003
+		Video Capture
+		Video Output
+		Video Memory-to-Memory
+		Read/Write
+		Streaming
+		Extended Pix Format
+		Device Capabilities
+Priority: 0
+Video input : 0 (loopback: ok)
+Video output: 0 (loopback in)
+Format Video Capture:
+	Width/Height      : 720/1280
+	Pixel Format      : 'NV12'
+	Field             : None
+	Bytes per Line    : 720
+	Size Image        : 1382400
+	Colorspace        : sRGB
+	Transfer Function : sRGB
+	YCbCr/HSV Encoding: ITU-R 601
+	Quantization      : Limited Range
+	Flags             : 
+Format Video Output:
+	Width/Height      : 720/1280
+	Pixel Format      : 'NV12'
+	Field             : None
+	Bytes per Line    : 720
+	Size Image        : 1382400
+	Colorspace        : sRGB
+	Transfer Function : sRGB
+	YCbCr/HSV Encoding: ITU-R 601
+	Quantization      : Limited Range
+	Flags             : 
+Streaming Parameters Video Capture:
+	Frames per second: 60.000 (60/1)
+	Read buffers     : 8
+Streaming Parameters Video Output:
+	Frames per second: 60.000 (60/1)
+	Write buffers    : 8
+
+User Controls
+
+                    keep_format 0x0098f900 (bool)   : default=0 value=1
+              sustain_framerate 0x0098f901 (bool)   : default=0 value=1
+                        timeout 0x0098f902 (int)    : min=0 max=100000 step=1 default=0 value=0
+               timeout_image_io 0x0098f903 (bool)   : default=0 value=0
+lefv2603@lefv2603-jetsonnano:~$
+
+
+
+
+GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! 'video/x-raw(memory:NVMM), width=(int)720, height=(int)1280, format=(string)NV12, framerate=(fraction)30/1' ! nvivafilter cuda-process=true customer-lib-name="libnvsample_cudaprocess.so" ! 'video/x-raw(memory:NVMM), format=(string)NV12' ! nvoverlaysink -e
+
+
+
+
+
+### Works
+# Producer 
+lefv2603@lefv2603-jetsonnano:~$ GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! qtdemux ! queue name=q1 ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw, format=(string)NV12, width=(int)720, height=(int)1280, framerate=(fraction)60/1' ! tee ! queue name=q2 ! v4l2sink device=/dev/video1
+Setting pipeline to PAUSED ...
+Opening in BLOCKING MODE 
+libv4l2: error getting pixformat: Invalid argument
+Opening in BLOCKING MODE 
+Pipeline is PREROLLING ...
+NvMMLiteOpen : Block : BlockType = 261 
+NVMEDIA: Reading vendor.tegra.display-size : status: 6 
+NvMMLiteBlockCreate : Block : BlockType = 261 
+Pipeline is PREROLLED ...
+Setting pipeline to PLAYING ...
+New clock: GstSystemClock
+^Chandling interrupt.
+Interrupt: Stopping pipeline ...
+Execution ended after 0:00:08.542895143
+Setting pipeline to PAUSED ...
+Setting pipeline to READY ...
+Setting pipeline to NULL ...
+Freeing pipeline ...
+lefv2603@lefv2603-jetsonnano:~$ 
+
+# Consumer
+lefv2603@lefv2603-jetsonnano:~$ gst-launch-1.0 v4l2src device=/dev/video1 ! nvvidconv ! tee ! queue ! nv3dsink -e
+Setting pipeline to PAUSED ...
+Pipeline is live and does not need PREROLL ...
+Setting pipeline to PLAYING ...
+New clock: GstSystemClock
+^Chandling interrupt.
+Interrupt: Stopping pipeline ...
+EOS on shutdown enabled -- Forcing EOS on the pipeline
+Waiting for EOS...
+Got EOS from element "pipeline0".
+EOS received - stopping pipeline...
+Execution ended after 0:00:02.473096621
+Setting pipeline to PAUSED ...
+Setting pipeline to READY ...
+Setting pipeline to NULL ...
+Freeing pipeline ...
+lefv2603@lefv2603-jetsonnano:~$ 
+
+# setup
+sudo rmmod ~/projects/v4l2loopback/v4l2loopback.ko
+sudo insmod ~/projects/v4l2loopback/v4l2loopback.ko max_buffers=8
+v4l2-ctl -d 1 --all 
+
+
+#### WORKS with changing the framerate; excepts that the segmentation does not move. 
+# same setup as before
+lefv2603@lefv2603-jetsonnano:~$ GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! qtdemux ! queue name=q1 ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)720, height=(int)1280, framerate=(fraction)20/1' ! nvv4l2h264enc ! h264parse ! tee ! queue ! identity drop-allocation=1 ! v4l2sink device=/dev/video1
+
+#
+lefv2603@lefv2603-jetsonnano:~$ ~/projects/dusty-nv/jetson-inference/build/aarch64/bin/segnet-camera --camera=/dev/video1 --network=fcn-resnet18-deepscene --visualize=mask --alpha=255
+
+# Pb : cannot play on the screen the result from the feed /dev/video from a consumer
+# can check the result with a nv3dsink
+lefv2603@lefv2603-jetsonnano:~$ GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! qtdemux ! queue name=q1 ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)720, height=(int)1280, framerate=(fraction)10/1' ! v4l2sink device=/dev/video1
+
+
+
+GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150945.mp4 ! tee ! qtdemux ! queue name=q1 ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)720, height=(int)1280, framerate=(fraction)30/1' ! nvv4l2h264enc ! h264parse ! tee ! queue ! nvvidconv ! videorate ! videoscale ! 'video/x-raw, format=(string)RGB, width=(int)720, height=(int)1280, framerate=(fraction)30/1' ! v4l2sink device=/dev/video1
+
+
+
+#### It WORKS
+lefv2603@lefv2603-jetsonnano:~$ GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150945.mp4 ! tee ! qtdemux ! queue name=q1 ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)720, height=(int)1280, framerate=(fraction)10/1' ! nvvidconv ! videorate ! videoscale ! 'video/x-raw, format=(string)UYVY' ! videoconvert ! xvimagesink -e
+
+
+##### WORKS CAN CONSUME /dev/video1  
+
+lefv2603@lefv2603-jetsonnano:~$ GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150945.mp4 ! tee ! qtdemux ! queue name=q1 ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)720, height=(int)1280, framerate=(fraction)30/1' ! nvvidconv ! videorate ! videoscale ! 'video/x-raw, format=(string)NV12, width=(int)720, height=(int)1280, framerate=(fraction)30/1' ! videoconvert ! tee ! queue ! v4l2sink device=/dev/video1
+Setting pipeline to PAUSED ...
+Opening in BLOCKING MODE 
+libv4l2: error getting pixformat: Invalid argument
+Opening in BLOCKING MODE 
+Pipeline is PREROLLING ...
+NvMMLiteOpen : Block : BlockType = 261 
+NVMEDIA: Reading vendor.tegra.display-size : status: 6 
+NvMMLiteBlockCreate : Block : BlockType = 261 
+Pipeline is PREROLLED ...
+Setting pipeline to PLAYING ...
+New clock: GstSystemClock
+^Chandling interrupt.
+Interrupt: Stopping pipeline ...
+Execution ended after 0:00:31.994123837
+Setting pipeline to PAUSED ...
+Setting pipeline to READY ...
+Setting pipeline to NULL ...
+Freeing pipeline ...
+lefv2603@lefv2603-jetsonnano:~$ 
+
+
+lefv2603@lefv2603-jetsonnano:~$ gst-launch-1.0 v4l2src device=/dev/video1 ! nvvidconv ! tee ! queue ! nv3dsink -e
+Setting pipeline to PAUSED ...
+Pipeline is live and does not need PREROLL ...
+Setting pipeline to PLAYING ...
+New clock: GstSystemClock
+^Chandling interrupt.
+Interrupt: Stopping pipeline ...
+EOS on shutdown enabled -- Forcing EOS on the pipeline
+Waiting for EOS...
+Got EOS from element "pipeline0".
+EOS received - stopping pipeline...
+Execution ended after 0:00:06.432407942
+Setting pipeline to PAUSED ...
+Setting pipeline to READY ...
+Setting pipeline to NULL ...
+Freeing pipeline ...
+
+# Can change rate 
+lefv2603@lefv2603-jetsonnano:~$ GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150945.mp4 ! tee ! qtdemux ! queue name=q1 ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)720, height=(int)1280, framerate=(fraction)30/1' ! nvvidconv ! videorate ! videoscale ! 'video/x-raw, format=(string)NV12, width=(int)720, height=(int)1280, framerate=(fraction)5/1' ! videoconvert ! tee ! queue ! v4l2sink device=/dev/video1
+
+# and producer will show
+
+# Works with format BGRx, YUYV
+lefv2603@lefv2603-jetsonnano:~$ GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150945.mp4 ! tee ! qtdemux ! queue name=q1 ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)720, height=(int)1280, framerate=(fraction)5/1' ! nvvidconv ! videorate ! videoscale ! 'video/x-raw, format=(string)BGRx, width=(int)480, height=(int)640, framerate=(fraction)30/1' ! videoconvert ! tee ! queue ! v4l2sink device=/dev/video1
+
+#####
+
+### FINALLY WORKS WITH SEGMENTATION !
+lefv2603@lefv2603-jetsonnano:~$ GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150945.mp4 ! tee ! qtdemux ! queue name=q1 ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)720, height=(int)1280, framerate=(fraction)60/1' ! nvvidconv ! videorate ! videoscale ! 'video/x-raw, format=(string)I420, width=(int)480, height=(int)640, framerate=(fraction)30/1' ! tee ! decodebin ! videoconvert ! videoscale ! "video/x-raw,format=(string)RGB,width=(int)1280,heigth=(int)720" ! v4l2sink device=/dev/video1
+
+lefv2603@lefv2603-jetsonnano:~$ ~/projects/dusty-nv/jetson-inference/build/aarch64/bin/segnet-camera --camera=/dev/video1 --network=fcn-resnet18-deepscene --visualize=mask --alpha=255
+
+
+lefv2603@lefv2603-jetsonnano:~$ v4l2-ctl -d 1 --all 
+Driver Info (not using libv4l2):
+	Driver name   : v4l2 loopback
+	Card type     : Dummy video device (0x0000)
+	Bus info      : platform:v4l2loopback-000
+	Driver version: 4.9.140
+	Capabilities  : 0x85208003
+		Video Capture
+		Video Output
+		Video Memory-to-Memory
+		Read/Write
+		Streaming
+		Extended Pix Format
+		Device Capabilities
+	Device Caps   : 0x85208003
+		Video Capture
+		Video Output
+		Video Memory-to-Memory
+		Read/Write
+		Streaming
+		Extended Pix Format
+		Device Capabilities
+Priority: 0
+Video input : 0 (loopback: ok)
+Video output: 0 (loopback in)
+Format Video Output:
+	Width/Height      : 1280/640
+	Pixel Format      : 'RGB3'
+	Field             : None
+	Bytes per Line    : 3840
+	Size Image        : 2457600
+	Colorspace        : sRGB
+	Transfer Function : sRGB
+	YCbCr/HSV Encoding: Default (maps to ITU-R 601)
+	Quantization      : Full Range
+	Flags             : 
+Streaming Parameters Video Capture:
+	Frames per second: 30.000 (30/1)
+	Read buffers     : 8
+Streaming Parameters Video Output:
+	Frames per second: 30.000 (30/1)
+	Write buffers    : 8
+
+User Controls
+
+                    keep_format 0x0098f900 (bool)   : default=0 value=0
+              sustain_framerate 0x0098f901 (bool)   : default=0 value=0
+                        timeout 0x0098f902 (int)    : min=0 max=100000 step=1 default=0 value=0
+               timeout_image_io 0x0098f903 (bool)   : default=0 value=0
+lefv2603@lefv2603-jetsonnano:~$ 
+```
