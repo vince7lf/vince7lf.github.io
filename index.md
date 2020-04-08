@@ -1403,3 +1403,12 @@ User Controls
                timeout_image_io 0x0098f903 (bool)   : default=0 value=0
 lefv2603@lefv2603-jetsonnano:~$ 
 ```
+
+### Kill the segmentation process
+L'inférence ne détecte pas lorsque la vidéo est terminée. Il faut tuer ("killer") le process. Une commande ext exécuté tout de suite  la suite de la fin de la lecture de la vidéo pour arrêter l'inférence.
+
+Voici le script:
+```
+#!/bin/sh
+myvar=$(ps -ef | grep deepscene); echo "$myvar" | if [ "$(wc -l)" -gt 1 ]; then kill -9 $(echo "$myvar" | awk -F" " 'NR==1{print $2}'); else echo "deepscene not running"; fi
+```
