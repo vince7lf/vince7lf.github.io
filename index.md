@@ -1476,7 +1476,7 @@ while getopts d:w:h:f:l: opt ; do
   esac
 done
 
-# source (or .) to execute a shell script in the same proce4ss, keeping and sharing the env var. 
+# source (or .) to execute a shell script in the same process, keeping and sharing the env var. 
 source /home/lefv2603/init.sh 
 
 GST_DEBUG=${DEBUG} gst-launch-1.0 --gst-debug -v filesrc location=${LOCATION} ! qtdemux ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! videorate ! videoscale ! "video/x-raw(memory:NVMM), format=(string)NV12, width=(int)${WIDTH}, height=(int)${HEIGHT}, framerate=(fraction)${FPS}" ! nvvidconv ! videorate ! videoscale ! "video/x-raw, format=(string)I420, width=(int)${WIDTH}, height=(int)${HEIGHT}, framerate=(fraction)${FPS}" ! decodebin ! videoconvert ! videoscale ! "video/x-raw,format=(string)RGB,width=(int)${WIDTH},heigth=(int)${HEIGHT}" ! v4l2sink device=/dev/video1 &
