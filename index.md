@@ -1415,7 +1415,23 @@ myvar=$(ps -ef | grep deepscene); echo "$myvar" | if [ "$(wc -l)" -gt 1 ]; then 
 
 ## Résultats 
 
-J'ai tenté de capturer le résultat (vidéos/images) de l'inférence directement depuis le nano, mais ce n'est pas une bonne idée car trop intrusif. Cela ralenti l'inférence. Il y a en fait deux images qui sont produites par le network: overlay et mask, qui sont directement "rendered" dans un XWindow.
+J'ai tenté de capturer le résultat (vidéos/images) de l'inférence directement depuis le nano, mais ce n'est pas une bonne idée car trop intrusif. Cela ralenti l'inférence. Il y a en fait deux images qui sont produites par le network: overlay et mask, qui sont directement "rendered" dans un XWindow (voir segnet-camera.py et glDisplay.cpp).
+
+segnet-camera.py
+```
+	...
+	# render the images
+	display.BeginRender()
+	display.Render(img_overlay, width, height)
+	display.Render(img_mask, width/2, height/2, width)
+
+        # save images separately to create a video of it
+        # file_out = "/home/lefv2603/Downloads/segnet-camera/capture_img_" + str(i).zfill(3 + len(str(i))) + ".jpg"
+	# jetson.utils.saveImageRGBA(file_out, img_overlay, width, height)
+
+	display.EndRender()
+	...
+```
  
 J'ai filmé mon écran avec mon cellulaire. Cela produit une vidéo HD 1080p 30FPS.
  
@@ -1430,7 +1446,7 @@ Les vidéos sont sur Teams et sharepoints
 * Sharepoints: <https://usherbrooke.sharepoint.com/sites/ProjetVisionMto/Documents%20partages/General/projet_visionmeteo/videos/gae724_lefv2603/resultats>
 
 ### Indicateurs de performance
-Concernant les indicateurs que je pensais collecter pour mesurer et comparer les performances, pour l'instant j'ai le "visuel" (vidéo), le system monitor pour un visuel rapide et "live", et les "tegrastats" qui sont pas mal complètes (RAM, swap, fréquence & température CPU et GPU).   
+Concernant les indicateurs que je pensais collecter pour mesurer et comparer les performances, pour l'instant j'ai le "visuel" (vidéo avec overlay et mask), le system monitor de Ubuntu pour un visuel rapide et "live", et les "tegrastats" qui sont pas mal complètes (RAM, swap, fréquence & température CPU et GPU).   
 
 <https://docs.nvidia.com/jetson/l4t/index.html#page/Tegra%2520Linux%2520Driver%2520Package%2520Development%2520Guide%2FAppendixTegraStats.html%23wwpID0E0SB0HA>
 
