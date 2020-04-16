@@ -1439,8 +1439,8 @@ Concernant les indicateurs que je pensais collecter pour mesurer et comparer les
 
 ### Scripts
 * Run video producer (mp4 from Samsung S8 1080p 60FPS) and inference (resnet18 + deepscene)
-* kill inference when producer ends
-* in batch: 60FPS, 30FPS, 15FPS, 1FPS and 720x1280, 480x640, 320x480, 240x320
+* Kill inference when producer ends
+* In batch: 60FPS, 30FPS, 15FPS, 1FPS and 720x1280, 480x640, 320x480, 240x320
 
 run_deepscene.sh
 ```
