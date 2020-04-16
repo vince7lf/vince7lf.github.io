@@ -1063,7 +1063,8 @@ $ ./segnet-camera --camera=/dev/video1 --network=fcn-resnet18-cityscapes --visua
 > $ kill -9 31864 31865
 > ```
 
-### en progres... jouer une vidéo prise avec mobile Samsung S8 60FPS
+### en cours... 
+jouer une vidéo prise avec mobile Samsung S8 60FPS
 ```
 gst-launch-1.0 -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)1080, height=(int)1920, framerate=(fraction)60/1' ! nvvidconv ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)1080, height=(int)1920, framerate=(fraction)60/1' ! nvv4l2h264enc ! h264parse ! v4l2sink device=/dev/video1
 
@@ -1109,7 +1110,7 @@ Reference: <https://syonyk.blogspot.com/2019/04/benchmarking-nvidia-jetson-nano.
 <https://towardsdatascience.com/a-bunch-of-tips-and-tricks-for-training-deep-neural-networks-3ca24c31ddc8>
 
 
-# Notes
+## Notes
 ```
 # works ... but sink to nv3dsink
 GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! qtdemux ! queue ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! 'video/x-raw(memory:NVMM), format=(string)NV12' ! nv3dsink -e
@@ -1404,7 +1405,7 @@ User Controls
 lefv2603@lefv2603-jetsonnano:~$ 
 ```
 
-### Arrêter l'inférence
+## Arrêter l'inférence
 L'inférence ne détecte pas lorsque la vidéo est terminée. Il faut tuer ("killer") le process. Une commande ext exécuté tout de suite  la suite de la fin de la lecture de la vidéo pour arrêter l'inférence.
 
 Voici le script:
