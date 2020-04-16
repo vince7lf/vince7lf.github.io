@@ -1412,3 +1412,132 @@ Voici le script:
 #!/bin/sh
 myvar=$(ps -ef | grep deepscene); echo "$myvar" | if [ "$(wc -l)" -gt 1 ]; then kill -9 $(echo "$myvar" | awk -F" " 'NR==1{print $2}'); else echo "deepscene not running"; fi
 ```
+
+## Résultats 
+
+J'ai tenté de capturer le résultat (vidéos/images) de l'inférence directement depuis le nano, mais ce n'est pas une bonne idée car trop intrusif. Cela ralenti l'inférence. Il y a en fait deux images qui sont produites par le network: overlay et mask, qui sont directement "rendered" dans un XWindow.
+ 
+J'ai filmé mon écran avec mon cellulaire. Cela produit une vidéo HD 1080p 30FPS.
+ 
+Voici une petite description des vidéos:
+
+* 20200221_020044.mp4: inférence en 30FPS 1920x1080 avec le "network" "fcn-resnet18-deepscene-576x320";
+
+* 20200412_232155.mp4: (+8min / 800Mb) une seule vidéo  qui montre successivement l'inférence de 60 / 30 / 15 / 1 FPS en 720x1280 / 480x640 / 320x480 / 240x320. Le "network" est "fcn-resnet18-deepscene-576x320". Il semble être limité à 26FPS et 576x320. <https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-console-2.md>
+
+Les vidéos sont sur Teams et sharepoints
+* Teams: <https://teams.microsoft.com/_#/school/files/General?threadId=19%3Ab84a37bfaa8d417b9f297af3860e22c6%40thread.skype&ctx=channel&context=resultats&rootfolder=%252Fsites%252FProjetVisionMto%252FDocuments%2520partages%252FGeneral%252Fprojet_visionmeteo%252Fvideos%252Fgae724_lefv2603%252Fresultats>
+* Sharepoints: <https://usherbrooke.sharepoint.com/sites/ProjetVisionMto/Documents%20partages/General/projet_visionmeteo/videos/gae724_lefv2603/resultats>
+
+### Indicateurs de performance
+Concernant les indicateurs que je pensais collecter pour mesurer et comparer les performances, pour l'instant j'ai le "visuel" (vidéo), le system monitor pour un visuel rapide et "live", et les "tegrastats" qui sont pas mal complètes (RAM, swap, fréquence & température CPU et GPU).   
+
+<https://docs.nvidia.com/jetson/l4t/index.html#page/Tegra%2520Linux%2520Driver%2520Package%2520Development%2520Guide%2FAppendixTegraStats.html%23wwpID0E0SB0HA>
+
+> _Exemple_
+> RAM 2072/3956MB (lfb 1x2MB) SWAP 893/1978MB (cached 35MB) IRAM 0/252kB(lfb 252kB) CPU [3%@1479,2%@1479,3%@1479,2%@1479] EMC_FREQ 3%@1600 GR3D_FREQ 0%@921 APE 25 PLL@22.5C CPU@24.5C PMIC@100C GPU@24C AO@31C thermal@24C POM_5V_IN 2159/3257 POM_5V_GPU 124/557 POM_5V_CPU 332/657
+
+### Scripts
+#### Run video producer (mp4 from Samsung S8 1080p 60FPS) and inference (resnet18 + deepscene), + kill inference when producer ends
+run_deepscene.sh
+```
+#!/bin/bash
+
+usage () { echo "Usage : $0 -d <--debug=[1*|2|3|4|5]> -w <--width=[240|320|480|720*|768|800|832|864|1024|1152|1280]> -h <--height=[240|320|480|720|768|800|832|864|1024|1152|1280*]> -f <--fps=1..30..60*/1> -l <--location=/home/lefv2603/projects/gae724/videos/20200308/20200308_152338.mp4>"; }
+
+DEBUG=1
+WIDTH=240   #320o 480o 720o (720p) 768o  832x  768x  800x  864x  900x  960x 1080x(1080p)
+HEIGHT=320 #576o 640o 1280o       1024o 1120x 1280x 1280x 1152x 1280x 1600x 1920x
+# 
+# works (320,576), (480,640), (720,1280), (768,1024), (768x1152), (800,1152), (832,1024), (864,1024)
+# does not work (832,1120), (832,1152), (768,1280), (800,1280), (864,1152), (900,1152), (900,1280), (960,1600), (1080,1920), (1024,1024)
+FPS=60/1
+LOCATION="/home/lefv2603/projects/gae724/videos/20200308/20200308_152338.mp4"
+#LOCATION="/home/lefv2603/projects/gae724/videos/20200308/20200308_150945.mp4"
+BITRATE=28000000 # 28026 kbps futur use
+
+#if [ $# -ne 5 ]
+#then
+  #usage
+  #exit 1
+#fi
+
+while getopts d:w:h:f:l: opt ; do
+  case $opt in
+    d) DEBUG=$OPTARG ;;
+    w) WIDTH=$OPTARG ;;
+    h) HEIGHT=$OPTARG ;;
+    f) FPS=$OPTARG ;;
+    l) LOCATION=$OPTARG ;;
+    #*) usage; exit 1;;
+  esac
+done
+
+# source (or .) to execute a shell script in the same proce4ss, keeping and sharing the env var. 
+source /home/lefv2603/init.sh 
+
+GST_DEBUG=${DEBUG} gst-launch-1.0 --gst-debug -v filesrc location=${LOCATION} ! qtdemux ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! videorate ! videoscale ! "video/x-raw(memory:NVMM), format=(string)NV12, width=(int)${WIDTH}, height=(int)${HEIGHT}, framerate=(fraction)${FPS}" ! nvvidconv ! videorate ! videoscale ! "video/x-raw, format=(string)I420, width=(int)${WIDTH}, height=(int)${HEIGHT}, framerate=(fraction)${FPS}" ! decodebin ! videoconvert ! videoscale ! "video/x-raw,format=(string)RGB,width=(int)${WIDTH},heigth=(int)${HEIGHT}" ! v4l2sink device=/dev/video1 &
+
+pids="$!"
+
+#~/projects/dusty-nv/jetson-inference/build/aarch64/bin/segnet-camera --camera=/dev/video1 --network=fcn-resnet18-deepscene-864x480 --visualize=mask --alpha=255 &
+~/projects/dusty-nv/jetson-inference/build/aarch64/bin/segnet-camera.py --camera=/dev/video1 --network=fcn-resnet18-deepscene-576x320 --visualize=mask --alpha=255 &
+
+wait $pids || { echo "there were errors" >&2; exit 1; }
+source /home/lefv2603/kill_deepscene.sh
+```
+
+kill_deepscene
+```
+#!/bin/bash
+
+usage () { echo "Usage : $0 -n <--NR=[1|2*]>"; } 
+
+# line number returned by the ps -ef | grep command, matching the process running
+if [ -z "${NR}" ]; then 
+  NR=1 # defaut if the second line if run by parent process
+fi
+
+
+while getopts n: opt ; do
+  case $opt in
+    n) NR=$OPTARG ;;
+    #*) usage; exit 1;;
+  esac
+done
+
+echo "NR=${NR}"
+
+myvar=$(ps -ef | grep -e "fcn-resnet18-deepscene"); echo "$myvar" | if [ "$(wc -l)" -gt 1 ]; then kill -9 $(echo "$myvar" | awk -F" " -vnr="${NR}" 'NR==nr {print $2}'); else echo "deepscene not running"; fi
+```
+
+run_deepscene_batch.sh
+```
+#!/bin/bash
+#
+
+DEBUG=1
+#WIDTH=("240" "320" "480" "640" "720")
+WIDTH=("720" "480" "320" "240")
+#WIDTH=("720" "480")
+#HEIGHT=("320" "480" "640" "720" "1280")
+HEIGHT=("1280" "640" "480" "320")
+#FPS=("1/1" "15/1" "30/1" "60/1")
+FPS=("60/1" "30/1" "15/1" "1/1")
+#FPS=("60/1")
+LOCATION="/home/lefv2603/projects/gae724/videos/20200308/20200308_150241.mp4"
+
+echo -e "" > /tmp/run_deepscene_batch.trace
+#
+for fps in "${FPS[@]}"; do
+  echo "FPS is ${fps}" | tee -a /tmp/run_deepscene_batch.trace
+  for idx in "${!WIDTH[@]}"; do
+    width=${WIDTH[${idx}]}
+    height=${HEIGHT[${idx}]}
+    echo "WIDTHxHEIGTH is \"${width}\"x\"${height}\"" | tee -a /tmp/run_deepscene_batch.trace
+    source /home/lefv2603/run_deepscene.sh -d "${DEBUG}" -w "${width}" -h "${height}" -f "${fps}" -l "${LOCATION}" &
+    pid="$!"
+    wait $pid || { echo "there were errors" >&2; exit 1; }
+  done 
+done
+```
