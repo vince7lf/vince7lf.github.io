@@ -1454,6 +1454,18 @@ Concernant les indicateurs que je pensais collecter pour mesurer et comparer les
 > _Exemple_
 > RAM 2072/3956MB (lfb 1x2MB) SWAP 893/1978MB (cached 35MB) IRAM 0/252kB(lfb 252kB) CPU [3%@1479,2%@1479,3%@1479,2%@1479] EMC_FREQ 3%@1600 GR3D_FREQ 0%@921 APE 25 PLL@22.5C CPU@24.5C PMIC@100C GPU@24C AO@31C thermal@24C POM_5V_IN 2159/3257 POM_5V_GPU 124/557 POM_5V_CPU 332/657
 
+#### Notes 
+
+classification par ommission
+matrice de confusion
+nb pixel vs mal segmenté
+
+image surestime / sous-estime classe
+
+outil pour évaluer si la piste a été détecté raisonnablement
+
+gae722 stage allité
+
 ### Scripts
 * Run video producer (mp4 from Samsung S8 1080p 60FPS) and inference (resnet18 + deepscene)
 * Kill inference when producer ends
