@@ -304,7 +304,10 @@ Une nouvelle fenêtre apparait avec la vidéo de la caméra.
 A noter que le nombre de frame est 21/1 dans l'exemple. Pour augmenter le nombre de frame, il faut diminuer la résolution. Voir plus bas. 
 
 Pour les détails de la ligne de dommande et l'utilisation de GStreamer, il faut se référer au guide suivant. GStreamer est l'outil qui est préconisé par NVidia (vs ffmpeg) afin de profiter des GPUs.  
-<https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Accelerated_GStreamer_User_Guide.pdf>
+* <https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Accelerated_GStreamer_User_Guide.pdf>
+
+Introduction au jargon et à la fondation de GStreamer:
+* <https://gstreamer.freedesktop.org/documentation/application-development/introduction/basics.html?gi-language=c>
 
 ### Résolutions x FPS supportés par la caméra
 Référence: <https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-camera-2.md>
