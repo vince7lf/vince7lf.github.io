@@ -102,8 +102,9 @@ python train.py -a fcn_resnet101 --dataset deepscene --model-dir ./model_output 
 ### Entrainement pour segnet18
 #### Préparation 
 * Il faut télécharger en avance le model déjà entrainé et le copier sur le serveur de Compute Canada, car depuis le serveur de Compute Canada le téléchargement est impossible
-# to train with segnet18, segnet18 requires resnet18-5c106cde.pth
+
 ```
+# to train with segnet18, segnet18 requires resnet18-5c106cde.pth
 # download from jetson nano
 lefv2603@lefv2603-jetsonnano:~/projects/dusty-nv/jetson-inference$ wget https://download.pytorch.org/models/resnet18-5c106cde.pth
 
