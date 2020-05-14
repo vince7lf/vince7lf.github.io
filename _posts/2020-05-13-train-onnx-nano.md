@@ -15,14 +15,16 @@ tar xvf freiburg_forest_multispectral_annotated.tar.gz
 ```
 
 ## Préparation de l'environnement d'entrainement (Compute Canada)
-* session interactive 
-* Python 2.7 cuda 10.0
-* Environnement Python virtuel  
-* installation des modules python requis
+### session interactive 
 ```
 # start the interactive resource alllocation; time consuming; have to wait for resource available; can take 5-10-15 minutes
 salloc --account=def-germ2201-ab --gres=gpu:1 --cpus-per-task=10 --mem=48000M --time=0-3:00
-
+```
+### Environnement virtuel Python
+* Python 2.7 cuda 10.0
+* Création de l'environnement Python virtuel
+* Installation des modules Python requis
+```
 # load modules python 2.7 and cuda 10.1. torchvision requires 10.1. 
 # module load python/2.7 cuda/10.1 cudnn
 module load python/2.7 cuda/10.0 cudnn
