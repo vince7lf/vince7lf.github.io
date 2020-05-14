@@ -70,7 +70,7 @@ git clone https://github.com/dusty-nv/pytorch-segmentation.git
 #           https://github.com/dusty-nv/vision/tree/v0.3.0
 ```
 ## Compilation de torchvision avec la même version du compilateur que pytorch
-> __NOTE IMPORTANTE__: il est important d'avoir la même version de CUDA entre Pytorch et TochVision. La commande `nvcc --version` donne la version du compilateur CUDA qui sera utilisé pour la compilation de torchvision, et qui doit être la même que celle qui a été utilisé par PyTorch. 
+> __NOTE IMPORTANTE__: il est important d'avoir la même version de CUDA entre Pytorch et TochVision. La commande `nvcc --version` donne la version du compilateur CUDA qui sera utilisé pour la compilation de torchvision, et qui doit être la même que celle qui a été utilisée par PyTorch. 
 
 ```
 cd ~/vision-0.3.0-dusty-ng
@@ -78,9 +78,8 @@ rm -rf build/
 python setup.py build install
 
 # run some torchvision test
-python test/test_models.py 
-
 # if it fails here... not good. bloqued. 
+python test/test_models.py 
 ```
 
 ## Prépare les images de la forêt de Freiburg pour le modèle 
