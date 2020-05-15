@@ -10,7 +10,13 @@ $ dpkg -l | grep TensorRT
 Pour Cuda (compilateur nvcc)
 nvcc --version
 ```
-
+* Au besoin isntaller uine Jeppack approprié. Par contre il faut aller voir dans le Jetpack quel version de TensorRT et Cuda est incluse. 
+  * <https://developer.nvidia.com/embedded/jetpack>
+  * <https://developer.nvidia.com/embedded/jetpack-archive>
+  * <https://developer.nvidia.com/embedded/linux-tegra-r321>
+  
+* il y a un forum pour AI & DeepLearning chez NVidia
+<https://forums.developer.nvidia.com/c/ai-deep-learning/86>
 
 ## Dataset deepscene freiburg_forest_multispectral_annotated 
 * Téléchargement des données annotées de la forêt de Freiburg
