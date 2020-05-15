@@ -2,12 +2,51 @@
 
 ## pre-requis: 
 * valider que l'environnement d'entrainement et de creation de l'ONNX (Compute Canada) est compatible avec l'exécution de l'inférence ONNX sur le Jetson (version de tensorRT + CUDA)
-Sur le Jetson nano, pour vérifier la version de tensorRT et cuda: 
+Sur le Jetson nano, il est possible de vérifier quelles sont les version de tensorRT et cuda. 
+Pour TensorRT: 
 ```
-Pour tensorRT
-$ dpkg -l | grep TensorRT
+dpkg -l | grep TensorRT
+ou 
+dpkg -l | grep nvinfer
 
+lefv2603@lefv2603-jetsonnano:~$ dpkg -l | grep nvinfer
+ii  libnvinfer-bin                                6.0.1-1+cuda10.0                                 arm64        TensorRT binaries
+ii  libnvinfer-dev                                6.0.1-1+cuda10.0                                 arm64        TensorRT development libraries and headers
+ii  libnvinfer-doc                                6.0.1-1+cuda10.0                                 all          TensorRT documentation
+ii  libnvinfer-plugin-dev                         6.0.1-1+cuda10.0                                 arm64        TensorRT plugin libraries
+ii  libnvinfer-plugin6                            6.0.1-1+cuda10.0                                 arm64        TensorRT plugin libraries
+ii  libnvinfer-samples                            6.0.1-1+cuda10.0                                 all          TensorRT samples
+ii  libnvinfer6                                   6.0.1-1+cuda10.0                                 arm64        TensorRT runtime libraries
+ii  python-libnvinfer                             6.0.1-1+cuda10.0                                 arm64        Python bindings for TensorRT
+ii  python-libnvinfer-dev                         6.0.1-1+cuda10.0                                 arm64        Python development package for TensorRT
+ii  python3-libnvinfer                            6.0.1-1+cuda10.0                                 arm64        Python 3 bindings for TensorRT
+ii  python3-libnvinfer-dev                        6.0.1-1+cuda10.0                                 arm64        Python 3 development package for TensorRT
+
+lefv2603@lefv2603-jetsonnano:~$ dpkg -l | grep TensorRT
+ii  graphsurgeon-tf                               6.0.1-1+cuda10.0                                 arm64        GraphSurgeon for TensorRT package
+ii  libnvinfer-bin                                6.0.1-1+cuda10.0                                 arm64        TensorRT binaries
+ii  libnvinfer-dev                                6.0.1-1+cuda10.0                                 arm64        TensorRT development libraries and headers
+ii  libnvinfer-doc                                6.0.1-1+cuda10.0                                 all          TensorRT documentation
+ii  libnvinfer-plugin-dev                         6.0.1-1+cuda10.0                                 arm64        TensorRT plugin libraries
+ii  libnvinfer-plugin6                            6.0.1-1+cuda10.0                                 arm64        TensorRT plugin libraries
+ii  libnvinfer-samples                            6.0.1-1+cuda10.0                                 all          TensorRT samples
+ii  libnvinfer6                                   6.0.1-1+cuda10.0                                 arm64        TensorRT runtime libraries
+ii  libnvonnxparsers-dev                          6.0.1-1+cuda10.0                                 arm64        TensorRT ONNX libraries
+ii  libnvonnxparsers6                             6.0.1-1+cuda10.0                                 arm64        TensorRT ONNX libraries
+ii  libnvparsers-dev                              6.0.1-1+cuda10.0                                 arm64        TensorRT parsers libraries
+ii  libnvparsers6                                 6.0.1-1+cuda10.0                                 arm64        TensorRT parsers libraries
+ii  nvidia-container-csv-tensorrt                 6.0.1.10-1+cuda10.0                              arm64        Jetpack TensorRT CSV file
+ii  python-libnvinfer                             6.0.1-1+cuda10.0                                 arm64        Python bindings for TensorRT
+ii  python-libnvinfer-dev                         6.0.1-1+cuda10.0                                 arm64        Python development package for TensorRT
+ii  python3-libnvinfer                            6.0.1-1+cuda10.0                                 arm64        Python 3 bindings for TensorRT
+ii  python3-libnvinfer-dev                        6.0.1-1+cuda10.0                                 arm64        Python 3 development package for TensorRT
+ii  tensorrt                                      6.0.1.10-1+cuda10.0                              arm64        Meta package of TensorRT
+ii  uff-converter-tf                              6.0.1-1+cuda10.0                                 arm64        UFF converter for TensorRT package
+lefv2603@lefv2603-jetsonnano:~$ 
+
+```
 Pour Cuda (compilateur nvcc)
+```
 nvcc --version
 ```
 * Au besoin isntaller uine Jeppack approprié. Par contre il faut aller voir dans le Jetpack quel version de TensorRT et Cuda est incluse. 
