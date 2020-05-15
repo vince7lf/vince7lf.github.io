@@ -18,6 +18,83 @@ nvcc --version
 * il y a un forum pour AI & DeepLearning chez NVidia
 <https://forums.developer.nvidia.com/c/ai-deep-learning/86>
 
+## tester le ONNX avec trtexec
+References: 
+* <https://forums.developer.nvidia.com/t/where-is-trtexec/73514>
+* <https://github.com/NVIDIA/TensorRT/issues/148>
+* <https://forums.developer.nvidia.com/t/tensorrt-cannot-use-precision-int32-with-weights-of-type-float/122490>
+
+Il y a un utilitaire trtexec qui vient avec tensorRT. Par contre il faut le compiler
+```
+cd /usr/src/tensorrt/samples/trtexec/
+sudo make
+```
+L'executable est dans /usr/src/tensorrt/bin/trtexec
+```
+lefv2603@lefv2603-jetsonnano:~/projects/dusty-nv/jetson-inference$ /usr/src/tensorrt/bin/trtexec --onnx=/home/lefv2603/projects/dusty-nv/pytorch-segmentation-master/resnet18-vlf.onnx --explicitBatch
+&&&& RUNNING TensorRT.trtexec # /usr/src/tensorrt/bin/trtexec --onnx=/home/lefv2603/projects/dusty-nv/pytorch-segmentation-master/resnet18-vlf.onnx --explicitBatch
+[04/14/2020-22:02:03] [I] === Model Options ===
+[04/14/2020-22:02:03] [I] Format: ONNX
+[04/14/2020-22:02:03] [I] Model: /home/lefv2603/projects/dusty-nv/pytorch-segmentation-master/resnet18-vlf.onnx
+[04/14/2020-22:02:03] [I] Output:
+[04/14/2020-22:02:03] [I] === Build Options ===
+[04/14/2020-22:02:03] [I] Max batch: explicit
+[04/14/2020-22:02:03] [I] Workspace: 16 MB
+[04/14/2020-22:02:03] [I] minTiming: 1
+[04/14/2020-22:02:03] [I] avgTiming: 8
+[04/14/2020-22:02:03] [I] Precision: FP32
+[04/14/2020-22:02:03] [I] Calibration: 
+[04/14/2020-22:02:03] [I] Safe mode: Disabled
+[04/14/2020-22:02:03] [I] Save engine: 
+[04/14/2020-22:02:03] [I] Load engine: 
+[04/14/2020-22:02:03] [I] Inputs format: fp32:CHW
+[04/14/2020-22:02:03] [I] Outputs format: fp32:CHW
+[04/14/2020-22:02:03] [I] Input build shapes: model
+[04/14/2020-22:02:03] [I] === System Options ===
+[04/14/2020-22:02:03] [I] Device: 0
+[04/14/2020-22:02:03] [I] DLACore: 
+[04/14/2020-22:02:03] [I] Plugins:
+[04/14/2020-22:02:03] [I] === Inference Options ===
+[04/14/2020-22:02:03] [I] Batch: Explicit
+[04/14/2020-22:02:03] [I] Iterations: 10 (200 ms warm up)
+[04/14/2020-22:02:03] [I] Duration: 10s
+[04/14/2020-22:02:03] [I] Sleep time: 0ms
+[04/14/2020-22:02:03] [I] Streams: 1
+[04/14/2020-22:02:03] [I] Spin-wait: Disabled
+[04/14/2020-22:02:03] [I] Multithreading: Enabled
+[04/14/2020-22:02:03] [I] CUDA Graph: Disabled
+[04/14/2020-22:02:03] [I] Skip inference: Disabled
+[04/14/2020-22:02:03] [I] === Reporting Options ===
+[04/14/2020-22:02:03] [I] Verbose: Disabled
+[04/14/2020-22:02:03] [I] Averages: 10 inferences
+[04/14/2020-22:02:03] [I] Percentile: 99
+[04/14/2020-22:02:03] [I] Dump output: Disabled
+[04/14/2020-22:02:03] [I] Profile: Disabled
+[04/14/2020-22:02:03] [I] Export timing to JSON file: 
+[04/14/2020-22:02:03] [I] Export profile to JSON file: 
+[04/14/2020-22:02:03] [I] 
+----------------------------------------------------------------
+Input filename:   /home/lefv2603/projects/dusty-nv/pytorch-segmentation-master/resnet18-vlf.onnx
+ONNX IR version:  0.0.4
+Opset version:    9
+Producer name:    pytorch
+Producer version: 1.3
+Domain:           
+Model version:    0
+Doc string:       
+----------------------------------------------------------------
+WARNING: ONNX model has a newer ir_version (0.0.4) than this parser was built against (0.0.3).
+WARNING: Your ONNX model has been generated with INT64 weights, while TensorRT does not natively support INT64. Attempting to cast down to INT32.
+Successfully casted down to INT32.
+While parsing node number 2 [Gather]:
+ERROR: onnx2trt_utils.hpp:347 In function convert_axis:
+[8] Assertion failed: axis >= 0 && axis < nbDims
+[04/14/2020-22:02:18] [E] Failed to parse onnx file
+[04/14/2020-22:02:18] [E] Parsing model failed
+[04/14/2020-22:02:18] [E] Engine could not be created
+&&&& FAILED TensorRT.trtexec # /usr/src/tensorrt/bin/trtexec --onnx=/home/lefv2603/projects/dusty-nv/pytorch-segmentation-master/resnet18-vlf.onnx --explicitBatch
+```
+
 ## Dataset deepscene freiburg_forest_multispectral_annotated 
 * Téléchargement des données annotées de la forêt de Freiburg
 ```
