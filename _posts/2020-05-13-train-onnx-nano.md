@@ -1,5 +1,17 @@
 # Ré-entraine les models disponibles pour le Jetson-Nano, et exportation vers ONNX pour l'inférence
 
+## pre-requis: 
+* valider que l'environnement d'entrainement et de creation de l'ONNX (Compute Canada) est compatible avec l'exécution de l'inférence ONNX sur le Jetson (version de tensorRT + CUDA)
+Sur le Jetson nano, pour vérifier la version de tensorRT et cuda: 
+```
+Pour tensorRT
+$ dpkg -l | grep TensorRT
+
+Pour Cuda (compilateur nvcc)
+nvcc --version
+```
+
+
 ## Dataset deepscene freiburg_forest_multispectral_annotated 
 * Téléchargement des données annotées de la forêt de Freiburg
 ```
