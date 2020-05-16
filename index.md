@@ -228,11 +228,11 @@ Une autre option pour installer pytorch sur le Jetson Nano est d'utiliser le sit
 
 * Compiler le projet; cette étape prend 3-5 minutes
 ```
-$ cd jetson-inference/build
-$ make
-$ make -j$(nproc)
-$ sudo make install
-$ sudo ldconfig
+cd jetson-inference/build
+make
+make -j$(nproc)
+sudo make install
+sudo ldconfig
 ```
 >
 
