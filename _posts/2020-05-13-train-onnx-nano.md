@@ -3,6 +3,7 @@
 ## pre-requis: 
 * valider que l'environnement d'entrainement et de creation de l'ONNX (Compute Canada) est compatible avec l'exécution de l'inférence ONNX sur le Jetson (version de tensorRT + CUDA)
 Sur le Jetson nano, il est possible de vérifier quelles sont les version de tensorRT et cuda. 
+Reference de compatibilite TensorRT: <https://docs.nvidia.com/deeplearning/tensorrt/release-notes/tensorrt-5.html>
 Pour TensorRT: 
 ```
 dpkg -l | grep TensorRT
