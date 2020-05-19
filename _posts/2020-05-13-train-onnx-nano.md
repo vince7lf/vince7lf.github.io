@@ -3,6 +3,7 @@
 ## Pré-requis: 
 * code non compatible avec Python 3
 Le code de pytorch-segmentation-master n'est pas compatible avec Python 3. Il faut exécuter l'entrainement avec Python 2.7.
+Il ne faut pas utiliser le module tensorrt car il force Python 3. Utiliser le module tensorrt une fois que l'entrainement est complété. 
 ```
 (env) [vincelf@blg4107 vision-0.3.0-dusty-ng]$ cd ~/pytorch-segmentation-master
 (env) [vincelf@blg4107 pytorch-segmentation-master]$ python train.py -a fcn_resnet18 --dataset deepscene --model-dir ./model_output --dist-url 'tcp://127.0.0.1:5556' /home/vincelf/downloads/freiburg_forest_annotated
