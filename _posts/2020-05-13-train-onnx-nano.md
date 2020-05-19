@@ -1,6 +1,21 @@
 # Ré-entraine les models disponibles pour le Jetson-Nano, et exportation vers ONNX pour l'inférence
 
 ## Pré-requis: 
+* code non compatible avec Python 3
+Le code de pytorch-segmentation-master n'est pas compatible avec Python 3. Il faut exécuter l'entrainement avec Python 2.7.
+```
+(env) [vincelf@blg4107 vision-0.3.0-dusty-ng]$ cd ~/pytorch-segmentation-master
+(env) [vincelf@blg4107 pytorch-segmentation-master]$ python train.py -a fcn_resnet18 --dataset deepscene --model-dir ./model_output --dist-url 'tcp://127.0.0.1:5556' /home/vincelf/downloads/freiburg_forest_annotated
+pytorch-segmentation/datasets/__init__.py
+Traceback (most recent call last):
+  File "train.py", line 24, in <module>
+    from datasets.cityscapes_utils import get_cityscapes
+  File "/home/vincelf/pytorch-segmentation-master/datasets/cityscapes_utils.py", line 18
+    print self.classes
+             ^
+SyntaxError: Missing parentheses in call to 'print'. Did you mean print(print self.classes)?
+(env) [vincelf@blg4107 pytorch-segmentation-master]$ vi /home/vincelf/pytorch-segmentation-master/datasets/cityscapes_utils.py
+```
 * valider que l'environnement d'entrainement et de creation de l'ONNX (Compute Canada) est compatible avec l'exécution de l'inférence ONNX sur le Jetson (version de tensorRT + CUDA).
 
 ### Jetson nano
