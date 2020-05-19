@@ -228,9 +228,9 @@ salloc --account=def-germ2201-ab --gres=gpu:1 --cpus-per-task=10 --mem=48000M --
 ```
 # load modules python 2.7 and cuda 10.1. torchvision requires 10.1. 
 # module load python/2.7 cuda/10.1 cudnn
-# module load python/2.7 cuda/10.0 cudnn
-# with tensorrt
-module load python/2.7 cuda/10.0 cudnn cudacore/.10.1.243 tensorrt
+module load python/2.7 cuda/10.0 cudnn
+# with tensorrt mais attention car il force Python 3, et l'entrainement de pytorch-segmentation-master échoue (pas compatible Python 3)
+# module load python/2.7 cuda/10.0 cudnn cudacore/.10.1.243 tensorrt 
 
 # clean the python virtual env
 rm -rf $SLURM_TMPDIR/env
