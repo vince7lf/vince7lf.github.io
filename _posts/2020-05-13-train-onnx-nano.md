@@ -1,12 +1,14 @@
 # Ré-entraine les models disponibles pour le Jetson-Nano, et exportation vers ONNX pour l'inférence
 
-## pre-requis: 
-* valider que l'environnement d'entrainement et de creation de l'ONNX (Compute Canada) est compatible avec l'exécution de l'inférence ONNX sur le Jetson (version de tensorRT + CUDA)
+## Pré-requis: 
+* valider que l'environnement d'entrainement et de creation de l'ONNX (Compute Canada) est compatible avec l'exécution de l'inférence ONNX sur le Jetson (version de tensorRT + CUDA).
+
+### Jetson nano
 Sur le Jetson nano, il est possible de vérifier quelles sont les version de tensorRT et cuda. 
 
-Reference de compatibilite TensorRT: <https://docs.nvidia.com/deeplearning/tensorrt/release-notes/tensorrt-5.html>
+Référence de compatibilite TensorRT: <https://docs.nvidia.com/deeplearning/tensorrt/release-notes/tensorrt-5.html>
 
-Pour TensorRT: 
+#### Pour TensorRT: 
 
 Reference: <https://forums.developer.nvidia.com/t/how-to-check-my-tensorrt-version/56374/9>
 ```
@@ -50,7 +52,7 @@ ii  uff-converter-tf                              6.0.1-1+cuda10.0              
 lefv2603@lefv2603-jetsonnano:~$ 
 
 ```
-Pour Cuda (compilateur nvcc)
+#### Pour Cuda (compilateur nvcc)
 ```
 nvcc --version
 ```
@@ -61,6 +63,41 @@ nvcc --version
   
 * il y a un forum pour AI & DeepLearning chez NVidia
 <https://forums.developer.nvidia.com/c/ai-deep-learning/86>
+
+### Compute Canada 
+Compute Canada mets à disponition tensorrt/6.0.1.5
+```
+[vincelf@beluga2 trtexec]$ module spider tensorrt
+
+----------------------------------------------------------------------------
+  tensorrt: tensorrt/6.0.1.5
+----------------------------------------------------------------------------
+    Description:
+      NVIDIA TensorRT is a platform for high-performance deep learning
+      inference
+
+
+    You will need to load all module(s) on any one of the lines below before the "tensorrt/6.0.1.5" module is available to load.
+
+      nixpkgs/16.09  cudacore/.10.1.243
+ 
+    Help:
+      
+      Description
+      ===========
+      NVIDIA TensorRT is a platform for high-performance deep learning inference
+      
+      
+      More information
+      ================
+       - Homepage: https://developer.nvidia.com/tensorrt
+      
+      
+      Compatible modules
+      ==================
+      This module is compatible with the following modules, one of each line is required:
+      * python/3.6.3 (default), python/3.7.4
+```
 
 ### Ajouter trtexec dans le PATH
 ```
