@@ -5,7 +5,10 @@
 Sur le Jetson nano, il est possible de vérifier quelles sont les version de tensorRT et cuda. 
 
 Reference de compatibilite TensorRT: <https://docs.nvidia.com/deeplearning/tensorrt/release-notes/tensorrt-5.html>
+
 Pour TensorRT: 
+
+Reference: <https://forums.developer.nvidia.com/t/how-to-check-my-tensorrt-version/56374/9>
 ```
 dpkg -l | grep TensorRT
 ou 
