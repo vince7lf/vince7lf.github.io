@@ -62,6 +62,15 @@ nvcc --version
 * il y a un forum pour AI & DeepLearning chez NVidia
 <https://forums.developer.nvidia.com/c/ai-deep-learning/86>
 
+### Ajouter trtexec dans le PATH
+```
+vi ~/.bashrc
+export PATH=${PATH}:/usr/local/cuda/bin:/usr/src/tensorrt/bin
+:wq
+source ~/.bashrc (ou . ~/.bashrc)
+```
+
+
 ## tester le ONNX avec trtexec
 References: 
 * <https://forums.developer.nvidia.com/t/where-is-trtexec/73514>
