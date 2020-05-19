@@ -206,13 +206,15 @@ tar xvf freiburg_forest_multispectral_annotated.tar.gz
 salloc --account=def-germ2201-ab --gres=gpu:1 --cpus-per-task=10 --mem=48000M --time=0-3:00
 ```
 ### Environnement virtuel Python
-* Python 2.7 cuda 10.0
+* Python 2.7 cuda 10.0 tensorrt/6.0.1.5
 * Création de l'environnement Python virtuel
 * Installation des modules Python requis
 ```
 # load modules python 2.7 and cuda 10.1. torchvision requires 10.1. 
 # module load python/2.7 cuda/10.1 cudnn
-module load python/2.7 cuda/10.0 cudnn
+# module load python/2.7 cuda/10.0 cudnn
+# with tensorrt
+module load python/2.7 cuda/10.0 cudnn cudacore/.10.1.243 tensorrt
 
 # clean the python virtual env
 rm -rf $SLURM_TMPDIR/env
