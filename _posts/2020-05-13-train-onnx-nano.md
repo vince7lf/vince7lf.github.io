@@ -231,7 +231,7 @@ pip --version
 nvcc --version # check CUDA compiler version
 
 # install requirements
-pip install --no-index torch==1.1.0 # 1.3.0 #1.1.0 error torch compiled with CUDA==10.0 and torchvision compiled with CUDA==10.1
+pip install --no-index torch==1.3.0 # 1.3.0 #1.1.0 error torch compiled with CUDA==10.0 and torchvision compiled with CUDA==10.1
 pip install --no-index scikit-learn
 pip install --no-index six
 pip install --no-index pillow==6.1.0 # version 7.0.0 break torchvision
