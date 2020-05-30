@@ -130,7 +130,8 @@ References:
 * <https://github.com/NVIDIA/TensorRT/issues/148>
 * <https://forums.developer.nvidia.com/t/tensorrt-cannot-use-precision-int32-with-weights-of-type-float/122490>
 
-Il y a un utilitaire trtexec qui vient avec tensorRT. Par contre il faut le compiler
+Il y a un utilitaire trtexec qui vient avec tensorRT. Par contre il faut le compiler sur le Jetson Nano. 
+Pour Compute Canada, il faut loader le module tensorrt (`module load tensorrt`) mais par contre cela load aussi Python 3.6 avec.
 ```
 cd /usr/src/tensorrt/samples/trtexec/
 sudo make
