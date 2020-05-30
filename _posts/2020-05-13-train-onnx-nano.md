@@ -550,3 +550,145 @@ Traceback (most recent call last):
     out_vars, _ = _flatten(out)
 RuntimeError: Only tuples, lists and Variables supported as JIT inputs, but got OrderedDict
 ```
+## Topic in NVidia Developer Forum
+<https://forums.developer.nvidia.com/t/trying-to-regenerate-onnx-for-jetson-nano/125494?u=vincelf>
+
+Hi hope all goes well. For the purpose of an essay for the university, I am trying to regenerate the onnx that is provided by NVidia for fcn-resnet18-deepscene-576x320. The objective is to train the model with my own images, but I want first to make sure I can run the onnx I am generating before doing anything else. 
+(For your curiosity the essay is an evaluation of the Jetson Nano's capacacity to run inference (semantic segmentation) in realtime with high resolution video. )
+
+I can train and generate the onnx but it gives me the unfamous assertion ```Assertion failed: axis >= 0 && axis < nbDims```. I understand that torch.view needs to be replaced by torch.flatten(). But I am using the code / models provided by NVidia, and checked that the fix is there (torch.view replaced by torch.flatten() ). But I still get the error 
+```
+ERROR: onnx2trt_utils.hpp:347 In function convert_axis:
+[8] Assertion failed: axis >= 0 && axis < nbDims
+```
+
+And I do not understand where I fail. 
+I already tried many many many many different things, and spent many hours on this ... still no success. 
+I am so close to close the loop of my experience to go from training to onnx.  
+If someone has a slim idea or suggestion... 
+Another important  thing : I am very limited in my environment. It's either the Jetson nano, or a server provided by Compute Canada. No DIGITS. 
+And I am far from being an expert (today) with Pytorch, DeepLearning models and ONNX. I am a student. 
+
+Here are all the steps below I am following on a Compute Canada AI/ML server. I do not do that on the Jetson Nano. I tried to export to onnx a simple model on a docker with JetpPack 4.4, but the Jetson nano freezes. (```https://pytorch.org/docs/stable/onnx.html; docker pull nvcr.io/nvidia/l4t-ml:r32.4.2-py3```)
+
+
+```
+# These commands are run on a Compute Canada (server) instance
+# move to the home directory
+cd ~
+
+# retrieve the deepscene freiburg_forest_multispectral_annotated (1.2Gb); really quick from compute canada (>13Mb/sec)
+wget http://deepscene.cs.uni-freiburg.de/static/datasets/freiburg_forest_multispectral_annotated.tar.gz
+
+# untar-zip the deepscene freiburg_forest_multispectral_annotated (1.2Gb) directly inside the home folder
+tar xvf freiburg_forest_multispectral_annotated.tar.gz 
+
+module python/2.7 cuda/10.0 cudnn 
+# clean the python virtual env
+rm -rf $SLURM_TMPDIR/env
+
+# create the virtual env
+virtualenv --no-download $SLURM_TMPDIR/env
+
+# activate the python virtual env
+source $SLURM_TMPDIR/env/bin/activate
+
+# install requirements
+pip install --no-index torch==1.3.0
+pip install --no-index scikit-learn
+pip install --no-index six
+pip install --no-index pillow==6.1.0
+pip install --no-index ~/Cython-0.29.17.tar.gz 
+pip install --no-index ~/pycocotools-2.0.0.tar.gz
+
+# retrieve the fork for vision-0.3.0 from dusty-nv
+cd ~
+git clone https://github.com/dusty-nv/vision.git
+
+# retrieve the code for training of semantic segmentation networks with PyTorch for jetson nano
+cd ~
+git clone https://github.com/dusty-nv/pytorch-segmentation.git
+
+cd ~/vision-0.3.0-dusty-ng
+rm -rf build/
+python setup.py build install
+
+# run torchvision test models
+python test/test_models.py 
+
+# remap the deepscene images for the model
+cd ~/pytorch-segmentation-master
+python deepscene_remap.py ~/downloads/freiburg_forest_annotated/train/GT_color ~/downloads/freiburg_forest_annotated/train/GT_index
+python deepscene_remap.py ~/downloads/freiburg_forest_annotated/train/GT_color ~/downloads/freiburg_forest_annotated/train/GT_index
+python deepscene_remap.py ~/downloads/freiburg_forest_annotated/test/GT_color ~/downloads/freiburg_forest_annotated/test/GT_index
+
+# train
+cd ~/pytorch-segmentation-master
+python train.py -a fcn_resnet18 --dataset deepscene --model-dir ./model_output --dist-url 'tcp://127.0.0.1:5556' /home/vincelf/downloads/freiburg_forest_annotated
+
+# export to onnx
+python onnx_export.py --input model_output/model_best.pth --output resnet18-vlf.onnx
+
+# test the onnx with trtexec
+/usr/src/tensorrt/bin/trtexec --onnx=/home/lefv2603/projects/dusty-nv/pytorch-segmentation-master/resnet18-vlf.onnx --explicitBatch
+[04/14/2020-22:02:03] [I] === Model Options ===
+[04/14/2020-22:02:03] [I] Format: ONNX
+[04/14/2020-22:02:03] [I] Model: /home/lefv2603/projects/dusty-nv/pytorch-segmentation-master/resnet18-vlf.onnx
+[04/14/2020-22:02:03] [I] Output:
+[04/14/2020-22:02:03] [I] === Build Options ===
+[04/14/2020-22:02:03] [I] Max batch: explicit
+[04/14/2020-22:02:03] [I] Workspace: 16 MB
+[04/14/2020-22:02:03] [I] minTiming: 1
+[04/14/2020-22:02:03] [I] avgTiming: 8
+[04/14/2020-22:02:03] [I] Precision: FP32
+[04/14/2020-22:02:03] [I] Calibration: 
+[04/14/2020-22:02:03] [I] Safe mode: Disabled
+[04/14/2020-22:02:03] [I] Save engine: 
+[04/14/2020-22:02:03] [I] Load engine: 
+[04/14/2020-22:02:03] [I] Inputs format: fp32:CHW
+[04/14/2020-22:02:03] [I] Outputs format: fp32:CHW
+[04/14/2020-22:02:03] [I] Input build shapes: model
+[04/14/2020-22:02:03] [I] === System Options ===
+[04/14/2020-22:02:03] [I] Device: 0
+[04/14/2020-22:02:03] [I] DLACore: 
+[04/14/2020-22:02:03] [I] Plugins:
+[04/14/2020-22:02:03] [I] === Inference Options ===
+[04/14/2020-22:02:03] [I] Batch: Explicit
+[04/14/2020-22:02:03] [I] Iterations: 10 (200 ms warm up)
+[04/14/2020-22:02:03] [I] Duration: 10s
+[04/14/2020-22:02:03] [I] Sleep time: 0ms
+[04/14/2020-22:02:03] [I] Streams: 1
+[04/14/2020-22:02:03] [I] Spin-wait: Disabled
+[04/14/2020-22:02:03] [I] Multithreading: Enabled
+[04/14/2020-22:02:03] [I] CUDA Graph: Disabled
+[04/14/2020-22:02:03] [I] Skip inference: Disabled
+[04/14/2020-22:02:03] [I] === Reporting Options ===
+[04/14/2020-22:02:03] [I] Verbose: Disabled
+[04/14/2020-22:02:03] [I] Averages: 10 inferences
+[04/14/2020-22:02:03] [I] Percentile: 99
+[04/14/2020-22:02:03] [I] Dump output: Disabled
+[04/14/2020-22:02:03] [I] Profile: Disabled
+[04/14/2020-22:02:03] [I] Export timing to JSON file: 
+[04/14/2020-22:02:03] [I] Export profile to JSON file: 
+[04/14/2020-22:02:03] [I] 
+----------------------------------------------------------------
+Input filename:   /home/lefv2603/projects/dusty-nv/pytorch-segmentation-master/resnet18-vlf.onnx
+ONNX IR version:  0.0.4
+Opset version:    9
+Producer name:    pytorch
+Producer version: 1.3
+Domain:           
+Model version:    0
+Doc string:       
+----------------------------------------------------------------
+WARNING: ONNX model has a newer ir_version (0.0.4) than this parser was built against (0.0.3).
+WARNING: Your ONNX model has been generated with INT64 weights, while TensorRT does not natively support INT64. Attempting to cast down to INT32.
+Successfully casted down to INT32.
+While parsing node number 2 [Gather]:
+ERROR: onnx2trt_utils.hpp:347 In function convert_axis:
+[8] Assertion failed: axis >= 0 && axis < nbDims
+[04/14/2020-22:02:18] [E] Failed to parse onnx file
+[04/14/2020-22:02:18] [E] Parsing model failed
+[04/14/2020-22:02:18] [E] Engine could not be created
+&&&& FAILED TensorRT.trtexec # /usr/src/tensorrt/bin/trtexec --onnx=/home/lefv2603/projects/dusty-nv/pytorch-segmentation-master/resnet18-vlf.onnx --explicitBatch
+```
