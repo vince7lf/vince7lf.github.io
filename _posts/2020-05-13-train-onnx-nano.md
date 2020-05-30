@@ -550,7 +550,16 @@ Traceback (most recent call last):
     out_vars, _ = _flatten(out)
 RuntimeError: Only tuples, lists and Variables supported as JIT inputs, but got OrderedDict
 ```
-## Topic in NVidia Developer Forum
+## Topics in NVidia Developer Forum
+### Existing related topics
+* <https://forums.developer.nvidia.com/t/error-while-trying-to-onnx-model-file-to-trt-engine/108145/4>
+* <https://forums.developer.nvidia.com/t/tensorrt-5-1-6-1-onnx-parser-cannot-parse-an-onnx-model-produced-by-tf2onnx/107356/2>
+* <https://forums.developer.nvidia.com/t/tensorrt-cannot-parse-some-onnx-models-transferred-from-paddle/83299/4>
+* <https://forums.developer.nvidia.com/t/some-onnx-layers-cannot-be-parsed-by-tensorrt/83377>
+* <https://forums.developer.nvidia.com/t/hello-ai-world-now-supports-python-and-onboard-training-with-pytorch/77762/22>
+* <https://forums.developer.nvidia.com/t/convert-pth-to-onnx-on-xavier-int8-calibration/115834/2>
+
+### New topic Trying to regenerate onnx for jetson-nano
 <https://forums.developer.nvidia.com/t/trying-to-regenerate-onnx-for-jetson-nano/125494?u=vincelf>
 
 Hi hope all goes well. For the purpose of an essay for the university, I am trying to regenerate the onnx that is provided by NVidia for fcn-resnet18-deepscene-576x320. The objective is to train the model with my own images, but I want first to make sure I can run the onnx I am generating before doing anything else. 
