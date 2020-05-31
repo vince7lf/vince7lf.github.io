@@ -115,7 +115,25 @@ Compute Canada mets à disponition tensorrt/6.0.1.5
       * python/3.6.3 (default), python/3.7.4
 ```
 
-### Ajouter trtexec dans le PATH
+Pour charger le module, il faut charger cudacore en pré-requis
+```
+module load python/3.6 cuda/10.0 cudnn cudacore/.10.1.243 tensorrt
+```
+Then try trtexec (no need to add it on the PATH)
+```
+[vincelf@blg4103 ~]$ trtexec
+&&&& RUNNING TensorRT.trtexec # trtexec
+=== Model Options ===
+  --uff=<file>                UFF model
+  --onnx=<file>               ONNX model
+  --model=<file>              Caffe model (default = no model, random weights used)
+  --deploy=<file>             Caffe prototxt file
+  --output=<name>[,<name>]*   Output names (it can be specified multiple times); at least one output is required for UFF and Caffe
+  --uffInput=<name>,X,Y,Z     Input blob name and its dimensions (X,Y,Z=C,H,W), it can be specified multiple times; at least one is required for UFF models
+  --uffNHWC                   Set if inputs are in the NHWC layout instead of NCHW (use X,Y,Z=H,W,C order in --uffInput)
+```
+
+### Ajouter trtexec dans le PATH (Jetson Nano)
 ```
 vi ~/.bashrc
 export PATH=${PATH}:/usr/local/cuda/bin:/usr/src/tensorrt/bin
