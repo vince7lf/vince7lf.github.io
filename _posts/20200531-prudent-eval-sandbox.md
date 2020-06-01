@@ -39,7 +39,7 @@ J'indique une évaluation min-max (Optimiste-Pessimiste).
 ### Dynamisme - 1-2 jours
 * Faire des tests de rafraichissement de l'application Web et application Esri lorsque des données sont mises à jour dans la base de données ;
 * Développement d'un script de test qui modifie les données (ajout - retrait - modification) selon des scénarios prédéfinis (hardcoded); 
-* Adapter l'application web pour qu'elle recharge le contenu en tenant compte de l'expérience client (pas de ralentissement, de clignotement, de perte de contexte, etc);  
+* Adapter l'application web pour qu'elle recharge le contenu en évaluant l'expérience client (ralentissement, clignotement, perte de contexte, etc);
 ### Optimisation (optionnel) - 1-4 jours
 * Serveur de base de données : voir les paramètres d'optimisation possible (nombre de connexions concurrentes, mémoire, indexation, gestion du cache, multithreading/CPU, etc); se référer à la documentation et faire des tests; 
 * Serveur carto: voir les paramètres d'optimisation possible; se référer à la documentation et faire des tests; 
@@ -48,7 +48,7 @@ J'indique une évaluation min-max (Optimiste-Pessimiste).
 ### Banque de temps supplémentaire pour les délais inattendus et les imprévus (non inclus dans le total)
 * +/- 1-3 jours
 # Phases futures (non incluses)
-* Optimisation (client app; serveurs ) ;
+* Optimisation (client app; serveurs) ;
 * Restrictions (role; accès aux features selon le login) ;
 * Sécurité (connexions HTTPS/TLS) ; 
 * Audit (client; admin prudent; scripts) ;
