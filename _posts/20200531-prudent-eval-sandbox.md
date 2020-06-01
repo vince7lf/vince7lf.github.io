@@ -15,12 +15,12 @@ J'indique une évaluation min-max (Optimiste-Pessimiste).
 * Serveur Web est Apache;
 * Applicatif est Web avec librairies javascript carto OpenLayers ou Leaflet;
 * Logiciels SIG disponibles: 
- * ArcGIS Pro
- * QGIS
+  * ArcGIS Pro
+  * QGIS
 ## Détails  de l'évaluation
 ### Validation de l'environnement - 0.5-1 jour
 * Valider les connexions aux différents éléments (serveur BD, serveur carto, serveur web); 
-** connexion internes et depuis l'Internet (serveur web et serveur BD); 
+  * connexion internes et depuis l'Internet (serveur web et serveur BD); 
 * Faire des tests de bases comme recommandé par la documentation de chaque élément ; 
 ### Données - 1-2 jours
 * Mise en place du schéma de données (conception / design); 
