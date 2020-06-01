@@ -1,4 +1,3 @@
-#
 Salut Jonathan, j'espère que cela va bien. 
 
 Voici mon évaluation pour les tests de la sandbox. Je recommande de la faire ré-évaluer par Marc mais surtout par la personne qui va exécuter le travail (stagiaire de ce que je comprends). C'est généralement ce que je fais de mon côté lorsque je reçois un mandat déjà évalué par quelqu'un d'autre. + recevoir plusieurs évaluations de différentes ressources permet de mieux cerner "le scope" et détecter les points d'incohérences entre les diverses parties. Et donc partir le projet avec une meilleure compréhension et de meilleures attentes.
@@ -48,11 +47,11 @@ Application: voir les paramètres d'optimisation possible; se référer à la do
 ### Banque de temps supplémentaire pour les délais inattendus et les imprévus (non inclus dans le total)
 +/- 1-3 jours
 # Phases futures (non incluses)
-Optimisation (client app; serveurs ) ;
-Restrictions (role; accès aux features selon le login) ;
-Sécurité (connexions HTTPS/TLS) ; 
-Audit (client; admin prudent; scripts) ;
-Dynamisme; mise à jour temps réel ;
-Collaboration; l'ajout de feature est partagé en temps réel; 
-Préférences utilisateurs (exe: conserver la dernière vue) ;
-Continuité du service (haute disponibilité; load balance) ;
+* Optimisation (client app; serveurs ) ;
+* Restrictions (role; accès aux features selon le login) ;
+* Sécurité (connexions HTTPS/TLS) ; 
+* Audit (client; admin prudent; scripts) ;
+* Dynamisme; mise à jour temps réel ;
+* Collaboration; l'ajout de feature est partagé en temps réel; 
+* Préférences utilisateurs (exe: conserver la dernière vue) ;
+* Continuité du service (haute disponibilité; load balance) ;
