@@ -1,6 +1,7 @@
 Salut Jonathan, j'espère que cela va bien. 
 
 Voici mon évaluation pour les tests de la sandbox. Je recommande de la faire ré-évaluer par Marc mais surtout par la personne qui va exécuter le travail (stagiaire de ce que je comprends). C'est généralement ce que je fais de mon côté lorsque je reçois un mandat déjà évalué par quelqu'un d'autre. + recevoir plusieurs évaluations de différentes ressources permet de mieux cerner "le scope" et détecter les points d'incohérences entre les diverses parties. Et donc partir le projet avec une meilleure compréhension et de meilleures attentes.
+
 Côté effort, je peux fournir entre 10-15 heures de mon temps par mois jusqu'à septembre 2020, ensuite probablement un peu plus, selon le nombre de cours que je prends (1 ou 2 cours de 3 crédits chaque -- mes 2 derniers cours !!!). Il faut vraiment que je concentre mon énergie pour compléter mon essai de recherche avant la rentrée. 
 
 # Évaluation sandbox
