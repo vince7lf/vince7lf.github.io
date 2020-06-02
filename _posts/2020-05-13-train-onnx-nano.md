@@ -245,6 +245,8 @@ salloc --account=def-germ2201-ab --gres=gpu:1 --cpus-per-task=10 --mem=48000M --
 * Création de l'environnement Python virtuel
 * Installation des modules Python requis
 ```
+# pytorch 1.1 with cuda 10.0
+# pytorch 1.3 with cuda 10.1
 # load modules python 2.7 and cuda 10.1. torchvision requires 10.1. 
 module load python/2.7 cuda/10.1 cudnn
 # module load python/2.7 cuda/10.0 cudnn # will failt because torchvision requires cuda 10.1. 
