@@ -374,6 +374,9 @@ __Note importante__: Il faut tester le onnx sur le jetson nano; car trtexec sur 
 scp vincelf@beluga.computecanada.ca:/home/vincelf/pytorch-segmentation-master/test.onnx /home/lefv2603/projects/dusty-nv/pytorch-segmentation-master
 lefv2603@lefv2603-jetsonnano:~/projects/dusty-nv/jetson-inference/build/aarch64/bin$ scp vincelf@beluga.computecanada.ca:/home/vincelf/pytorch-segmentation-master/resnet18-vlf.onnx /home/lefv2603/projects/dusty-nv/pytorch-segmentation-master
 
+# test the onnx with trtexec on the jetcon nano JetPack 4.4 tensorrt 7.1.0.16-1+cuda10.2
+trtexec --onnx=/home/lefv2603/resnet18-vlf-2.onnx --explicitBatch --verbose
+
 # From the jetson nano, test the inference
 cd ~/projects/dusty-nv/jetson-inference/build/aarch64/bin
 lefv2603@lefv2603-jetsonnano:~/projects/dusty-nv/jetson-inference/build/aarch64/bin$ ./segnet-camera --network '/home/lefv2603/projects/dusty-nv/pytorch-segmentation-master/resnet18-vlf.onnx' --labels /home/lefv2603/projects/dusty-nv/jetson-inference/data/networks/FCN-ResNet18-DeepScene-576x320/classes.txt --colors /home/lefv2603/projects/dusty-nv/jetson-inference/data/networks/FCN-ResNet18-DeepScene-576x320/colors.txt --input_blob input_0 --output_blob ouput_0
