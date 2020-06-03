@@ -260,7 +260,7 @@ rm -rf $SLURM_TMPDIR/pyenv27
 virtualenv --no-download $SLURM_TMPDIR/pyenv27
 
 # activate the python virtual env
-source $SLURM_TMPDIR/env/bin/activate
+source $SLURM_TMPDIR/pyenv27/bin/activate
 
 # check the python and pip version (2.7)
 python --version
