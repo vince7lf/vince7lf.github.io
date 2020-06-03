@@ -245,11 +245,11 @@ salloc --account=def-germ2201-ab --gres=gpu:1 --cpus-per-task=10 --mem=48000M --
 * Création de l'environnement Python virtuel
 * Installation des modules Python requis
 ```
-# pytorch 1.1 with cuda 10.0
+# pytorch 1.1.0 with cuda 10.0 and vision forked from dusty_nv 0.3.0 branch
 # pytorch 1.3 with cuda 10.1
 # load modules python 2.7 and cuda 10.1. torchvision requires 10.1. 
-module load python/2.7 cuda/10.1 cudnn
-# module load python/2.7 cuda/10.0 cudnn # will failt because torchvision requires cuda 10.1. 
+# module load python/2.7 cuda/10.1 cudnn
+module load python/2.7 cuda/10.0 cudnn # will failt because torchvision requires cuda 10.1. 
 # with tensorrt mais attention car il force Python 3, et l'entrainement de pytorch-segmentation-master échoue (pas compatible Python 3)
 # module load python/2.7 cuda/10.0 cudnn cudacore/.10.1.243 tensorrt 
 
@@ -268,7 +268,7 @@ pip --version
 nvcc --version # check CUDA compiler version
 
 # install requirements
-pip install --no-index torch==1.3.0 # 1.3.0 #1.1.0 error torch compiled with CUDA==10.0 and torchvision compiled with CUDA==10.1
+pip install --no-index torch==1.1.0 # 1.3.0 #1.1.0 error torch compiled with CUDA==10.0 and torchvision compiled with CUDA==10.1
 pip install --no-index scikit-learn
 pip install --no-index six
 pip install --no-index pillow==6.1.0 # version 7.0.0 break torchvision
@@ -281,6 +281,7 @@ pip install --no-index ~/pycocotools-2.0.0.tar.gz
 # retrieve the fork for vision-0.3.0 from dusty-nv
 cd ~
 git clone https://github.com/dusty-nv/vision.git
+git checkout v0.3.0
 
 # retrieve the code for training of semantic segmentation networks with PyTorch for jetson nano
 cd ~
@@ -366,6 +367,7 @@ python onnx_export.py --input model_output/model_best.pth --output resnet18-vlf.
 ```
 
 ## Test le modèle avec l'inférence ONNX
+__Note importante__: Il faut tester le onnx sur le jetson nano; car trtexec sur Compute Canada retourne une erreur. Alors que trtexec sur le Jetson Nano (JetPack 4.4) ne retourne pas d'erreur. 
 ```
 # From the jetson nano: copy the onnx model
 scp vincelf@beluga.computecanada.ca:/home/vincelf/pytorch-segmentation-master/test.onnx /home/lefv2603/projects/dusty-nv/pytorch-segmentation-master
@@ -444,7 +446,7 @@ segNet -- failed to initialize.
 segnet-camera:   failed to initialize imageNet
 ```
  
-# RuntimeError: Only tuples, lists and Variables supported as JIT inputs, but got OrderedDict
+## RuntimeError: Only tuples, lists and Variables supported as JIT inputs, but got OrderedDict
 With cuda=10.0, pytorch==1.1.0, torchvision 0.3.0 from dusty-nv (recompiled)
 ```
 (env) [vincelf@blg4102 pytorch-segmentation-master]$ python onnx_export.py --input model_output/model_best.pth --output resnet18-vlf.onnx
@@ -571,6 +573,108 @@ Traceback (most recent call last):
     out_vars, _ = _flatten(out)
 RuntimeError: Only tuples, lists and Variables supported as JIT inputs, but got OrderedDict
 ```
+
+## ERROR: builtin_op_importers.cpp:695 In function importBatchNormalization: [6] Assertion failed: scale_weights.shape == weights_shape
+Cette erreur arrive sur le serveur de Compute Canada (dans mon cas sur Beluga). Mais surement en raison de la version de tensorrt. Car le modele onnx fonctionne très bien sur le Jetson Nano avec le JetPack 4.4. 
+```
+(pyenv36) [vincelf@blg4102 vision]$ trtexec --onnx=/home/vincelf/pytorch-segmentation-master-old/resnet18-vlf.onnx --explicitBatch --verbose
+&&&& RUNNING TensorRT.trtexec # trtexec --onnx=/home/vincelf/pytorch-segmentation-master-old/resnet18-vlf.onnx --explicitBatch --verbose
+[05/02/2020-23:05:30] [I] === Model Options ===
+[05/02/2020-23:05:30] [I] Format: ONNX
+[05/02/2020-23:05:30] [I] Model: /home/vincelf/pytorch-segmentation-master-old/resnet18-vlf.onnx
+[05/02/2020-23:05:30] [I] Output:
+[05/02/2020-23:05:30] [I] === Build Options ===
+[05/02/2020-23:05:30] [I] Max batch: explicit
+[05/02/2020-23:05:30] [I] Workspace: 16 MB
+[05/02/2020-23:05:30] [I] minTiming: 1
+[05/02/2020-23:05:30] [I] avgTiming: 8
+[05/02/2020-23:05:30] [I] Precision: FP32
+[05/02/2020-23:05:30] [I] Calibration: 
+[05/02/2020-23:05:30] [I] Safe mode: Disabled
+[05/02/2020-23:05:30] [I] Save engine: 
+[05/02/2020-23:05:30] [I] Load engine: 
+[05/02/2020-23:05:30] [I] Inputs format: fp32:CHW
+[05/02/2020-23:05:30] [I] Outputs format: fp32:CHW
+[05/02/2020-23:05:30] [I] Input build shapes: model
+[05/02/2020-23:05:30] [I] === System Options ===
+[05/02/2020-23:05:30] [I] Device: 0
+[05/02/2020-23:05:30] [I] DLACore: 
+[05/02/2020-23:05:30] [I] Plugins:
+[05/02/2020-23:05:30] [I] === Inference Options ===
+[05/02/2020-23:05:30] [I] Batch: Explicit
+[05/02/2020-23:05:30] [I] Iterations: 10 (200 ms warm up)
+[05/02/2020-23:05:30] [I] Duration: 10s
+[05/02/2020-23:05:30] [I] Sleep time: 0ms
+[05/02/2020-23:05:30] [I] Streams: 1
+[05/02/2020-23:05:30] [I] Spin-wait: Disabled
+[05/02/2020-23:05:30] [I] Multithreading: Enabled
+[05/02/2020-23:05:30] [I] CUDA Graph: Disabled
+[05/02/2020-23:05:30] [I] Skip inference: Disabled
+[05/02/2020-23:05:30] [I] === Reporting Options ===
+[05/02/2020-23:05:30] [I] Verbose: Enabled
+[05/02/2020-23:05:30] [I] Averages: 10 inferences
+[05/02/2020-23:05:30] [I] Percentile: 99
+[05/02/2020-23:05:30] [I] Dump output: Disabled
+[05/02/2020-23:05:30] [I] Profile: Disabled
+[05/02/2020-23:05:30] [I] Export timing to JSON file: 
+[05/02/2020-23:05:30] [I] Export profile to JSON file: 
+[05/02/2020-23:05:30] [I] 
+[05/02/2020-23:05:30] [V] [TRT] Plugin Creator registration succeeded - GridAnchor_TRT
+[05/02/2020-23:05:30] [V] [TRT] Plugin Creator registration succeeded - NMS_TRT
+[05/02/2020-23:05:30] [V] [TRT] Plugin Creator registration succeeded - Reorg_TRT
+[05/02/2020-23:05:30] [V] [TRT] Plugin Creator registration succeeded - Region_TRT
+[05/02/2020-23:05:30] [V] [TRT] Plugin Creator registration succeeded - Clip_TRT
+[05/02/2020-23:05:30] [V] [TRT] Plugin Creator registration succeeded - LReLU_TRT
+[05/02/2020-23:05:30] [V] [TRT] Plugin Creator registration succeeded - PriorBox_TRT
+[05/02/2020-23:05:30] [V] [TRT] Plugin Creator registration succeeded - Normalize_TRT
+[05/02/2020-23:05:30] [V] [TRT] Plugin Creator registration succeeded - RPROI_TRT
+[05/02/2020-23:05:30] [V] [TRT] Plugin Creator registration succeeded - BatchedNMS_TRT
+[05/02/2020-23:05:30] [V] [TRT] Plugin Creator registration succeeded - FlattenConcat_TRT
+----------------------------------------------------------------
+Input filename:   /home/vincelf/pytorch-segmentation-master-old/resnet18-vlf.onnx
+ONNX IR version:  0.0.4
+Opset version:    9
+Producer name:    pytorch
+Producer version: 1.1
+Domain:           
+Model version:    0
+Doc string:       
+----------------------------------------------------------------
+WARNING: ONNX model has a newer ir_version (0.0.4) than this parser was built against (0.0.3).
+[05/02/2020-23:05:31] [V] [TRT] /home/jenkins/workspace/TensorRT/helpers/rel-6.0/L1_Nightly/build/source/parsers/onnxOpenSource/builtin_op_importers.cpp:773: Convolution input dimensions: (3, 320, 320)
+[05/02/2020-23:05:31] [E] [TRT] (Unnamed Layer* 0) [Convolution]: at least 4 dimensions are required for input
+[05/02/2020-23:05:31] [V] [TRT] /home/jenkins/workspace/TensorRT/helpers/rel-6.0/L1_Nightly/build/source/parsers/onnxOpenSource/builtin_op_importers.cpp:840: Using kernel: (7, 7), strides: (2, 2), padding: (3, 3), dilations: (1, 1), numOutputs: 64
+[05/02/2020-23:05:31] [V] [TRT] /home/jenkins/workspace/TensorRT/helpers/rel-6.0/L1_Nightly/build/source/parsers/onnxOpenSource/builtin_op_importers.cpp:841: Convolution output dimensions: (0)
+[05/02/2020-23:05:31] [V] [TRT] 129:Conv -> 
+While parsing node number 1 [BatchNormalization -> "130"]:
+--- Begin node ---
+input: "129"
+input: "backbone.bn1.weight"
+input: "backbone.bn1.bias"
+input: "backbone.bn1.running_mean"
+input: "backbone.bn1.running_var"
+output: "130"
+op_type: "BatchNormalization"
+attribute {
+  name: "epsilon"
+  f: 1e-05
+  type: FLOAT
+}
+attribute {
+  name: "momentum"
+  f: 0.9
+  type: FLOAT
+}
+
+--- End node ---
+ERROR: builtin_op_importers.cpp:695 In function importBatchNormalization:
+[6] Assertion failed: scale_weights.shape == weights_shape
+[05/02/2020-23:05:31] [E] Failed to parse onnx file
+[05/02/2020-23:05:31] [E] Parsing model failed
+[05/02/2020-23:05:31] [E] Engine could not be created
+&&&& FAILED TensorRT.trtexec # trtexec --onnx=/home/vincelf/pytorch-segmentation-master-old/resnet18-vlf.onnx --explicitBatch --verbose
+```
+
 ## Topics in NVidia Developer Forum
 ### Existing related topics
 * <https://forums.developer.nvidia.com/t/error-while-trying-to-onnx-model-file-to-trt-engine/108145/4>
