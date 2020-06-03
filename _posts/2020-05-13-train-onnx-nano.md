@@ -298,7 +298,8 @@ git clone https://github.com/dusty-nv/pytorch-segmentation.git
 > __NOTE IMPORTANTE__: il est important d'avoir la même version de CUDA entre Pytorch et TochVision. La commande `nvcc --version` donne la version du compilateur CUDA qui sera utilisé pour la compilation de torchvision, et qui doit être la même que celle qui a été utilisée par PyTorch. 
 
 ```
-cd ~/vision-0.3.0-dusty-ng
+# cd ~/vision-0.3.0-dusty-ng
+cd ~/vision
 rm -rf build/
 python setup.py build install
 
