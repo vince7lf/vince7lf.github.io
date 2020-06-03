@@ -253,11 +253,11 @@ module load python/2.7 cuda/10.0 cudnn # will failt because torchvision requires
 # with tensorrt mais attention car il force Python 3, et l'entrainement de pytorch-segmentation-master échoue (pas compatible Python 3)
 # module load python/2.7 cuda/10.0 cudnn cudacore/.10.1.243 tensorrt 
 
-# clean the python virtual env
-rm -rf $SLURM_TMPDIR/env
+# clean the python virtual pyenv27
+rm -rf $SLURM_TMPDIR/pyenv27
 
 # create the virtual env
-virtualenv --no-download $SLURM_TMPDIR/env
+virtualenv --no-download $SLURM_TMPDIR/pyenv27
 
 # activate the python virtual env
 source $SLURM_TMPDIR/env/bin/activate
@@ -381,9 +381,10 @@ lefv2603@lefv2603-jetsonnano:~/projects/dusty-nv/jetson-inference/build/aarch64/
 ## Désactiver et effacer l'environnement virtuel Python sur le serveur de Compute Canada
 ```
 # deactivate python env
+deactivate
 
 # clean the python virtual env
-rm -rf $SLURM_TMPDIR/env
+rm -rf $SLURM_TMPDIR/pyenv27
 ```
 
 # Erreurs
