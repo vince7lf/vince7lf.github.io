@@ -677,6 +677,16 @@ ERROR: builtin_op_importers.cpp:695 In function importBatchNormalization:
 &&&& FAILED TensorRT.trtexec # trtexec --onnx=/home/vincelf/pytorch-segmentation-master-old/resnet18-vlf.onnx --explicitBatch --verbose
 ```
 
+## Error compiling vision fork command u'/cvmfs/soft.computecanada.ca/easybuild/software/2017/avx512/Compiler/intel2018.3/cuda/10.0.130:/cvmfs/soft.computecanada.ca/easybuild/software/2017/Core/cudacore/10.1.243/bin/nvcc' failed with exit status 1
+This error occured if you load cuda 10.1 and then cuda 10.0. without deactivating the python env, or else. 
+How to fix is to quit the salloc session and restart it, with module load. 
+```
+/cvmfs/soft.computecanada.ca/easybuild/software/2017/avx512/Compiler/intel2018.3/cuda/10.0.130:/cvmfs/soft.computecanada.ca/easybuild/software/2017/Core/cudacore/10.1.243/bin/nvcc -DWITH_CUDA -I/home/vincelf/vision/torchvision/csrc -I/localscratch/vincelf.8411818.0/pyenv27/lib/python2.7/site-packages/torch/include -I/localscratch/vincelf.8411818.0/pyenv27/lib/python2.7/site-packages/torch/include/torch/csrc/api/include -I/localscratch/vincelf.8411818.0/pyenv27/lib/python2.7/site-packages/torch/include/TH -I/localscratch/vincelf.8411818.0/pyenv27/lib/python2.7/site-packages/torch/include/THC -I/cvmfs/soft.computecanada.ca/easybuild/software/2017/avx512/Compiler/intel2018.3/cuda/10.0.130:/cvmfs/soft.computecanada.ca/easybuild/software/2017/Core/cudacore/10.1.243/include -I/cvmfs/soft.computecanada.ca/easybuild/software/2017/Core/python/2.7.14/include/python2.7 -c /home/vincelf/vision/torchvision/csrc/cuda/ROIPool_cuda.cu -o build/temp.linux-x86_64-2.7/home/vincelf/vision/torchvision/csrc/cuda/ROIPool_cuda.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --compiler-options '-fPIC' -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=0 -std=c++11
+unable to execute u'/cvmfs/soft.computecanada.ca/easybuild/software/2017/avx512/Compiler/intel2018.3/cuda/10.0.130:/cvmfs/soft.computecanada.ca/easybuild/software/2017/Core/cudacore/10.1.243/bin/nvcc': No such file or directory
+error: command u'/cvmfs/soft.computecanada.ca/easybuild/software/2017/avx512/Compiler/intel2018.3/cuda/10.0.130:/cvmfs/soft.computecanada.ca/easybuild/software/2017/Core/cudacore/10.1.243/bin/nvcc' failed with exit status 1
+
+```
+
 ## Topics in NVidia Developer Forum
 ### Existing related topics
 * <https://forums.developer.nvidia.com/t/error-while-trying-to-onnx-model-file-to-trt-engine/108145/4>
