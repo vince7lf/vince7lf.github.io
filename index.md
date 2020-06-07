@@ -237,9 +237,9 @@ sudo ldconfig
 >
 
 ## Mise à jour
-### Falemshot (for taking screenshot)
+### Flameshot (for taking screenshot)
 * <https://github.com/lupoDharkael/flameshot>
-`sudo apt install flameshot`
+```sudo apt install flameshot```
 
 ### pip
 Installation de pip pour Python2 
