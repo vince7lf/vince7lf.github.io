@@ -241,7 +241,7 @@ tar xvf freiburg_forest_multispectral_annotated.tar.gz
 salloc --account=def-germ2201-ab --gres=gpu:1 --cpus-per-task=10 --mem=48000M --time=0-3:00
 ```
 ### Environnement virtuel Python
-* Python 2.7 cuda 10.0 tensorrt/6.0.1.5
+* Python 2.7 cuda 10.0
 * Création de l'environnement Python virtuel
 * Installation des modules Python requis
 ```
