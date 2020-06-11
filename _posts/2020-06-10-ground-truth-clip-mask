@@ -1,0 +1,5 @@
+# Create a ground truth image for semantic segmentattion
+## Two technics : clipped or mask
+
+Reference: 
+* <https://www.youtube.com/watch?v=rAifOKAmn4s>
