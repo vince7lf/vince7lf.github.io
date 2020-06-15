@@ -17,7 +17,7 @@ Il faut de plus arranger les pixels car ils sont un tout petit peu décalés par
 Références:
 - image manipulation with numpy :  <http://www.degeneratestate.org/posts/2016/Oct/23/image-processing-with-numpy/>
 
-## Classes et couleurs de DeppScene
+## Classes et couleurs du modèle NVidia pour DeepScene
 ### Classes
 ```
 cat /home/lefv2603/projects/jetson-inference/data/networks/FCN-ResNet18-DeepScene-576x320/classes.txt 
@@ -36,6 +36,19 @@ cat /home/lefv2603/projects/jetson-inference/data/networks/FCN-ResNet18-DeepScen
 15 100 20
 255 185 0
 0 120 255 150
+```
+
+### Classes et couleurs du dataset de DeepScene
+Référence: /home/lefv2603/Downloads/freiburg_forest_annotated/README.txt
+```
+Class		R	G	B	ID
+Void		- 	- 	-	0
+Road            170 	170 	170	1
+Grass           0 	255 	0	2
+Vegetation      102 	102 	51	3
+Tree            0 	60 	0	3
+Sky             0 	120 	255	4
+Obstacle        0 	0 	0	5
 ```
 
 ### Codes
