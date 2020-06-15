@@ -66,6 +66,12 @@ cat /home/lefv2603/projects/jetson-inference/data/networks/FCN-ResNet18-DeepScen
 ### Code source pour voir les couleurs de l'image ground truth (GT) et générée
 
 ```
+# Jetson Nano
+/home/lefv2603/projects/jetson-inference/build/aarch64/bin/segnet-console --visualize=mask --filter-mode=point --network=fcn-resnet18-deepscene /home/lefv2603/Downloads/freiburg_forest_annotated/test/rgb/b1-09517_Clipped.jpg b1-09517_Clipped_pred_new_color.jpg
+scp /home/lefv2603/b1-09517_Clipped_pred_new_color.jpg vincelf@beluga.computecanada.ca:/home/vincelf/upload
+```
+```
+# serveur de Compute Canada
 from skimage import io
 import numpy as np
 import os
