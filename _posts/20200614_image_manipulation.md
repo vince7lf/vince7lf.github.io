@@ -1,4 +1,6 @@
-Manipulation d'images
+# Manipulation d'images
+
+## Prétraitement de l'image générée
 
 Pour pouvoir tester le metric ioU ou le f1 score, l'image générée par le modèle doit correspondre aux classes et aux couleurs. Deux options sont alors importantes: 
 `--visualize=mask`: permet de ne sauvegarder que la segmentation prédite. L'autre optoin disponible est `overlay` qui affiche la segmentation prédite au dessus de l'image originale. 
@@ -10,7 +12,34 @@ Pour pouvoir tester le metric ioU ou le f1 score, l'image générée par le mod�
 
 Le résultat est un peu décevant car l'image génére est très grossièrement "pixelisée". 
 
-Il faut de plus arrganger les pixels car ils sont un tout petit peu décalés par rapport aux couleurs de chaque classe. 
+Il faut de plus arranger les pixels car ils sont un tout petit peu décalés par rapport aux couleurs de chaque classe. 
 
-
+Références:
 - image manipulation with numpy :  <http://www.degeneratestate.org/posts/2016/Oct/23/image-processing-with-numpy/>
+
+## Classes et couleurs de DeppScene
+### Classes
+```
+cat /home/lefv2603/projects/jetson-inference/data/networks/FCN-ResNet18-DeepScene-576x320/classes.txt 
+trail
+grass
+vegetation
+obstacle
+sky
+```
+
+### Couleurs
+```
+cat /home/lefv2603/projects/jetson-inference/data/networks/FCN-ResNet18-DeepScene-576x320/colors.txt 
+200 155 75 180
+85 210 100
+15 100 20
+255 185 0
+0 120 255 150
+```
+
+### Codes
+
+```
+set( tuple(v) for m2d in img for v in m2d )
+```
