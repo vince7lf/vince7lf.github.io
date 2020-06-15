@@ -18,6 +18,7 @@ Il fat de pleus générer l'image avec le code couleur de DeepScene pour que la 
 
 Références:
 - image manipulation with numpy :  <http://www.degeneratestate.org/posts/2016/Oct/23/image-processing-with-numpy/>
+- reduce number of color in image : <http://matlab.izmiran.ru/help/toolbox/images/color4.html>
 
 ## Classes et couleurs du modèle NVidia pour DeepScene
 ### Classes
