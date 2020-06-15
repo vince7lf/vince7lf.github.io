@@ -41,5 +41,25 @@ cat /home/lefv2603/projects/jetson-inference/data/networks/FCN-ResNet18-DeepScen
 ### Codes
 
 ```
-set( tuple(v) for m2d in img for v in m2d )
+from skimage import io
+import numpy as np
+import os
+
+home_gt='/home/vincelf/downloads/freiburg_forest_annotated/test/GT_color'
+gt_color='b1-09517_Clipped.png'
+gt_color_f = os.path.join(home_gt, gt_color)
+gt_color_img = io.imread(gt_color_f)
+gt_color_img.shape
+(481, 868, 3)
+set( tuple(v) for m2d in gt_color_img for v in m2d )
+{(170, 170, 170), (102, 102, 51), (0, 255, 0), (0, 120, 255)}
+
+home_pred='/home/vincelf/upload'
+color_pred='b1-09517_Clipped_pred.jpg'
+color_pred_f = os.path.join(home_pred, color_pred)
+color_pred_img = io.imread(gt_color_pred_f)
+color_pred_img.shape
+(481, 868, 3)
+set( tuple(v) for m2d in color_pred_img for v in m2d )
+{(201, 156, 75), (87, 211, 101), (16, 99, 21), (84, 211, 98), (199, 157, 75), (0, 120, 255), (202, 155, 75), (198, 155, 76), (84, 210, 100), (16, 101, 20), (17, 100, 22), (16, 100, 22), (0, 120, 253), (200, 155, 74), (200, 154, 76), (84, 210, 102), (2, 120, 255), (17, 100, 20), (201, 154, 74), (2, 119, 255), (85, 211, 101), (201, 154, 76), (13, 100, 19), (86, 209, 102), (201, 155, 77), (0, 119, 255), (198, 156, 74), (14, 101, 22), (15, 100, 17), (199, 156, 77), (14, 101, 20), (16, 99, 19), (17, 102, 21), (0, 121, 254), (15, 100, 19), (86, 210, 100), (202, 155, 77), (0, 121, 255), (13, 100, 21), (15, 99, 21), (86, 210, 98), (83, 209, 99), (85, 209, 99), (1, 119, 255)}
 ```
