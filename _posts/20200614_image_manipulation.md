@@ -89,7 +89,7 @@ set( tuple(v) for m2d in gt_color_img for v in m2d )
 home_pred='/home/vincelf/upload'
 color_pred='b1-09517_Clipped_pred_new_color.jpg'
 color_pred_f = os.path.join(home_pred, color_pred)
-color_pred_img = io.imread(gt_color_pred_f)
+color_pred_img = io.imread(color_pred_f)
 color_pred_img.shape
 #(481, 868, 3)
 set( tuple(v) for m2d in color_pred_img for v in m2d )
