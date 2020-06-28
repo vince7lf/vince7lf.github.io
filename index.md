@@ -1462,6 +1462,8 @@ Concernant les indicateurs que je pensais collecter pour mesurer et comparer les
 > _Exemple_
 > RAM 2072/3956MB (lfb 1x2MB) SWAP 893/1978MB (cached 35MB) IRAM 0/252kB(lfb 252kB) CPU [3%@1479,2%@1479,3%@1479,2%@1479] EMC_FREQ 3%@1600 GR3D_FREQ 0%@921 APE 25 PLL@22.5C CPU@24.5C PMIC@100C GPU@24C AO@31C thermal@24C POM_5V_IN 2159/3257 POM_5V_GPU 124/557 POM_5V_CPU 332/657
 
+To know more about the temperature performance (XYZ@n.nC, exe: LLC@22.5C): <https://elinux.org/Jetson/Thermal>
+
 #### Notes 
 
 classification par ommission
