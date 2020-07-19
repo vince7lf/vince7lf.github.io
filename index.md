@@ -46,12 +46,20 @@ $ sudo hdparm -t --direct /dev/sda
 /dev/sda:
 Timing O_DIRECT disk reads: 1004 MB in 3.00 seconds = 334.15 MB/sec
 ```
-Microsd card (regular)
+Microsd card Scan Disk Ultra 32Gb class 10 HC I) 
 ```
 lefv2603@lefv2603-desktop:~$ sudo hdparm -t --direct /dev/mmcblk0p1
 
 /dev/mmcblk0p1:
  Timing O_DIRECT disk reads: 122 MB in  3.03 seconds =  40.22 MB/sec
+```
+
+Microsd card Samsung EVO 64Gb Plus class ?? HC 1
+```
+lefv2603@lefv2603-jetsonnano:~$ sudo hdparm -t --direct /dev/mmcblk0p1
+
+/dev/mmcblk0p1:
+ Timing O_DIRECT disk reads: 256 MB in  3.02 seconds =  84.71 MB/sec
 ```
 
 ## Installation d'un SSD interne Nvme M.2 avec carte d'extension M.2 vers USB3.0
