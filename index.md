@@ -61,6 +61,14 @@ lefv2603@lefv2603-jetsonnano:~$ sudo hdparm -t --direct /dev/mmcblk0p1
 /dev/mmcblk0p1:
  Timing O_DIRECT disk reads: 256 MB in  3.02 seconds =  84.71 MB/sec
 ```
+Microsd card Samsung EVO 64Gb Select class ?? HC 1
+```
+lefv2603@lefv2603-jetsonnano:~$ sudo hdparm -t --direct /dev/sda1
+
+/dev/sda1:
+ Timing O_DIRECT disk reads:  92 MB in  3.01 seconds =  30.54 MB/sec
+```
+
 
 ## Installation d'un SSD interne Nvme M.2 avec carte d'extension M.2 vers USB3.0
 À noter qu'à ce jour le disque n'arrive pas resté connecté très longtemps, pour une raison inconnue, il devient indisponible.
