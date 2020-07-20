@@ -40,7 +40,7 @@ Référence: <https://devtalk.nvidia.com/default/topic/1049706/jetson-nano/can-t
 ```
 $ sudo apt install hdparm
 ```
-SSD disk
+Samsung 970 EVO Plus 250GB M.2 NVMe Internal Solid State Drive (SSD)
 ```
 $ sudo hdparm -t --direct /dev/sda
 /dev/sda:
