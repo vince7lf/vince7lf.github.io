@@ -31,7 +31,7 @@ garder ca simple essentielle résumé haut niveau
 
 perspective Jetson AGX Xavier 
 
-== 20200810
+## 20200810
 pas d'indentation de paragraphe
 saut de ligne entre pasragraphe
 pas de petits paragraphes 
