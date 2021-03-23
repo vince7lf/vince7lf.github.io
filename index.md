@@ -107,13 +107,16 @@ $ cd jetson-inference/tools
 $ ./download-models.sh
 ```
 * Installer PyTorch; nécessaire pour faire le transfer learning; uniquement la version PyTorch v1.1.0 pour Python 3.6 est installée. 
+
 ```
 $ cd jetson-inference/build
 $ ./install-pytorch.sh
 ```
+
 > **_NOTE Importante:_**
 > A noter que l'installation de PyTorch V1.1.0 pour Python 3.6 échoue, même après une installation fraîche. 
 > 
+
 ```
 torch-1.1.0-cp36-cp 100%[===================>] 202.36M  3.81MB/s    in 53s     
 Processing ./torch-1.1.0-cp36-cp36m-linux_aarch64.whl
@@ -243,6 +246,7 @@ Une autre option pour installer pytorch sur le Jetson Nano est d'utiliser le sit
 
 
 * Compiler le projet; cette étape prend 3-5 minutes
+
 ```
 cd jetson-inference/build
 make
@@ -250,6 +254,7 @@ make -j$(nproc)
 sudo make install
 sudo ldconfig
 ```
+
 >
 
 ## Mise à jour
@@ -260,16 +265,20 @@ sudo ldconfig
 
 ### pip
 Installation de pip pour Python2 
+
 ```
 sudo apt install python3-pip
 ```
+
 pip3 pour Python3 devrait être installé avec l'étpae précédente. 
 
 ### dconf-editor pour basculer entre les fenêtres, et non les applications (défaut), avec Alt+Tab
 L'alternative est de basculer entre applications avec Alt-# (clavier FR) (ou Alt+\` clavier US)  (touche en dessous de Esc)
+
 ```
 sudo apt-get install dconf-tools
 ```
+
 Ensuite ouvrer l'editor dconf-editor:
 Référence: https://superuser.com/questions/394376/how-to-prevent-gnome-shells-alttab-from-grouping-windows-from-similar-apps
 - "Open dconf-editor"
@@ -284,12 +293,15 @@ Référence: https://superuser.com/questions/394376/how-to-prevent-gnome-shells-
 Ce test permet de savoir si le système est bien en place, et si le Jetson nano est desservi par assez d'énergie. Sinon, il s'éteind tout simplement pendant l'exécution de l'inférence. 
 
 La commande utilisée est:
+
 ```
 $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
 $ ./segnet-console --network=fcn-resnet18-deepscene --visualize=mask --alpha=10000 images/city_0.jpg output.jpg
 ```
+
 La première exécution le rapport donne des valeurs assez élevées. 
+
 ```
 [TRT]   ------------------------------------------------
 [TRT]   Timing Report networks/FCN-ResNet18-Cityscapes-512x256/fcn_resnet18.onnx
@@ -300,7 +312,9 @@ La première exécution le rapport donne des valeurs assez élevées.
 [TRT]   Total         CPU  63.02396ms  CUDA  62.86823ms
 [TRT]   ------------------------------------------------
 ```
+
 Les fois suivantes, les valeurs du rapport restent stables. Par contre la commande `sudo jetson_clocks` a été exécuté après la première fois. 
+
 ```
 [TRT]   ------------------------------------------------
 [TRT]   Timing Report networks/FCN-ResNet18-Cityscapes-512x256/fcn_resnet18.onnx
@@ -318,9 +332,11 @@ Réference: <https://www.jetsonhacks.com/2019/04/02/jetson-nano-raspberry-pi-cam
 La première chose a s'assurer est d'installer la caméra dans le boitier à la bonne position, c'est à dire la bonne orientation. Le cable doit longer le haut du boitier. 
 
 La commande pour tester la caméra est la suivante:
+
 ```
 $ gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=3820, height=2464, framerate=21/1, format=NV12' ! nvvidconv flip-method=0 ! 'video/x-raw,width=960, height=616' ! nvvidconv ! nvegltransform ! nveglglessink -e
 ```
+
 Une nouvelle fenêtre apparait avec la vidéo de la caméra. 
 A noter que le nombre de frame est 21/1 dans l'exemple. Pour augmenter le nombre de frame, il faut diminuer la résolution. Voir plus bas. 
 
@@ -334,10 +350,13 @@ Introduction au jargon et à la fondation de GStreamer:
 Référence: <https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-camera-2.md>
 
 Installer v4l-utils:
+
 ```
 $ sudo apt-get install v4l-utils
 ```
+
 Et exécuter l'utilitaire *v4l2-ctl*:
+
 ```
 $ v4l2-ctl --list-formats-ext
 ioctl: VIDIOC_ENUM_FMT
@@ -356,12 +375,15 @@ ioctl: VIDIOC_ENUM_FMT
 		Size: Discrete 1280x720
 			Interval: Discrete 0.017s (60.000 fps)
 ```
+
 On peut s'appercevoir que la caméra supporte jusqu'à 60 images-par-seconde en résolution 1280x720, et 21 images-par-seconde en résolution 3264x2464. 
 
 Essayons le format 60FPS 1280x720: 
+
 ```
 $ gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM),width=1280, height=720, framerate=60/1, format=NV12' ! nvvidconv flip-method=0 ! 'video/x-raw,width=960, height=616' ! nvvidconv ! nvegltransform ! nveglglessink -e
 ```
+
 Cela fontionne. 
 
 ### Validation des capacités de la caméra
@@ -416,7 +438,9 @@ Camera Controls
                    sensor_modes 0x009a2082 (int)    : min=0 max=30 step=1 default=30 value=5 flags=read-only
 
 ```
+
 ## Nano hardware encoder decoder
+
 Basé sur le commentaire trouvé sur le forum devtalk (<https://devtalk.nvidia.com/default/topic/1050950/jetson-nano/h-264-h-265-encoding-using-jetson-nano-gpu/>), il est recommandé d'utiliser GStreamer, à la place du populaire ffmpeg, pour bénéficier de l'accélération des GPUs du nano. ffmpeg utilise les CPUs et non les GPUs. 
 
 *"ffmpeg doesn't use the Nano's hardware encoder or decoder, you can run it but it will be CPU-only."*
@@ -428,11 +452,13 @@ La référence à utiliser pour traiter les images et vidéos avec le Jetson nan
 
 Cette commande va jouer une vidéo mpeg4 en plein écran (sans le son). Ctrl+C pour arrêter. 
 Il est important d'indiquer le chemin complet de la vidéo. 
+
 ```
 gst-launch-1.0 filesrc location=~/Downloads/1080p.mp4 ! decodebin ! queue ! videoconvert ! autovideosink
 ```
 
 Pour jouer une vidéo avec une rotation: 
+
 ```
 lefv2603@lefv2603-jetsonnano:~$ gst-launch-1.0 filesrc location=/media/3433-3732/DCIM/Camera/20200308_150708.mp4 ! decodebin ! queue ! nvvidconv flip-method=3 ! autovideosink
 ```
@@ -452,6 +478,7 @@ NVidia fournit déjà des tests pour réaliser l'inférence de modèle de segmen
 Référence: <https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-camera-2.md>
 
 Par exemple:
+
 ```
 $ cd ~/projects/dusty-nv/jetson-inference
 $ cd ./build/aarch64/bin
@@ -489,6 +516,7 @@ $ ./segnet-camera.py --network=fcn-resnet18-mhp
 
 ### Installation d'un 'matériel' vidéo virtuel (loopback)
 La documentation du module _loopback_ précise que les _kernel headers_ doivent être installées, et de la même version que le kernel. Cela tombe bien puisque les sources sont fournies avec l'installation. Les _kernel headers_ du 'Linux For Tegra' (L4T) sont situées dans: 
+
 ```
 /usr/src/linux-headers-4.9.140-tegra-ubuntu18.04_aarch64/kernel-4.9
 ```
@@ -504,6 +532,7 @@ Références:
 - <https://gist.github.com/strezh/9114204>
 
 #### Prépare et télécharge
+
 ```
 $ ls -al /dev/video*
 crw-rw----+ 1 root video 81, 0 Feb 15 16:58 /dev/video0
@@ -515,13 +544,16 @@ $ cd v4l2loopback
 ```
 
 #### Installation
+
 ```
 $ make 
 $ make && sudo make install
 $ sudo depmod -a
 ```
+
 #### Démarrage
 Il est TRÈS important de préciser un nombre de max_buffers=8. 
+
 ```
 $ sudo modprobe v4l2loopback max_buffers=8
 $ ls -al /dev/video*
@@ -533,16 +565,21 @@ crw-rw----+ 1 root video 81, 3 Feb 16 14:36 /dev/video1
 #### Autres configuration
 
 Le FPS peut être fixer:
+
 ```
 ./projects/v4l2loopback/utils/v4l2loopback-ctl set-fps 60 /dev/video1
 ```
+
 De me que les critère de captures (caps). Ceci sont des exemples qui ne sont peut-être pas fonctionnel dans le contexte. Il fuat les adapter. 
+
 ```
 ./projects/v4l2loopback/utils/v4l2loopback-ctl set-caps "video/x-raw,format=UYVY,width=640,height=480" /dev/video1
 ./projects/v4l2loopback/utils/v4l2loopback-ctl set-caps "video/x-raw,format=NV10,width=1280,height=720" /dev/video1
 ./projects/v4l2loopback/utils/v4l2loopback-ctl set-caps "video/x-raw,format=RGB,width=720,height=1280" /dev/video1
 ```
+
 #### Validation des capacités du loopback /dev/video1
+
 ```
 $ v4l2-ctl -d 1 --all 
 Driver Info (not using libv4l2):
@@ -594,6 +631,7 @@ User Controls
                         timeout 0x0098f902 (int)    : min=0 max=100000 step=1 default=0 value=0
                timeout_image_io 0x0098f903 (bool)   : default=0 value=0
 ```
+
 #### Dépannage
 
 ##### Erreur gstv4l2bufferpool.c:479:gst_v4l2_buffer_pool_alloc_buffer:<v4l2sink0:pool:sink> failed to allocate buffer
@@ -614,11 +652,13 @@ New clock: GstSystemClock
 ```
 
 * I first removed the module
+
 ```
 sudo rmmod v4l2loopback.ko
 ```
 
 * Then reinstalled the module with max_buffers=8
+
 ```
 sudo insmod v4l2loopback.ko max_buffers=8
 ```
@@ -626,11 +666,13 @@ sudo insmod v4l2loopback.ko max_buffers=8
 The max_buffers=8, to me, makes all the difference. Initially I installed it with buffers=2. And got the error "failed to allocate buffer". What made me wondering is that I already made it work on a previous installation, on the same system (I re-installed from scratch my system). And my documentation was not precise enough to make that property VERY important.
 
 * Producer I used: 
+
 ```
 gst-launch-1.0 videotestsrc ! v4l2sink device=/dev/video1
 ```
 
 * Consumer I used
+
 ```
 gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
 ```
@@ -638,6 +680,7 @@ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
 Works. 
 
 == driver info once it works (read/write buffers =8)
+
 ```
 ~/projects/umlaeute/v4l2loopback$ v4l2-ctl -d 1 --all
 Driver Info (not using libv4l2):
@@ -693,13 +736,17 @@ User Controls
 #### Tests
 
 Démarrer en premier la source vidéo de test (producer) vers /dev/video1:
+
 ```
 $ gst-launch-1.0 videotestsrc ! v4l2sink device=/dev/video1
 ```
+
 Ensuite démarrer le consommateur de test (consummer) de la vidéo:
+
 ```
 $ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
 ```
+
 Une petite fenêtre va apparaître avec des frames de différentes couleurs et de la neige.
 
 ### Pour streamer une vidéo avec gstreamer-1.0 sur le loopback /dev/video1
@@ -707,12 +754,14 @@ Une petite fenêtre va apparaître avec des frames de différentes couleurs et d
   - buffers n'est pas une option valide, il faut utiliser max_buffers à la place.
   - max_buffers avec au moins 8; avec 2 max_buffers cela ne marche pas
   - Référence: <https://github.com/umlaeute/v4l2loopback/issues/83>
+
 ```
 sudo modprobe v4l2loopback max_buffers=8
 ou bien
 sudo rmmod ~/projects/umlaeute/v4l2loopback/v4l2loopback.ko
 sudo insmod ~/projects/umlaeute/v4l2loopback/v4l2loopback.ko max_buffers=8
 ```
+
 - le chemin complet de la vidéo est requis
 - tee multiplexer est requis
   - pour forcer une copie de la mémoire dans le pipeline de gstreamer
@@ -726,6 +775,7 @@ sudo insmod ~/projects/umlaeute/v4l2loopback/v4l2loopback.ko max_buffers=8
 Producer du streaming video:
 
 Ctrl+C dans le terminal pour arrêter et fermer la fenêtre de la vidéo. 
+
 ```
 gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee name=qtdemux ! decodebin ! videoconvert ! video/x-raw ! v4l2sink device=/dev/video1
 
@@ -737,6 +787,7 @@ gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee ! qt
 Consummer de test: 
 
 Ctrl+C dans le terminal pour arrêter, ou fermer la fenêtre de la vidéo. 
+
 ```
 $ gst-launch-1.0 v4l2src device=/dev/video1 ! xvimagesink
 ```
@@ -767,6 +818,7 @@ J'ai essayé de faire l'installation mais j'ai échoué avec l'intallation de Py
 Référence: <https://github.com/XUSean0118/DVSNet.git>
 
 ### NVidia avec loopback
+
 ---
 > **_NOTE Importante:_**
 > NVidia procure du code pour l'inférence avec une caméra. Afin de faire fonctionner l'inférence avec une vidéo au lieu de la caméra, il est important de faire quelques ajustements dans le code cpp. Voici les détails: 
@@ -866,6 +918,7 @@ segnet-camera:  successfully initialized camera device
     depth:  24 (bpp)
 
 ```
+
 ```
   gst-launch-1.0 -v filesrc location=/home/lefv2603/Downloads/1080p.mp4 ! tee ! qtdemux ! decodebin ! videoconvert ! videoscale ! "video/x-raw,format=(string)RGB,width=(int)1280,heigth=(int)720" ! v4l2sink device=/dev/video1
 ```
@@ -875,6 +928,7 @@ segnet-camera:  successfully initialized camera device
 - Juste après avoir démarrer le producer, **dans un deuxième terminal**, démarrer l'inférence. Une nouvelle fenêtre va apparaître avec la vidéo en train de se faire inférer. 
 
 Note Importante: La version en python ne fonctionne pas et retourne une erreur ! 
+
 ```
 lefv2603@lefv2603-jetsonnano:~$ ~/projects/dusty-nv/jetson-inference/build/aarch64/bin/segnet-camera.py --camera=/dev/video1 --network=fcn-resnet18-deepscene --visualize=mask --alpha=255
 jetson.inference.__init__.py
@@ -1089,6 +1143,7 @@ $ ./segnet-camera --camera=/dev/video1 --network=fcn-resnet18-cityscapes --visua
 
 ### en cours... 
 jouer une vidéo prise avec mobile Samsung S8 60FPS
+
 ```
 gst-launch-1.0 -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)1080, height=(int)1920, framerate=(fraction)60/1' ! nvvidconv ! 'video/x-raw(memory:NVMM), format=(string)NV12, width=(int)1080, height=(int)1920, framerate=(fraction)60/1' ! nvv4l2h264enc ! h264parse ! v4l2sink device=/dev/video1
 
@@ -1116,6 +1171,7 @@ gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/vi
 ```
 
 ### GStreamer en mode DEBUG 
+
 ```
 GST_DEBUG=2 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! queue ! qtdemux ! h264parse ! nvv4l2decoder ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM), format=(string)I420, width=(int)480, height=(int)640, framerate=(fraction)20/1' ! queue ! tee ! nvv4l2h264enc bitrate=8000000 ! h264parse ! v4l2sink device=/dev/video1 -e
 ...
@@ -1123,6 +1179,7 @@ GST_DEBUG=2 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projec
 ```
 
 ### Saisir les logs de gstreamer
+
 ```
 lefv2603@lefv2603-jetsonnano:~$ GST_DEBUG=3 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! queue ! qtdemux ! queue ! h264parse ! nvv4l2decoder ! nvvidconv flip-method=3 ! videorate ! videoscale ! 'video/x-raw(memory:NVMM),format=(string)NV12,width=(int)480,height=(int)640,framerate=(fraction)20/1' ! nvv4l2h264enc ! h264parse ! v4l2sink device=/dev/video1 -e 2>&1 | tee stream.txt
 ```
@@ -1135,6 +1192,7 @@ Reference: <https://syonyk.blogspot.com/2019/04/benchmarking-nvidia-jetson-nano.
 
 
 ## Notes
+
 ```
 # works ... but sink to nv3dsink
 GST_DEBUG=1 gst-launch-1.0 --gst-debug -v filesrc location=/home/lefv2603/projects/gae724/videos/20200308/20200308_150708.mp4 ! tee ! qtdemux ! queue ! h264parse ! nvv4l2decoder enable-max-performance=1 ! nvvidconv flip-method=3 ! 'video/x-raw(memory:NVMM), format=(string)NV12' ! nv3dsink -e
@@ -1433,6 +1491,7 @@ lefv2603@lefv2603-jetsonnano:~$
 L'inférence ne détecte pas lorsque la vidéo est terminée. Il faut tuer ("killer") le process. Une commande ext exécuté tout de suite  la suite de la fin de la lecture de la vidéo pour arrêter l'inférence.
 
 Voici le script:
+
 ```
 #!/bin/sh
 myvar=$(ps -ef | grep deepscene); echo "$myvar" | if [ "$(wc -l)" -gt 1 ]; then kill -9 $(echo "$myvar" | awk -F" " 'NR==1{print $2}'); else echo "deepscene not running"; fi
@@ -1443,6 +1502,7 @@ myvar=$(ps -ef | grep deepscene); echo "$myvar" | if [ "$(wc -l)" -gt 1 ]; then 
 J'ai tenté de capturer le résultat (vidéos/images) de l'inférence directement depuis le nano, mais ce n'est pas une bonne idée car trop intrusif. Cela ralenti l'inférence. Il y a en fait deux images qui sont produites par le network: overlay et mask, qui sont directement "rendered" dans un XWindow (voir segnet-camera.py et glDisplay.cpp).
 
 segnet-camera.py
+
 ```
 	...
 	# render the images
@@ -1498,6 +1558,7 @@ gae722 stage allité
 * In batch: 60FPS, 30FPS, 15FPS, 1FPS and 720x1280, 480x640, 320x480, 240x320
 
 run_deepscene.sh
+
 ```
 #!/bin/bash
 
