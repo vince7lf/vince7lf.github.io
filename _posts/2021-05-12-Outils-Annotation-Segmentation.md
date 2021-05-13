@@ -45,6 +45,6 @@ Pour votre information: l'annotation se fait par création de polygones et crée
 
 * <https://github.com/heartexlabs/label-studio>
 
-# Outil du CRIM / Justine 
+# Outil du CRIM / Justine Boulent
 
 > "j’utilise un code qui a été fait par le crim et que j’ai un peu adapté, qui génère une interface graphique pour faire des annotations de type segmentation. Il est assez pratique pour corriger les annotations (clic gauche tu dessines, clic droit tu effaces). Par contre, il n’y a qu’un outil pinceau, donc ça ne serait peut être pas adapté à toutes les thématiques. Si jamais tu ne trouves pas quelque chose qui te convient en ligne, je pourrais sûrement te le partager."
