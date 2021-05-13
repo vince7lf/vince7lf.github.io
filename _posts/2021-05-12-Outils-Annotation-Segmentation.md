@@ -48,7 +48,7 @@ Dan Morris
 ### Supervise.ly
 ### Labelbox $
 
-## Rémi Tavon (UdeS) 
+## Rémi T. (UdeS) 
 
 > "Voici celui que j'ai utilisé et qui fonctionne assez bien, mais qui demande une certaine connaissance de Python:
 <https://github.com/mcordts/cityscapesScripts/blob/master/cityscapesscripts/annotation/cityscapesLabelTool.py>"
@@ -59,7 +59,7 @@ Dan Morris
 
 > "Autrement, il y un autre outil que j'aurais voulu essayer pour l'annotation et qui est bien connu des géomaticiens: QGIS. Des images peuvent y être lues même si elles ne sont pas géoréférencées et l'outil de numérisation (i.e. création de polygones) est assez simple et efficace. Il resterait seulement à coder un plugin pour passer rapidement d'une image à l'autre et sauvegarder automatiquement un fichier du type json ou gpkg (pour les annotations). Je vous laisse cogiter là-dessus."
 
-## Mickaël Germain UdeS GitHub
+## Mickaël G. UdeS GitHub
 
 * <https://github.com/Slava/label-tool>
  
@@ -91,7 +91,7 @@ Dan Morris
 * dataturks
 * Playment
 
-## Outil du CRIM / Justine Boulent
+## Outil du CRIM / Justine B.
 
 > "j’utilise un code qui a été fait par le crim et que j’ai un peu adapté, qui génère une interface graphique pour faire des annotations de type segmentation. Il est assez pratique pour corriger les annotations (clic gauche tu dessines, clic droit tu effaces). Par contre, il n’y a qu’un outil pinceau, donc ça ne serait peut être pas adapté à toutes les thématiques. Si jamais tu ne trouves pas quelque chose qui te convient en ligne, je pourrais sûrement te le partager."
 
