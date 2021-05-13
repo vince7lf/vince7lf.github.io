@@ -10,6 +10,7 @@ Voici une liste des outils qui permettent de faire des annotations pour la segme
 ## Label Studio
 
 * <https://github.com/heartexlabs/label-studio>
+* https://labelstud.io/
 
 * Prométeur à premièere vue / intuition. 
 * Pas mal de fonctionnalités déjà présentes, comme le multi-projet, multi-usager.  
@@ -68,7 +69,7 @@ Dan Morris
 
 ## Recherche Web 
 
-Sources:
+### Sources:
 * <https://humansintheloop.org/the-best-image-labeling-tools-for-computer-vision-of-2020/>
 * <https://sourceforge.net/software/compare/Prodigy-Annotation-vs-Supervisely/>
 
@@ -81,6 +82,14 @@ Sources:
 *	BasicAI
 * Swivl Education Bot, Inc
 * Hive Data
+
+### Sources: 
+* <https://bohemian.ai/blog/image-annotation-tools-which-one-pick-2020/>
+
+* CVAT (Computer Vision Annotation Tool)
+* VoTT (Visual Object Tagging Tool)
+* dataturks
+* Playment
 
 ## Outil du CRIM / Justine Boulent
 
