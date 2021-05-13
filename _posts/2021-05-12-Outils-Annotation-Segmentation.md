@@ -98,7 +98,7 @@ Dan Morris
 ## SIG QGIS, ARC GIS Pro, etc
 
 * création de polygones;
-* curseur qui colle au coutour des lignes / polygones
+* curseur qui colle aux coutours des lignes / polygones
 * géoréférencement
 
 # Articles
