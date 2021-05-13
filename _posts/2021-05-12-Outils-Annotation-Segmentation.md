@@ -11,6 +11,7 @@ Voici une liste des outils qui permettent de faire des annotations pour la segme
 
 * <https://github.com/heartexlabs/label-studio>
 
+* Prométeur à premièere vue / intuition. 
 * Pas mal de fonctionnalités déjà présentes, comme le multi-projet, multi-usager.  
 
 ## Supervise.ly
@@ -22,9 +23,9 @@ Voici une liste des outils qui permettent de faire des annotations pour la segme
 * Sinon version payante. 
 
 ---
-Les autres outils sont exclues pour les raisons suivantes: 
+Les autres outils sont exclus pour les raisons suivantes: 
 * parce que ce ne sont pas des interfaces conviviales (scripts), web ou ouverte/gratuite
-* déjà exclue ou 
+* déjà exclue ou amélioré par un autre outil (AIDE).  
 
 # Références: 
 
@@ -46,19 +47,23 @@ Dan Morris
 ### Supervise.ly
 ### Labelbox $
 
-## Rémi Tavon (UdeS); eclue; script only ; pas de GUI
+## Rémi Tavon (UdeS) 
 
 > "Voici celui que j'ai utilisé et qui fonctionne assez bien, mais qui demande une certaine connaissance de Python:
 <https://github.com/mcordts/cityscapesScripts/blob/master/cityscapesscripts/annotation/cityscapesLabelTool.py>"
 
 > "Pour votre information: l'annotation se fait par création de polygones et crée un fichier .json, qui est ensuite rasterisé par d'autres outils sur <https://github.com/mcordts/cityscapesScripts/tree/master/cityscapesscripts/preparation>"
 
+* exclu; script seulment ; pas de GUI, pas Web
+
 > "Autrement, il y un autre outil que j'aurais voulu essayer pour l'annotation et qui est bien connu des géomaticiens: QGIS. Des images peuvent y être lues même si elles ne sont pas géoréférencées et l'outil de numérisation (i.e. création de polygones) est assez simple et efficace. Il resterait seulement à coder un plugin pour passer rapidement d'une image à l'autre et sauvegarder automatiquement un fichier du type json ou gpkg (pour les annotations). Je vous laisse cogiter là-dessus."
 
 ## Mickaël Germain UdeS GitHub
 
 * <https://github.com/Slava/label-tool>
+ 
 * <https://github.com/Hitachi-Automotive-And-Industry-Lab/semantic-segmentation-editor>
+
 * <https://github.com/heartexlabs/label-studio>
 
 ## Recherche Web 
@@ -93,4 +98,4 @@ Sources:
 
 <https://medium.com/deep-systems/3-reasons-why-ai-assisted-labeling-will-destroy-manual-labor-market-dbacad7bdf13>
 
-* non objectif car écrit par supervisely
+* non objecti, car écrit par supervisely
