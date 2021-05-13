@@ -3,24 +3,28 @@ Voici une liste des outils qui permettent de faire des annotations pour la segme
 # Top 3
 
 ## AIDE Demo Semantic segmentation on the Chesapeake Land Cover satellite imagery
-<http://aidedemo.westeurope.cloudapp.azure.com:8080/landcover/interface?imgs=4f0ce1d5-ca41-42c2-9d52-8807a560e4c4>
+* <http://aidedemo.westeurope.cloudapp.azure.com:8080/landcover/interface?imgs=4f0ce1d5-ca41-42c2-9d52-8807a560e4c4>
 
 * C'est le 1er choix retenu pour l'instant. Déjà évalué rapidement par Mickaël. 
 
 ## Label Studio
 
-<https://github.com/heartexlabs/label-studio>
+* <https://github.com/heartexlabs/label-studio>
 
 * Pas mal de fonctionnalités déjà présentes, comme le multi-projet, multi-usager.  
 
 ## Supervise.ly
 
+* <https://supervise.ly/>
+* <https://deepsystems.ai/products/supervisely>
+
 * Version communautaire disponible pour les scientifiques et chercheurs
 * Sinon version payante. 
 
-Les autres ci-dessous sont exclues soit : 
-* parce que ce ne sont pas des interfaces conviviales (scripts)
-* 
+---
+Les autres outils sont exclues pour les raisons suivantes: 
+* parce que ce ne sont pas des interfaces conviviales (scripts), web ou ouverte/gratuite
+* déjà exclue ou 
 
 # Références: 
 
@@ -54,10 +58,24 @@ Dan Morris
 ## Mickaël Germain UdeS GitHub
 
 * <https://github.com/Slava/label-tool>
-
 * <https://github.com/Hitachi-Automotive-And-Industry-Lab/semantic-segmentation-editor>
-
 * <https://github.com/heartexlabs/label-studio>
+
+## Recherche Web 
+
+Sources:
+* <https://humansintheloop.org/the-best-image-labeling-tools-for-computer-vision-of-2020/>
+* <https://sourceforge.net/software/compare/Prodigy-Annotation-vs-Supervisely/>
+
+* Prodigy
+* SuperAnnotate
+* Hasty.ai
+* TrainingData.io
+* Alegion
+*	Dataloop AI
+*	BasicAI
+* Swivl Education Bot, Inc
+* Hive Data
 
 ## Outil du CRIM / Justine Boulent
 
