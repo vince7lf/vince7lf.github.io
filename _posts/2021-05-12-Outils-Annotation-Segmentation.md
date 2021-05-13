@@ -26,7 +26,7 @@ Voici une liste des outils qui permettent de faire des annotations pour la segme
 ---
 Les autres outils sont exclus pour les raisons suivantes: 
 * parce que ce ne sont pas des interfaces conviviales (scripts), web ou ouverte/gratuite
-* déjà exclue ou amélioré par un autre outil (AIDE).  
+* déjà exclu ou amélioré par un autre outil (exe: AIDE).  
 
 # Références: 
 
