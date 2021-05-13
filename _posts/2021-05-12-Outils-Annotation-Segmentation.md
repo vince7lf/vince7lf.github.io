@@ -12,9 +12,9 @@ Voici une liste des outils qui permettent de faire des annotations pour la segme
 # 6 outils d'annotation qui sont référencés dans le document AIDE: Accelerating image‐based ecological surveys with interactive machine learning
 
 > Benjamin Kellenberger
- Devis Tuia
- Dan Morris 
- (DOI: 10.1111/2041-210X.13489)
+Devis Tuia
+Dan Morris 
+(DOI: 10.1111/2041-210X.13489)
  
 
 > "some interfaces were designed with explicit focus on annotation, like __VATIC__ (Vondrick et al., 2013), __LabelImg__, __VGG Image Annotator__ (Dutta & Zisserman, 2019), __VIOLA__ (Bondi et al., 2017), __LabelMe__ (Russell et al., 2008) and commercial tools like __LabelBox__. A few of them have some form of simple annotation assistance; for example, both VATIC and VIOLA offer interpolation for video data to reduce the number of annotations required. However, more elaborate labelling assistance is often absent."
