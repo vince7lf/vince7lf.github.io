@@ -43,10 +43,10 @@ Dan Morris
 ## The best image annotation platforms for computer vision (+ an honest review of each)
 <https://hackernoon.com/the-best-image-annotation-platforms-for-computer-vision-an-honest-review-of-each-dac7f565fea>
 
-### LabelIMG
-### VGG Image Annotator
-### Supervise.ly
-### Labelbox $
+* LabelIMG
+* VGG Image Annotator
+* Supervise.ly
+* Labelbox $
 
 ## Rémi T. (UdeS) 
 
