@@ -12,7 +12,7 @@ Voici une liste des outils qui permettent de faire des annotations pour la segme
 * <https://github.com/heartexlabs/label-studio>
 * https://labelstud.io/
 
-* Prométeur à premièere vue / intuition. 
+* Prométeur à première vue 
 * Pas mal de fonctionnalités déjà présentes, comme le multi-projet, multi-usager.  
 
 ## Supervise.ly
