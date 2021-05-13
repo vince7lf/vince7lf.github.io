@@ -1,9 +1,17 @@
 Voici une liste des outils qui permettent de faire des annotations pour la segmentation sémantique (mask).  
 
 # Synthèse 
-<https://github.com/heartexlabs/label-studio>
+
+## AIDE Demo Semantic segmentation on the Chesapeake Land Cover satellite imagery
 <http://aidedemo.westeurope.cloudapp.azure.com:8080/landcover/interface?imgs=4f0ce1d5-ca41-42c2-9d52-8807a560e4c4>
 
+1er choix. Déjà évalué par Mickaël. 
+
+## Label Studio
+<https://github.com/heartexlabs/label-studio>
+Pas mal de fonctionnalités impressionantes, multiusager. 
+
+## Supervise.ly
 
 # AIDE Demo Semantic segmentation on the Chesapeake Land Cover satellite imagery
 <http://aidedemo.westeurope.cloudapp.azure.com:8080/landcover/interface?imgs=4f0ce1d5-ca41-42c2-9d52-8807a560e4c4>
