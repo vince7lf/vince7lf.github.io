@@ -12,6 +12,10 @@ Avec les indications supplémentaires suivantes:
 
 Sinon il y aura une erreur à l'installation des `requirements.txt`
 
+```
+This package requires Rust >=1.41.0.
+```
+
 Reference : <https://www.cloudbooklet.com/install-rust-on-ubuntu-18-04-lts/>
 
 ```
