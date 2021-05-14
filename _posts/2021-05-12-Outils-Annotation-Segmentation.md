@@ -2,6 +2,9 @@ Voici une liste des outils qui permettent de faire des annotations pour la segme
 
 # Top 3
 
+## LabelBox
+* Video image segmentation <https://www.youtube.com/watch?v=j3SP8JSAOwI&ab_channel=LabelboxLabelbox>
+
 ## AIDE Demo Semantic segmentation on the Chesapeake Land Cover satellite imagery
 * <http://aidedemo.westeurope.cloudapp.azure.com:8080/landcover/interface?imgs=4f0ce1d5-ca41-42c2-9d52-8807a560e4c4>
 
