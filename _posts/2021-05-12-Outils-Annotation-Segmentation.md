@@ -121,6 +121,19 @@ Dan Morris
 * Scalable
 * RectLabel
 
+### Source: 
+* <https://www.researchgate.net/post/How_do_I_create_a_ground_truth_image_for_segmentation_in_digital_image_processing>
+
+* rectlabel.com (Apple)
+* Image Labeler app in MATLAB
+* inkscape software
+* diffgram
+  * <https://medium.com/diffgram/how-to-validate-your-deep-learning-model-with-the-diffgram-sdk-tutorial-22234a9a35>
+  * <https://github.com/diffgram/diffgram/tree/master/sdk>
+  * <https://medium.com/diffgram/fast-annotation-net-a-framework-for-active-learning-in-2018-1c75d6b4af92>
+* It may be achieved by image binarization (using useful threshold) , or by utilizing one of the well known image edge detection methods (e.g. differential masks, or band-pass filtered methods like Marr and Hilderith ... etc.) . Or segmentation can be carry on by using image classification (e.g. Mean value, parallel piped, scatter scope, etc.). For more details see my site on R.G
+  * <https://www.researchgate.net/profile/Saleh-Ali-15>
+
 ## Outil du CRIM / Justine B.
 
 > "j’utilise un code qui a été fait par le crim et que j’ai un peu adapté, qui génère une interface graphique pour faire des annotations de type segmentation. Il est assez pratique pour corriger les annotations (clic gauche tu dessines, clic droit tu effaces). Par contre, il n’y a qu’un outil pinceau, donc ça ne serait peut être pas adapté à toutes les thématiques. Si jamais tu ne trouves pas quelque chose qui te convient en ligne, je pourrais sûrement te le partager."
