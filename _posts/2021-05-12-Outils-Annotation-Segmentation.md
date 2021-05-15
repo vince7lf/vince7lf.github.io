@@ -100,6 +100,7 @@ Dan Morris
 
 * CVAT (Computer Vision Annotation Tool)
   * <https://www.youtube.com/watch?v=6IJ0QN7PBKo&ab_channel=NikitaManovich>
+  * <https://www.youtube.com/watch?v=Fh8oKuSUIPs&ab_channel=NikitaManovichNikitaManovich>
 * VoTT (Visual Object Tagging Tool)
 * dataturks
 * MakeSense.AI
