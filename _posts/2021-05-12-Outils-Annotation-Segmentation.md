@@ -95,6 +95,17 @@ Dan Morris
 * dataturks
 * Playment
 
+### Source:
+* <https://www.sicara.ai/blog/2019-09-01-top-five-open-source-annotation-tools-computer-vision>
+
+* CVAT (Computer Vision Annotation Tool)
+* VoTT (Visual Object Tagging Tool)
+* dataturks
+* MakeSense.AI
+* VGG VIA
+* LabelMe
+* Coco-Annotator
+
 ### Source: 
 * <https://medium.com/anolytics/how-to-label-data-for-semantic-segmentation-deep-learning-models-907a996f95f7>
 
