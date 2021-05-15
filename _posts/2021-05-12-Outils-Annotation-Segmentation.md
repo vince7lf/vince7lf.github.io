@@ -1,6 +1,6 @@
 Voici une liste des outils qui permettent de faire des annotations pour la segmentation sémantique (mask).
 
-# Top 3
+# Sélection
 
 ## LabelBox
 * Video image segmentation <https://www.youtube.com/watch?v=j3SP8JSAOwI&ab_channel=LabelboxLabelbox>
@@ -10,14 +10,6 @@ Voici une liste des outils qui permettent de faire des annotations pour la segme
 
 * C'est le 1er choix retenu pour l'instant. Déjà évalué rapidement par Mickaël. 
 
-## Label Studio
-
-* <https://github.com/heartexlabs/label-studio>
-* https://labelstud.io/
-
-* Prométeur à première vue 
-* Pas mal de fonctionnalités déjà présentes, comme le multi-projet, multi-usager.  
-
 ## Supervise.ly
 
 * <https://supervise.ly/>
@@ -26,10 +18,13 @@ Voici une liste des outils qui permettent de faire des annotations pour la segme
 * Version communautaire disponible pour les scientifiques et chercheurs
 * Sinon version payante. 
 
----
-Les autres outils sont exclus pour les raisons suivantes: 
-* parce que ce ne sont pas des interfaces conviviales (scripts), web ou ouverte/gratuite
-* déjà exclu ou amélioré par un autre outil (exe: AIDE).  
+## CVAT (Computer Vision Annotation Tool) Intel
+
+## Hasty.ai
+
+## Darwin 
+* <https://www.youtube.com/watch?v=SvihDSAY4TQ&ab_channel=V7>
+
 
 # Références: 
 
@@ -133,6 +128,18 @@ Dan Morris
   * <https://medium.com/diffgram/fast-annotation-net-a-framework-for-active-learning-in-2018-1c75d6b4af92>
 * It may be achieved by image binarization (using useful threshold) , or by utilizing one of the well known image edge detection methods (e.g. differential masks, or band-pass filtered methods like Marr and Hilderith ... etc.) . Or segmentation can be carry on by using image classification (e.g. Mean value, parallel piped, scatter scope, etc.). For more details see my site on R.G
   * <https://www.researchgate.net/profile/Saleh-Ali-15>
+
+### Source: 
+* <https://abelling.com/comparison-of-different-annotation-tools-for-computer-vision/>
+
+* Supervise.ly
+* Hasty.ai
+* CVAT
+* Make-Sense
+* Darwin
+* Heartex
+* Scalabel
+* Segments.ai
 
 ## Outil du CRIM / Justine B.
 
