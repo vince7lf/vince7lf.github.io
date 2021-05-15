@@ -87,7 +87,7 @@ Dan Morris
 * Swivl Education Bot, Inc
 * Hive Data
 
-### Sources: 
+### Source: 
 * <https://bohemian.ai/blog/image-annotation-tools-which-one-pick-2020/>
 
 * CVAT (Computer Vision Annotation Tool)
@@ -100,6 +100,13 @@ Dan Morris
 
 * anolytics 
   * <https://www.anolytics.ai/semantic-segmentation-services/>
+
+### source:
+* <https://towardsdatascience.com/image-data-labelling-and-annotation-everything-you-need-to-know-86ede6c684b1>
+
+* MakeSense.AI
+* Scalable
+* RectLabel
 
 ## Outil du CRIM / Justine B.
 
