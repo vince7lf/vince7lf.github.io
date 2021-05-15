@@ -48,6 +48,7 @@ Dan Morris
 
 * LabelIMG
 * VGG Image Annotator
+  * <https://github.com/michhar/maskrcnn-custom>
 * Supervise.ly
 * Labelbox $
 
