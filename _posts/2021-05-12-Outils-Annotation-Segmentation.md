@@ -19,8 +19,10 @@ Voici une liste des outils qui permettent de faire des annotations pour la segme
 * Sinon version payante. 
 
 ## CVAT (Computer Vision Annotation Tool) Intel
+* <https://www.youtube.com/watch?v=9Fe_GzMLo3E&ab_channel=NikitaManovichNikitaManovich>
 
 ## Hasty.ai
+* <https://www.youtube.com/watch?v=gkA7qFbE6M4&ab_channel=VittorioMachiavelliVittorioMachiavelli>
 
 ## Darwin 
 * <https://www.youtube.com/watch?v=SvihDSAY4TQ&ab_channel=V7>
