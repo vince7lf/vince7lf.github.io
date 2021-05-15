@@ -95,7 +95,9 @@ Dan Morris
 * dataturks
 * Playment
 
-### Source: <https://medium.com/anolytics/how-to-label-data-for-semantic-segmentation-deep-learning-models-907a996f95f7>
+### Source: 
+* <https://medium.com/anolytics/how-to-label-data-for-semantic-segmentation-deep-learning-models-907a996f95f7>
+
 * anolytics 
   * <https://www.anolytics.ai/semantic-segmentation-services/>
 
