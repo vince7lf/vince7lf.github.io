@@ -99,6 +99,7 @@ Dan Morris
 * <https://www.sicara.ai/blog/2019-09-01-top-five-open-source-annotation-tools-computer-vision>
 
 * CVAT (Computer Vision Annotation Tool)
+  * <https://www.youtube.com/watch?v=6IJ0QN7PBKo&ab_channel=NikitaManovich>
 * VoTT (Visual Object Tagging Tool)
 * dataturks
 * MakeSense.AI
