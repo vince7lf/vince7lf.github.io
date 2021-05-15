@@ -96,7 +96,8 @@ Dan Morris
 * Playment
 
 ### Source: <https://medium.com/anolytics/how-to-label-data-for-semantic-segmentation-deep-learning-models-907a996f95f7>
-* anolytics <https://www.anolytics.ai/semantic-segmentation-services/>
+* anolytics 
+  * <https://www.anolytics.ai/semantic-segmentation-services/>
 
 ## Outil du CRIM / Justine B.
 
