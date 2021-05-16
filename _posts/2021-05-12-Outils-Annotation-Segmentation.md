@@ -3,7 +3,9 @@ Voici une liste des outils qui permettent de faire des annotations pour la segme
 # Sélection
 
 ## LabelBox
-* Video image segmentation <https://www.youtube.com/watch?v=j3SP8JSAOwI&ab_channel=LabelboxLabelbox>
+* Videos:
+* <https://www.youtube.com/watch?v=j3SP8JSAOwI&ab_channel=LabelboxLabelbox>
+* <https://www.youtube.com/watch?v=KPiHk_QmT7g&ab_channel=LabelboxAcademy>
 
 ## AIDE Demo Semantic segmentation on the Chesapeake Land Cover satellite imagery
 * <http://aidedemo.westeurope.cloudapp.azure.com:8080/landcover/interface?imgs=4f0ce1d5-ca41-42c2-9d52-8807a560e4c4>
@@ -11,22 +13,37 @@ Voici une liste des outils qui permettent de faire des annotations pour la segme
 * C'est le 1er choix retenu pour l'instant. Déjà évalué rapidement par Mickaël. 
 
 ## Supervise.ly
-
 * <https://supervise.ly/>
 * <https://deepsystems.ai/products/supervisely>
+
+Video: 
+* <https://youtu.be/d53ksO3rFX4>
 
 * Version communautaire disponible pour les scientifiques et chercheurs
 * Sinon version payante. 
 
 ## CVAT (Computer Vision Annotation Tool) Intel
+* <https://github.com/openvinotoolkit/cvat>
+
+Video:
 * <https://www.youtube.com/watch?v=9Fe_GzMLo3E&ab_channel=NikitaManovichNikitaManovich>
 
 ## Hasty.ai
+* <https://hasty.ai/>
+
+Video:
 * <https://www.youtube.com/watch?v=gkA7qFbE6M4&ab_channel=VittorioMachiavelliVittorioMachiavelli>
 
 ## Darwin 
+* <https://www.v7labs.com/darwin>
+
+Video:
 * <https://www.youtube.com/watch?v=SvihDSAY4TQ&ab_channel=V7>
 
+### Superannotate
+* <https://superannotate.com/>
+* <https://www.youtube.com/watch?v=DMS4AljE3ms>
+* 
 
 # Références: 
 
@@ -62,11 +79,17 @@ Dan Morris
 
 ## Mickaël G. UdeS GitHub
 
+### label-tool GitHub 
 * <https://github.com/Slava/label-tool>
  
+ ### Hitachi Automotive And Industry Lab semantic segmentation editor GitHub
 * <https://github.com/Hitachi-Automotive-And-Industry-Lab/semantic-segmentation-editor>
 
+### Label Studio GitHub
 * <https://github.com/heartexlabs/label-studio>
+
+Video:
+* <https://www.youtube.com/watch?v=2i6q6uqoC3w&ab_channel=AlexWitsil>
 
 ## Recherche Web 
 
