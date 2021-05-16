@@ -52,6 +52,18 @@ Démo:
 
 * C'est le 1er choix retenu pour l'instant. Déjà évalué rapidement par Mickaël. 
 
+## VGG Image Annotator
+* <https://github.com/michhar/maskrcnn-custom>
+
+Video: 
+* <https://www.youtube.com/watch?v=-3WVSxNLk_k>
+
+## VoTT (Visual Object Tagging Tool)
+* <https://github.com/microsoft/VoTT>
+
+Video: 
+* <https://www.youtube.com/watch?v=uDWgWJ5Gpwc>
+
 # Références: 
 
 ## 6 outils d'annotation qui sont référencés dans le document AIDE: Accelerating image‐based ecological surveys with interactive machine learning
@@ -68,13 +80,7 @@ Dan Morris
 <https://hackernoon.com/the-best-image-annotation-platforms-for-computer-vision-an-honest-review-of-each-dac7f565fea>
 
 * LabelIMG
-
 * VGG Image Annotator
-  * <https://github.com/michhar/maskrcnn-custom>
-
-Video: 
-* <https://www.youtube.com/watch?v=-3WVSxNLk_k>
-
 * Supervise.ly
 * Labelbox $
 
