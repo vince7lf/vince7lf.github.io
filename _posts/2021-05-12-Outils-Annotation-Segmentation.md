@@ -21,6 +21,7 @@ Video:
 Video: 
 * <https://youtu.be/d53ksO3rFX4>
 
+Commentaires:
 * Version communautaire disponible pour les scientifiques et chercheurs
 * Sinon version payante. 
 
