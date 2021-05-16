@@ -2,15 +2,17 @@ Voici une liste des outils qui permettent de faire des annotations pour la segme
 
 # Sélection
 
-## LabelBox
-Videos:
-* <https://www.youtube.com/watch?v=j3SP8JSAOwI&ab_channel=LabelboxLabelbox>
-* <https://www.youtube.com/watch?v=KPiHk_QmT7g&ab_channel=LabelboxAcademy>
+## Darwin 
+* <https://www.v7labs.com/darwin>
 
-## AIDE Demo Semantic segmentation on the Chesapeake Land Cover satellite imagery
-* <http://aidedemo.westeurope.cloudapp.azure.com:8080/landcover/interface?imgs=4f0ce1d5-ca41-42c2-9d52-8807a560e4c4>
+Video:
+* <https://www.youtube.com/watch?v=SvihDSAY4TQ&ab_channel=V7>
 
-* C'est le 1er choix retenu pour l'instant. Déjà évalué rapidement par Mickaël. 
+### Superannotate
+* <https://superannotate.com/>
+
+Video: 
+* <https://www.youtube.com/watch?v=DMS4AljE3ms>
 
 ## Supervise.ly
 * <https://supervise.ly/>
@@ -34,18 +36,15 @@ Video:
 Video:
 * <https://www.youtube.com/watch?v=gkA7qFbE6M4&ab_channel=VittorioMachiavelliVittorioMachiavelli>
 
-## Darwin 
-* <https://www.v7labs.com/darwin>
+## LabelBox
+Videos:
+* <https://www.youtube.com/watch?v=j3SP8JSAOwI&ab_channel=LabelboxLabelbox>
+* <https://www.youtube.com/watch?v=KPiHk_QmT7g&ab_channel=LabelboxAcademy>
 
-Video:
-* <https://www.youtube.com/watch?v=SvihDSAY4TQ&ab_channel=V7>
+## AIDE Demo Semantic segmentation on the Chesapeake Land Cover satellite imagery
+* <http://aidedemo.westeurope.cloudapp.azure.com:8080/landcover/interface?imgs=4f0ce1d5-ca41-42c2-9d52-8807a560e4c4>
 
-### Superannotate
-* <https://superannotate.com/>
-
-Video: 
-* <https://www.youtube.com/watch?v=DMS4AljE3ms>
-
+* C'est le 1er choix retenu pour l'instant. Déjà évalué rapidement par Mickaël. 
 
 
 # Références: 
