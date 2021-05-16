@@ -68,8 +68,13 @@ Dan Morris
 <https://hackernoon.com/the-best-image-annotation-platforms-for-computer-vision-an-honest-review-of-each-dac7f565fea>
 
 * LabelIMG
+
 * VGG Image Annotator
   * <https://github.com/michhar/maskrcnn-custom>
+
+Video: 
+* <https://www.youtube.com/watch?v=-3WVSxNLk_k>
+
 * Supervise.ly
 * Labelbox $
 
