@@ -65,6 +65,13 @@ Video:
 * <https://www.youtube.com/watch?v=uDWgWJ5Gpwc>
 * <https://www.youtube.com/watch?v=uXxE4Sas3uQ>
 
+
+##LabelMe
+* <https://github.com/CSAILVision/LabelMeAnnotationTool>
+
+Video: 
+* <>
+
 # Références: 
 
 ## 6 outils d'annotation qui sont référencés dans le document AIDE: Accelerating image‐based ecological surveys with interactive machine learning
@@ -211,6 +218,7 @@ Video:
   * <https://github.com/facebookresearch/deepmask>
 * uea computer vision image labelling tool 
   * <https://bitbucket.org/ueacomputervision/image-labelling-tool/src/master/>
+  * <https://github.com/Britefury/django-labeller>
 
 ## Outil du CRIM / Justine B.
 
