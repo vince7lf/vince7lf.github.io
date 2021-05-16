@@ -65,12 +65,8 @@ Video:
 * <https://www.youtube.com/watch?v=uDWgWJ5Gpwc>
 * <https://www.youtube.com/watch?v=uXxE4Sas3uQ>
 
-
-##LabelMe
+## LabelMe
 * <https://github.com/CSAILVision/LabelMeAnnotationTool>
-
-Video: 
-* <>
 
 # Références: 
 
