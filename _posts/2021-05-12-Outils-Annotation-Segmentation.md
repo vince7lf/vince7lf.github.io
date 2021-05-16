@@ -143,6 +143,23 @@ Dan Morris
 * Scalabel
 * Segments.ai
 
+### Source:
+* <https://bohemian.ai/blog/image-annotation-tools-which-one-pick-2020/>
+
+* CVAT (Computer Vision Annotation Tool)
+* VoTT (Visual Object Tagging Tool)
+* LabelBox
+
+### Source:
+* <https://en.wikipedia.org/wiki/List_of_manual_image_annotation_tools>
+
+* Computer Vision Annotation Tool (CVAT)
+* ImageTagger
+* LabelMe
+* RectLabel
+* VGG Image Annotator (VIA)
+* VoTT (Visual Object Tagging Tool)
+
 ## Outil du CRIM / Justine B.
 
 > "j’utilise un code qui a été fait par le crim et que j’ai un peu adapté, qui génère une interface graphique pour faire des annotations de type segmentation. Il est assez pratique pour corriger les annotations (clic gauche tu dessines, clic droit tu effaces). Par contre, il n’y a qu’un outil pinceau, donc ça ne serait peut être pas adapté à toutes les thématiques. Si jamais tu ne trouves pas quelque chose qui te convient en ligne, je pourrais sûrement te le partager."
