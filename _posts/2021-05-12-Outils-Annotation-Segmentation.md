@@ -24,6 +24,11 @@ Video:
 * Version communautaire disponible pour les scientifiques et chercheurs
 * Sinon version payante. 
 
+## LabelBox
+Videos:
+* <https://www.youtube.com/watch?v=j3SP8JSAOwI&ab_channel=LabelboxLabelbox>
+* <https://www.youtube.com/watch?v=KPiHk_QmT7g&ab_channel=LabelboxAcademy>
+
 ## CVAT (Computer Vision Annotation Tool) Intel
 * <https://github.com/openvinotoolkit/cvat>
 
@@ -36,16 +41,10 @@ Video:
 Video:
 * <https://www.youtube.com/watch?v=gkA7qFbE6M4&ab_channel=VittorioMachiavelliVittorioMachiavelli>
 
-## LabelBox
-Videos:
-* <https://www.youtube.com/watch?v=j3SP8JSAOwI&ab_channel=LabelboxLabelbox>
-* <https://www.youtube.com/watch?v=KPiHk_QmT7g&ab_channel=LabelboxAcademy>
-
 ## AIDE Demo Semantic segmentation on the Chesapeake Land Cover satellite imagery
 * <http://aidedemo.westeurope.cloudapp.azure.com:8080/landcover/interface?imgs=4f0ce1d5-ca41-42c2-9d52-8807a560e4c4>
 
 * C'est le 1er choix retenu pour l'instant. Déjà évalué rapidement par Mickaël. 
-
 
 # Références: 
 
