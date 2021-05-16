@@ -3,7 +3,7 @@ Voici une liste des outils qui permettent de faire des annotations pour la segme
 # Sélection
 
 ## LabelBox
-* Videos:
+Videos:
 * <https://www.youtube.com/watch?v=j3SP8JSAOwI&ab_channel=LabelboxLabelbox>
 * <https://www.youtube.com/watch?v=KPiHk_QmT7g&ab_channel=LabelboxAcademy>
 
