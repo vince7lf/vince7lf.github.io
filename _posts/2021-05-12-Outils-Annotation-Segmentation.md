@@ -202,6 +202,16 @@ Video:
 * VGG Image Annotator (VIA)
 * VoTT (Visual Object Tagging Tool)
 
+### Source:
+* <https://www.reddit.com/r/computervision/comments/5jxhtc/image_segmentation_labelling_tool/>
+
+* Multimapth.net Facebook
+  * <https://github.com/facebookresearch/multipathnet>
+* Deepmask facebook
+  * <https://github.com/facebookresearch/deepmask>
+* uea computer vision image labelling tool 
+  * <https://bitbucket.org/ueacomputervision/image-labelling-tool/src/master/>
+
 ## Outil du CRIM / Justine B.
 
 > "j’utilise un code qui a été fait par le crim et que j’ai un peu adapté, qui génère une interface graphique pour faire des annotations de type segmentation. Il est assez pratique pour corriger les annotations (clic gauche tu dessines, clic droit tu effaces). Par contre, il n’y a qu’un outil pinceau, donc ça ne serait peut être pas adapté à toutes les thématiques. Si jamais tu ne trouves pas quelque chose qui te convient en ligne, je pourrais sûrement te le partager."
