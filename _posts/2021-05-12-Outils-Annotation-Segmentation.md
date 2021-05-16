@@ -26,6 +26,8 @@ Commentaires:
 * Sinon version payante. 
 
 ## LabelBox
+* <https://labelbox.com/>
+
 Videos:
 * <https://www.youtube.com/watch?v=j3SP8JSAOwI&ab_channel=LabelboxLabelbox>
 * <https://www.youtube.com/watch?v=KPiHk_QmT7g&ab_channel=LabelboxAcademy>
@@ -43,6 +45,9 @@ Video:
 * <https://www.youtube.com/watch?v=gkA7qFbE6M4&ab_channel=VittorioMachiavelliVittorioMachiavelli>
 
 ## AIDE Demo Semantic segmentation on the Chesapeake Land Cover satellite imagery
+* <https://github.com/microsoft/aerial_wildlife_detection>
+
+Démo:
 * <http://aidedemo.westeurope.cloudapp.azure.com:8080/landcover/interface?imgs=4f0ce1d5-ca41-42c2-9d52-8807a560e4c4>
 
 * C'est le 1er choix retenu pour l'instant. Déjà évalué rapidement par Mickaël. 
