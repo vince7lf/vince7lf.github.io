@@ -8,7 +8,7 @@ Voici une liste des outils qui permettent de faire des annotations pour la segme
 Video:
 * <https://www.youtube.com/watch?v=SvihDSAY4TQ&ab_channel=V7>
 
-### Superannotate
+### Superannotate OpenCV
 * <https://superannotate.com/>
 
 Video: 
@@ -44,7 +44,7 @@ Video:
 Video:
 * <https://www.youtube.com/watch?v=gkA7qFbE6M4&ab_channel=VittorioMachiavelliVittorioMachiavelli>
 
-## AIDE Demo Semantic segmentation on the Chesapeake Land Cover satellite imagery
+## AIDE Demo Semantic segmentation on the Chesapeake Land Cover satellite imagery       
 * <https://github.com/microsoft/aerial_wildlife_detection>
 
 Démo:
@@ -58,11 +58,12 @@ Démo:
 Video: 
 * <https://www.youtube.com/watch?v=-3WVSxNLk_k>
 
-## VoTT (Visual Object Tagging Tool)
+## VoTT (Visual Object Tagging Tool) Microsoft
 * <https://github.com/microsoft/VoTT>
 
 Video: 
 * <https://www.youtube.com/watch?v=uDWgWJ5Gpwc>
+* <https://www.youtube.com/watch?v=uXxE4Sas3uQ>
 
 # Références: 
 
