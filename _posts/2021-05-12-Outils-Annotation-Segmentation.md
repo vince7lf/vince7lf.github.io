@@ -54,6 +54,7 @@ Démo:
 * C'est le 1er choix retenu pour l'instant. Déjà évalué rapidement par Mickaël. 
 
 ## VGG Image Annotator
+* https://www.robots.ox.ac.uk/~vgg/software/via/
 * <https://github.com/michhar/maskrcnn-custom>
 
 Video: 
