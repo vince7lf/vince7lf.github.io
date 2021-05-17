@@ -44,7 +44,8 @@ Video:
 Video:
 * <https://www.youtube.com/watch?v=gkA7qFbE6M4&ab_channel=VittorioMachiavelliVittorioMachiavelli>
 
-## AIDE Demo Semantic segmentation on the Chesapeake Land Cover satellite imagery       
+## AIDE Annotation Interface for Data-driven Ecology
+Demo Semantic segmentation on the Chesapeake Land Cover satellite imagery       
 * <https://github.com/microsoft/aerial_wildlife_detection>
 
 Démo:
