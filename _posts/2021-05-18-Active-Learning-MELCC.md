@@ -16,7 +16,7 @@
 * frederick.letourneau@environnement.gouv.qc.ca
 * sabrina.courant@environnement.gouv.qc.ca
 
-* Données storage
+# Données storage
 GeoTiff COG
 
 Open Aerial Map
