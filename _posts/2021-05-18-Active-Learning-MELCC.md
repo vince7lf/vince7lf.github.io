@@ -15,3 +15,13 @@ innovation commun : site miellifère (miel)
 chantale.langevin@environnement.gouv.qc.ca
 frederick.letourneau@environnement.gouv.qc.ca
 sabrina.courant@environnement.gouv.qc.ca
+
+* Données storage
+GeoTiff COG
+Open Aerial Map
+map.openaerialmap.org
+copier l'adresse du lien
+
+# data storage
+COG
+map.openaerial.org COG GeoTiff
