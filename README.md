@@ -117,11 +117,29 @@ Ne pas discuter de la méthodologie; juste mettre les données. Ne pas discuter 
 
 ### Méthodologie
 
+Simplifier cette partie
+
 Enlever le chapitre revue de la littérature
 Les références apparaissent dans le cadre théorique. 
 
+Enlever les duplicats de paragraphes. 
 
+Faire un rappel de la mise en contexte. 
 
+Tester les performance et pouvoir travailler en semi-temps réel 
+Clarifier que le choix est de tester le matériel et ensuite améliorer mise en contexte. 
 
+configuration optmiale en temps réél et semi-temp réel. 
+
+Alléger la méthodologie. 
+
+Tester les résolutions 
+
+Ajouter la classe qui sera utilisé dans la métholologie et mise en contexte. 
++ trottoire etc
+
+Couper les parties de la méthodologie
+
+Reduire la partie matériel et méthodes
 
 
