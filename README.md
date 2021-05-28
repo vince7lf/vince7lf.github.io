@@ -71,5 +71,57 @@ figure 12 : a enlever
 
 ## 20210528
 
+Mise en contexte
+Reference: LaTeX, 
+
+Inteligence artigfcille
+
+mêlé : modèle vs architecture vs réseau vs inférence
+
+architecture  => modèle > inférence
+
+spécialiste : clarifier car on ne devrait 
+
+modèle: trouver la meilleure architecture du modèle. 
+
+OK : documenter l'approche, les tests et les résultats
+
+Cadre théorique  :
+gros travail: 
+* trop concis: parler du contexte beaucoup plus large
+* parler segmentation  classification object detection
+* nano ordinateur depuis 2012 inteligence articifiel jusqu'a l'apprentisage et ONNX
+* ONNX : cela drevrait apparaitre dans la problématique; rajouter des références
+
+=> Éliminer des sections dans la partie méthodologie
+
+=> Figure 4 : faire la carte
+
+2012 apprentissage profond. 
+
+Figure : adapté de...
+
+Internet est une mice de données : à enlever. 
+
+Mettre les sites web en reférence avec la date de consultation. 
+
+Remplacer le mot réseau par architecture
+
+Tableau des données : confus, mélange
+
+Enlever la phrases avec les utilitaires. 
+
+### Matériel et méthode
+
+Ne pas discuter de la méthodologie; juste mettre les données. Ne pas discuter ou bouger la méthodologie. 
+
+### Méthodologie
+
+Enlever le chapitre revue de la littérature
+Les références apparaissent dans le cadre théorique. 
+
+
+
+
 
 
